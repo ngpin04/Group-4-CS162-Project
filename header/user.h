@@ -13,6 +13,6 @@ struct user
     bool isStaff = false; //default as student
     date birth;
     string username;
-    string password = "KHTN123@"; //the dafault password need to be set to
+    string password = "KHTN123@"; //the dafault password need to be set to ddmmyyyy of the user
     void changePassword();
 };
