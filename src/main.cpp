@@ -2,11 +2,9 @@
 #include "../header/readData.h"
 const int N = 1e5;
 
-user User[N];
-
-int numUser;
+userList *User = new userList;
 
 int main() {
-    readData(User, numUser, "data/user.txt");
+    readData(User, "data/user.txt");
     return 0;
 }

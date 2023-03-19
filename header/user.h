@@ -19,3 +19,11 @@ struct user
     void changePassword(string newPassword);
     void input(ifstream &fi);
 };
+
+struct userList {
+    userList *next;
+    user data;
+    userList();
+    userList(user data);
+    userList(userList *next, user data);
+};

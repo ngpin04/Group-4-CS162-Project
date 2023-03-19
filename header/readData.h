@@ -1,2 +1,2 @@
 
-void readData(user User[], int &numUser, string filename);
+void readData(userList *User, string filename);

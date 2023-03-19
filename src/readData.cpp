@@ -2,14 +2,15 @@
 #include "../header/user.h"
 #include "../header/readData.h"
 
-void readData(user User[], int &numUser, string filename) {
+void readData(userList *User, string filename) {
     ifstream fi(filename);
     while (true) {
         int num; fi >> num;
         if (num == -1) 
             break;
-        User[numUser].input(fi);
-        ++numUser;
+        User->data.input(fi);
+        User->next = new userList;
+        User = User->next;
     }
     fi.close();
 }
