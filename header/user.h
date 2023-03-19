@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 
 struct date{
@@ -14,5 +16,14 @@ struct user
     date birth;
     string username;
     string password = "KHTN123@"; //the dafault password need to be set to ddmmyyyy of the user
-    void changePassword();
+    void changePassword(string newPassword);
+    void input(ifstream &fi);
+};
+
+struct userList {
+    userList *next;
+    user data;
+    userList();
+    userList(user data);
+    userList(userList *next, user data);
 };
