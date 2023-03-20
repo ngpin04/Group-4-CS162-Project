@@ -16,7 +16,7 @@ struct user
     date birth;
     string username;
     string password = "KHTN123@"; //the dafault password need to be set to ddmmyyyy of the user
-    void changePassword(string newPassword);
+    void changePassword();
     void input(ifstream &fi);
 };
 
