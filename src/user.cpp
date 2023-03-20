@@ -2,7 +2,14 @@
 
 void user::changePassword() 
 {
-    string newpass1, newpass2;
+    string curpass, newpass1, newpass2;
+    do 
+    {
+        cout << "Enter your current password: ";
+        cin >> curpass;
+        if (curpass!=password)
+            cout << "Sorry, this is not your current password. \nPlease try again!\n";
+    } while (curpass!=password);
     do
     {
         cout << "Enter your new password: ";
