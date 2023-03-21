@@ -90,9 +90,21 @@ void loginAsStaff()
 
     switch (a)
     {
-        case 1: startSem();
-        case 2: endSem();
-        case 3: anyTime();
+        case 1: 
+        {
+            startSem();
+            break;
+        }
+        case 2: 
+        {
+            endSem();
+            break;
+        }
+        case 3: 
+        {
+            anyTime();
+            break;
+        }
     }
 }
 
@@ -140,11 +152,13 @@ void login()
             {
                 user user;
                 user.changePassword();
+                break;
             }
             case 3:
             {
                 if (a == 1) loginAsStaff();
                 if (a == 2) loginAsStudent();
+                break;
             }
             case 0:
         }
