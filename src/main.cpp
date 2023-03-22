@@ -1,10 +1,19 @@
 #include "../header/user.h"
 #include "../header/readData.h"
-const int N = 1e5;
+#include "../header/login.h"
 
-userList *User = new userList;
+userList *userData = new userList;
 
 int main() {
-    readData(User, "data/user.txt");
+    readData(userData, "data/user.txt");
+    printData(userData);
+    user* curUser = nullptr;
+    while (true){
+        if (!curUser)
+            checkUserAtLogIn(userData, curUser);
+        else{
+            menuAfterLogin(curUser);
+        }     
+    }
     return 0;
 }
