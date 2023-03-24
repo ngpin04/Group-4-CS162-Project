@@ -2,9 +2,16 @@
 #include "../header/user.h"
 using namespace std;
 
+void clearScreen() {
+if (_WIN32)
+    system("cls");
+else
+    system("clear");
+}
+
 void checkUserAtLogIn(userList *pHead, user *&curUser)
 {
-    system ("cls");
+    clearScreen();
     cout << "==============================================" << endl;
     cout << "|| Welcome to the Course Management System! ||" << endl;
     cout << "==============================================" << endl
@@ -50,7 +57,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
 
 void startSem()
 {
-    system ("cls");
+    clearScreen();
     cout << "====================================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> BEGIN-SEMESTER ACTIONS" << endl;
     cout << "====================================================================" << endl;
@@ -86,7 +93,7 @@ void startSem()
 
 void endSem()
 {
-    system ("cls");
+    clearScreen();
     cout << "==================================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
     cout << "==================================================================" << endl;
@@ -116,7 +123,7 @@ void endSem()
 
 void anyTime()
 {
-    system ("cls");
+    clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
     cout << "==============================================================" << endl;
@@ -145,7 +152,7 @@ void anyTime()
 
 void actionsAsStaff()
 {
-    system ("cls");
+    clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
     cout << "==============================================================" << endl;
@@ -181,7 +188,7 @@ void actionsAsStaff()
 
 void actionsAsStudent()
 {
-    system ("cls");
+    clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
     cout << "==============================================================" << endl;
@@ -204,7 +211,7 @@ void actionsAsStudent()
 
 void menuAfterLogin(user *&curUser)
 {
-    system ("cls");
+    clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> MAIN MENU" << endl;
     cout << "==============================================================" << endl;

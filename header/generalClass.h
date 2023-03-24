@@ -3,10 +3,16 @@
 #include "../header/student.h"
 using namespace std;
 
-struct generalClass //for example: 22APCS1
+struct generalClass
 {
     int firstYear;
     string name;
     string index;
     studentList* studentHead;
+};
+
+struct classList
+{
+    generalClass data;
+    classList* next;
 };
