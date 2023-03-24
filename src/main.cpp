@@ -9,11 +9,13 @@ int main() {
     printData(userData);
     user* curUser = nullptr;
     while (true){
-        if (!curUser)
+        if (!curUser){
+            printData(userData);
             checkUserAtLogIn(userData, curUser);
+        }
         else{
             menuAfterLogin(curUser);
-        }     
+        }
     }
     return 0;
 }

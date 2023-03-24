@@ -4,10 +4,11 @@ using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
 {
-    int a;
+    system ("cls");
     cout << "==============================================" << endl;
     cout << "|| Welcome to the Course Management System! ||" << endl;
-    cout << "==============================================" << endl << endl;
+    cout << "==============================================" << endl
+         << endl;
     cout << "Logging in..." << endl;
     cout << "Enter username: ";
     string curUsername;
@@ -15,41 +16,46 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     cout << "Enter password: ";
     string curPassword;
     cin >> curPassword;
-    while (pHead)
+    userList* cur = pHead;
+    while (cur)
     {
-        if (curUsername == pHead->data.username && curPassword == pHead->data.password)
+        if (curUsername == cur->data.username && curPassword == cur->data.password)
         {
-            cout << "Login successfully!";
-            curUser = &(pHead->data);
+            cout << "Login successfully!" << endl << endl;
+            curUser = &(cur->data);
             return;
         }
-        pHead = pHead->next;
+        cur = cur->next;
     }
+    cur = pHead;
     do
     {
-        cout << "No such account exists! Please re-enter username and password." << endl; //re-login until login ok
+        cout << endl << "No such account exists! Please re-enter username and password." << endl; // re-login until login ok
         cout << "Enter username: ";
         cin >> curUsername;
         cout << "Enter password: ";
         cin >> curPassword;
-        while (pHead)
+        while (cur)
         {
-            if (curUsername == pHead->data.username && curPassword == pHead->data.password)
+            if (curUsername == cur->data.username && curPassword == cur->data.password)
             {
-                cout << "Login successfully!";
-                curUser = &(pHead->data);
+                cout << "Login successfully!" << endl;
+                curUser = &(cur->data);
                 return;
             }
-            pHead = pHead->next;
+            cur = cur->next;
         }
-    } while (true);
+    } while (curUser == nullptr);
 }
 
 void startSem()
 {
-    cout << "\033[2J\033[1;1H";
+    system ("cls");
+    cout << "====================================================================" << endl;
+    cout << "Logged In >> Main Menu >> Possible Actions >> BEGIN-SEMESTER ACTIONS" << endl;
+    cout << "====================================================================" << endl;
     int start;
-    cout << "Beginning of Semester: " << endl
+    cout << "Actions at the beginning of semester: " << endl
          << endl;
     cout << "1. Create a semester" << endl;
     cout << "2. Add course to semester" << endl;
@@ -73,15 +79,19 @@ void startSem()
     case 6:
     case 7:
     case 8:
-    case 0: break;
+    case 0:
+        break;
     }
 }
 
 void endSem()
 {
-    cout << "\033[2J\033[1;1H";
-    int end;
-    cout << "End of Semester: " << endl
+    system ("cls");
+    cout << "==================================================================" << endl;
+    cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
+    cout << "==================================================================" << endl;
+    int choice;
+    cout << "Actions at the end of semester: " << endl
          << endl;
     cout << "1. Export list of students from course" << endl;
     cout << "2. Import scoreboard of a course" << endl;
@@ -90,51 +100,60 @@ void endSem()
     cout << "5. View scoreboard of a class" << endl
          << endl;
     cout << "Your choice: ";
-    cin >> end;
+    cin >> choice;
 
-    switch (end)
+    switch (choice)
     {
     case 1:
     case 2:
     case 3:
     case 4:
     case 5:
-    case 0: break;
+    case 0:
+        break;
     }
 }
 
 void anyTime()
 {
-    cout << "\033[2J\033[1;1H";
-    int r;
-    cout << "Possible actions: " << endl
+    system ("cls");
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+    cout << "==============================================================" << endl;
+    int choice;
+    cout << "Actions at any time: " << endl
          << endl;
-    cout << "1. View list of classes" << endl;
-    cout << "2. View list of students in a class" << endl;
-    cout << "3. View list of courses" << endl;
-    cout << "4. View list of students in a course" << endl
+    cout << "\t1. View list of classes" << endl;
+    cout << "\t2. View list of students in a class" << endl;
+    cout << "\t3. View list of courses" << endl;
+    cout << "\t4. View list of students in a course" << endl;
+    cout << "\t0. Go back to Possible Actions" << endl
          << endl;
     cout << "Your choice: ";
-    cin >> r;
+    cin >> choice;
 
-    switch (r)
+    switch (choice)
     {
     case 1:
     case 2:
     case 3:
     case 4:
-    case 0: break;
+    case 0:
+        break;
     }
 }
 
 void actionsAsStaff()
 {
-    cout << "\033[2J\033[1;1H";
+    system ("cls");
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << "==============================================================" << endl;
     int a;
     cout << "Possible actions" << endl
          << endl;
     cout << "\t1. At the beginning of semester" << endl;
-    cout << "\t2. At the End of semester" << endl;
+    cout << "\t2. At the end of semester" << endl;
     cout << "\t3. At any time" << endl
          << endl;
     cout << "Your choice: ";
@@ -162,7 +181,10 @@ void actionsAsStaff()
 
 void actionsAsStudent()
 {
-    cout << "\033[2J\033[1;1H";
+    system ("cls");
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << "==============================================================" << endl;
     int choice;
     cout << "Possible actions: " << endl
          << endl;
@@ -175,44 +197,52 @@ void actionsAsStudent()
     {
     case 1:
     case 2:
-    case 0: break;
+    case 0:
+        break;
     }
 }
 
 void menuAfterLogin(user *&curUser)
 {
-    cout << "\033[2J\033[1;1H";
+    system ("cls");
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> MAIN MENU" << endl;
+    cout << "==============================================================" << endl;
     int choice;
-    cout << "Options: " << endl
-         << endl;
-    cout << "\t1. View your profile" << endl;
-    cout << "\t2. Change password" << endl;
-    cout << "\t3. Possible actions" << endl;
-    cout << "\t0. Logout" << endl
-         << endl;
-    cout << "Your choice: ";
-    cin >> choice;
-    cout << "\033[2J\033[1;1H";
 
-    switch (choice)
+    while (choice != 0)
     {
-    case 1:
-    case 2:
-    {
-        curUser->changePassword();
-        break;
-    }
-    case 3:
-    {
-        if (curUser->isStaff)
-            actionsAsStaff();
-        else
-            actionsAsStudent();
-        break;
-    }
-    case 0:{
-        curUser = nullptr;
-        return;
-    }
+        cout << endl << "Hi, " << curUser->username << "!" << endl << endl;
+        cout << "Options: " << endl
+            << endl;
+        cout << "\t1. View your profile" << endl;
+        cout << "\t2. Change password" << endl;
+        cout << "\t3. Possible actions" << endl;
+        cout << "\t0. Logout" << endl
+            << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+        case 2:
+        {
+            curUser->changePassword();
+            break;
+        }
+        case 3:
+        {
+            if (curUser->isStaff)
+                actionsAsStaff();
+            else
+                actionsAsStudent();
+            break;
+        }
+        case 0:
+        {
+            curUser = nullptr;
+            return;
+        }
+        }
     }
 }
