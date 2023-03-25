@@ -14,3 +14,10 @@ void readData(userList *User, string filename) {
     }
     fi.close();
 }
+
+void printData(userList *pHead){
+    while(pHead){
+        cout << pHead->data.username << endl;
+        pHead = pHead->next;
+    }
+}
