@@ -258,25 +258,25 @@ void menuAfterLogin(user *&curUser)
         cin >> choice;
         switch (choice)
         {
-        case 1:
-        case 2:
-        {
-            curUser->changePassword();
-            break;
-        }
-        case 3:
-        {
-            if (curUser->isStaff)
-                actionsAsStaff();
-            else
-                actionsAsStudent();
-            break;
-        }
-        case 0:
-        {
-            curUser = nullptr;
-            return;
-        }
+            case 1:
+            case 2:
+            {
+                curUser->changePassword();
+                break;
+            }
+            case 3:
+            {
+                if (curUser->isStaff)
+                    actionsAsStaff();
+                else
+                    actionsAsStudent();
+                break;
+            }
+            case 0:
+            {
+                curUser = nullptr;
+                return;
+            }
         }
     }
 }
