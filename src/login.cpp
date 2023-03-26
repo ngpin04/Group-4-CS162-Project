@@ -91,7 +91,13 @@ void startSem()
             case 7:
             case 8:
             case 0:
+            {
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+                cout << "==============================================================" << endl;
                 return;
+            }
         }
     }
 }
@@ -126,7 +132,13 @@ void endSem()
             case 4:
             case 5:
             case 0:
+            {
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+                cout << "==============================================================" << endl;
                 return;
+            }
         }
     }
 }
@@ -159,7 +171,13 @@ void anyTime()
             case 3:
             case 4:
             case 0:
+            {
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+                cout << "==============================================================" << endl;
                 return;
+            }
         }
     }
 }
@@ -202,7 +220,13 @@ void actionsAsStaff()
                 break;
             }
             case 0:
+            {
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> MAIN MENU" << endl;
+                cout << "==============================================================" << endl;
                 return;
+            }
         }
     }
 }
@@ -231,7 +255,13 @@ void actionsAsStudent()
             case 1:
             case 2:
             case 0:
+            {
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> MAIN MENU" << endl;
+                cout << "==============================================================" << endl;
                 return;
+            }       
         }
     }
 }
