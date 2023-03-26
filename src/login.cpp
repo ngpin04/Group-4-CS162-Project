@@ -6,7 +6,7 @@ void clearScreen() {
 if (_WIN32)
     system("cls");
 else
-    system("clear");
+    cout << "\033[2J\033[1;1H";
 }
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
