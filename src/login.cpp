@@ -61,33 +61,38 @@ void startSem()
     cout << "====================================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> BEGIN-SEMESTER ACTIONS" << endl;
     cout << "====================================================================" << endl;
-    int start;
-    cout << "Actions at the beginning of semester: " << endl
-         << endl;
-    cout << "1. Create a semester" << endl;
-    cout << "2. Add course to semester" << endl;
-    cout << "3. Upload list of students to course" << endl;
-    cout << "4. View list of courses" << endl;
-    cout << "5. Update course information" << endl;
-    cout << "6. Add a student to course" << endl;
-    cout << "7. Remove a student from course" << endl;
-    cout << "8. Delete course" << endl
-         << endl;
-    cout << "Your choice: ";
-    cin >> start;
+    int choice = 100;
 
-    switch (start)
+    while (choice != 0)
     {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 0:
-        break;
+        cout << "Actions at the beginning of semester: " << endl
+             << endl;
+        cout << "\t1. Create a semester" << endl;
+        cout << "\t2. Add course to semester" << endl;
+        cout << "\t3. Upload list of students to course" << endl;
+        cout << "\t4. View list of courses" << endl;
+        cout << "\t5. Update course information" << endl;
+        cout << "\t6. Add a student to course" << endl;
+        cout << "\t7. Remove a student from course" << endl;
+        cout << "\t8. Delete course" << endl;
+        cout << "\t0. Return to Possible Actions"
+             << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 0:
+                return;
+        }
     }
 }
 
@@ -97,27 +102,32 @@ void endSem()
     cout << "==================================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
     cout << "==================================================================" << endl;
-    int choice;
-    cout << "Actions at the end of semester: " << endl
-         << endl;
-    cout << "1. Export list of students from course" << endl;
-    cout << "2. Import scoreboard of a course" << endl;
-    cout << "3. View scoreboard of a course" << endl;
-    cout << "4. Update student's result" << endl;
-    cout << "5. View scoreboard of a class" << endl
-         << endl;
-    cout << "Your choice: ";
-    cin >> choice;
+    int choice = 100;
 
-    switch (choice)
+    while (choice != 0)
     {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 0:
-        break;
+        cout << "Actions at the end of semester: " << endl
+             << endl;
+        cout << "\t1. Export list of students from course" << endl;
+        cout << "\t2. Import scoreboard of a course" << endl;
+        cout << "\t3. View scoreboard of a course" << endl;
+        cout << "\t4. Update student's result" << endl;
+        cout << "\t5. View scoreboard of a class" << endl;
+        cout << "\t0. Return to Possible Actions"
+             << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 0:
+                return;
+        }
     }
 }
 
@@ -127,26 +137,30 @@ void anyTime()
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
     cout << "==============================================================" << endl;
-    int choice;
-    cout << "Actions at any time: " << endl
-         << endl;
-    cout << "\t1. View list of classes" << endl;
-    cout << "\t2. View list of students in a class" << endl;
-    cout << "\t3. View list of courses" << endl;
-    cout << "\t4. View list of students in a course" << endl;
-    cout << "\t0. Go back to Possible Actions" << endl
-         << endl;
-    cout << "Your choice: ";
-    cin >> choice;
+    int choice = 100;
 
-    switch (choice)
+    while (choice != 0)
     {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 0:
-        break;
+        cout << "Actions at any time: " << endl
+             << endl;
+        cout << "\t1. View list of classes" << endl;
+        cout << "\t2. View list of students in a class" << endl;
+        cout << "\t3. View list of courses" << endl;
+        cout << "\t4. View list of students in a course" << endl;
+        cout << "\t0. Return to Possible Actions" << endl
+             << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 0:
+                return;
+        }
     }
 }
 
@@ -156,33 +170,40 @@ void actionsAsStaff()
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
     cout << "==============================================================" << endl;
-    int a;
-    cout << "Possible actions" << endl
-         << endl;
-    cout << "\t1. At the beginning of semester" << endl;
-    cout << "\t2. At the end of semester" << endl;
-    cout << "\t3. At any time" << endl
-         << endl;
-    cout << "Your choice: ";
-    cin >> a;
+    int choice = 100;
 
-    switch (a)
+    while (choice != 0)
     {
-    case 1:
-    {
-        startSem();
-        break;
-    }
-    case 2:
-    {
-        endSem();
-        break;
-    }
-    case 3:
-    {
-        anyTime();
-        break;
-    }
+        cout << "Possible actions" << endl
+             << endl;
+        cout << "\t1. At the beginning of semester" << endl;
+        cout << "\t2. At the end of semester" << endl;
+        cout << "\t3. At any time" << endl;
+        cout << "\t0. Return to Main Menu"
+             << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            {
+                startSem();
+                break;
+            }
+            case 2:
+            {
+                endSem();
+                break;
+            }
+            case 3:
+            {
+                anyTime();
+                break;
+            }
+            case 0:
+                return;
+        }
     }
 }
 
@@ -192,20 +213,26 @@ void actionsAsStudent()
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
     cout << "==============================================================" << endl;
-    int choice;
-    cout << "Possible actions: " << endl
-         << endl;
-    cout << "\t1. View list of courses" << endl;
-    cout << "\t2. View scoreboard" << endl;
-    cout << "Your choice: ";
-    cin >> choice;
+    int choice = 100;
 
-    switch (choice)
+    while (choice != 0)
     {
-    case 1:
-    case 2:
-    case 0:
-        break;
+        cout << "Possible actions: " << endl
+             << endl;
+        cout << "\t1. View list of courses" << endl;
+        cout << "\t2. View scoreboard" << endl;
+        cout << "\t0. Return to Main Menu"
+             << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            case 2:
+            case 0:
+                return;
+        }
     }
 }
 
@@ -215,41 +242,41 @@ void menuAfterLogin(user *&curUser)
     cout << "==============================================================" << endl;
     cout << "Logged In >> MAIN MENU" << endl;
     cout << "==============================================================" << endl;
-    int choice;
+    int choice = 100;
 
     while (choice != 0)
     {
         cout << endl << "Hi, " << curUser->username << "!" << endl << endl;
         cout << "Options: " << endl
-            << endl;
+             << endl;
         cout << "\t1. View your profile" << endl;
         cout << "\t2. Change password" << endl;
         cout << "\t3. Possible actions" << endl;
         cout << "\t0. Logout" << endl
-            << endl;
+             << endl;
         cout << "Your choice: ";
         cin >> choice;
         switch (choice)
         {
-        case 1:
-        case 2:
-        {
-            curUser->changePassword();
-            break;
-        }
-        case 3:
-        {
-            if (curUser->isStaff)
-                actionsAsStaff();
-            else
-                actionsAsStudent();
-            break;
-        }
-        case 0:
-        {
-            curUser = nullptr;
-            return;
-        }
+            case 1:
+            case 2:
+            {
+                curUser->changePassword();
+                break;
+            }
+            case 3:
+            {
+                if (curUser->isStaff)
+                    actionsAsStaff();
+                else
+                    actionsAsStudent();
+                break;
+            }
+            case 0:
+            {
+                curUser = nullptr;
+                return;
+            }
         }
     }
 }
