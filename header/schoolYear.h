@@ -5,6 +5,13 @@
 #include "../header/generalClass.h"
 using namespace std;
 
+struct semester
+{
+    date startDate;
+    date endDate;
+    courseList* allCourses;
+};
+
 struct schoolYear //for example: 2020-2021
 {
     int start;
@@ -13,13 +20,6 @@ struct schoolYear //for example: 2020-2021
     semester* sem2;
     semester* sem3;
     classList* allClasses;
-};
-
-struct semester
-{
-    date startDate;
-    date endDate;
-    courseList* allCourses;
 };
 
 struct yearList
