@@ -17,7 +17,6 @@ struct schoolYear //for example: 2020-2021
 
 struct semester
 {
-    schoolYear year;
     date startDate;
     date endDate;
     courseList* allCourses;
