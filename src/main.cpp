@@ -1,8 +1,10 @@
 #include "../header/user.h"
 #include "../header/readData.h"
 #include "../header/login.h"
+#include "../header/schoolYear.h"
 
 userList *userData = new userList;
+yearList *YearList = new yearList;
 
 int main() {
     readData(userData, "data/user.txt");
@@ -14,7 +16,7 @@ int main() {
             checkUserAtLogIn(userData, curUser);
         }
         else{
-            menuAfterLogin(curUser);
+            menuAfterLogin(curUser, YearList);
         }
     }
     return 0;
