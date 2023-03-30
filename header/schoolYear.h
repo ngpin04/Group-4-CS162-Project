@@ -9,6 +9,7 @@ struct semester
 {
     date startDate;
     date endDate;
+    bool scorePublished = false; // only true when scoreboard of all courses have been updated
     courseList* allCourses;
 };
 

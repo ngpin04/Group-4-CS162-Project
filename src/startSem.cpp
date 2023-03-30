@@ -39,7 +39,7 @@ void startSem(yearList *YearList) {
             newSem = createSemester(YearList);
         } else {
             if (newSem == nullptr) {
-                cout << "Semester has not been created, please try again" << endl;
+                cout << "Semester has not been created, please try again." << endl;
             }
 
             switch (choice) {
