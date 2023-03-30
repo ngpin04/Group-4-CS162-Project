@@ -13,27 +13,11 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     cout << "==============================================" << endl
          << endl;
     cout << "Logging in..." << endl;
-    cout << "Enter username: ";
     string curUsername;
-    cin >> curUsername;
-    cout << "Enter password: ";
     string curPassword;
-    cin >> curPassword;
     userList* cur = pHead;
-    while (cur)
-    {
-        if (curUsername == cur->data.username && curPassword == cur->data.password)
-        {
-            cout << "Login successfully!" << endl << endl;
-            curUser = &(cur->data);
-            return;
-        }
-        cur = cur->next;
-    }
-    cur = pHead;
     do
     {
-        cout << endl << "No such account exists! Please re-enter username and password." << endl; // re-login until login ok
         cout << "Enter username: ";
         cin >> curUsername;
         cout << "Enter password: ";
@@ -48,6 +32,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
             }
             cur = cur->next;
         }
+        cout << endl << "No such account exists! Please re-enter username and password." << endl; // re-login until login ok
     } while (curUser == nullptr);
 }
 
