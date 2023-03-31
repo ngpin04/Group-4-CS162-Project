@@ -24,21 +24,18 @@ void printCourseScore(user *curUser, semester *s)
                      << left << setw(15) << availCourses->data.courseName
                      << left << setw(10) << availCourses->data.credit;
 
-                while (scoreboard)
-                {
-                    if (scoreboard->data.id == curUser->id)
-                    {
-                        cout << left << setw(10) << scoreboard->data.total
-                             << left << setw(10) << scoreboard->data.midterm
-                             << left << setw(10) << scoreboard->data.finalMark
-                             << left << setw(10) << scoreboard->data.other << endl;
-                        break;
-                    }
-                    else scoreboard = scoreboard->next;
-                }
+                cout << left << setw(10) << scoreboard->data.total
+                     << left << setw(10) << scoreboard->data.midterm
+                     << left << setw(10) << scoreboard->data.finalMark
+                     << left << setw(10) << scoreboard->data.other << endl;
             }
-            else enrolledStd = enrolledStd->next;
+            else
+            {
+                enrolledStd = enrolledStd->next;
+                scoreboard = scoreboard->next;
+            }
         }
+        
         availCourses = availCourses->next;
     }
 
