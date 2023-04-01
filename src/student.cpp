@@ -1,12 +1,11 @@
 #pragma once;
 #include <string>
 #include <iomanip>
-#include "../header/user.h";
-#include "../header/schoolYear.h";
+#include "../header/user.h"
+#include "../header/schoolYear.h"
 
-void printCourseScore(user *curUser, semester *s)
+void printCourseScore(int userID, semester *s)
 {
-    bool scoreAvailable = false; // check if there is any score to display
     courseList *availCourses = s->allCourses;
 
     while (availCourses)
@@ -16,18 +15,25 @@ void printCourseScore(user *curUser, semester *s)
 
         while (enrolledStd)
         {
-            if (enrolledStd->data.id == curUser->id)
-            {
-                if (!scoreAvailable) scoreAvailable = true;
+            bool resultsReleased = availCourses->data.resultsReleased;
 
+            if (enrolledStd->data.id == userID)
+            {
                 cout << left << setw(10) << availCourses->data.id
                      << left << setw(15) << availCourses->data.courseName
                      << left << setw(10) << availCourses->data.credit;
 
-                cout << left << setw(10) << scoreboard->data.total
-                     << left << setw(10) << scoreboard->data.midterm
-                     << left << setw(10) << scoreboard->data.finalMark
-                     << left << setw(10) << scoreboard->data.other << endl;
+                if (!resultsReleased)
+                {
+                    cout << left << "Results not released." << endl;
+                }
+                else
+                {
+                    cout << left << setw(10) << scoreboard->data.total
+                         << left << setw(10) << scoreboard->data.midterm
+                         << left << setw(10) << scoreboard->data.finalMark
+                         << left << setw(10) << scoreboard->data.other << endl;
+                }
             }
             else
             {
@@ -35,45 +41,30 @@ void printCourseScore(user *curUser, semester *s)
                 scoreboard = scoreboard->next;
             }
         }
-        
         availCourses = availCourses->next;
     }
 
-    if (!scoreAvailable) // meaning student is in system but did not participate in any courses
-        cout << "There's no score to view." << endl;
-    
     return;
 }
 
 void viewScoreboard(user *curUser, yearList *YearList)
 {
     string userYear = to_string(curUser->id).substr(0, 2);
-    string finished = "n";
 
     while (YearList)
     {
         string curYear = to_string(YearList->data.start % 100);
         if (userYear == curYear)
         {
-            while (finished != "y")
+            semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
+
+            for (int i = 0; i < 3; i++)
             {
-                int sem;
-                cout << "Select a semester: ";
-                cin >> sem;
-
-                semester* s = nullptr;
-                if (sem == 1)
-                    s = YearList->data.sem1;
-                if (sem == 2)
-                    s = YearList->data.sem2;
-                if (sem == 3)
-                    s = YearList->data.sem2;
-
-                bool scorePublished = s->scorePublished;
+                bool scorePublished = s[i]->scorePublished;
 
                 if (scorePublished)
                 {
-                    cout << "SCOREBOARD OF SEMESTER " << sem << ": " << endl;
+                    cout << "SCOREBOARD OF SEMESTER " << i + 1 << ": " << endl;
                     cout << left << setw(10) << "COURSE ID"
                          << left << setw(15) << "COURSE NAME"
                          << left << setw(10) << "CREDITS"
@@ -83,17 +74,13 @@ void viewScoreboard(user *curUser, yearList *YearList)
                          << left << setw(10) << "OTHER";
                     cout << "-----------------------------------------------------------------------------------------------" << endl;
 
-                    printCourseScore(curUser, s);
+                    printCourseScore(curUser->id, s[i]);
                 }
                 else
-                    cout << "The results of this semester has not been published yet." << endl;
-                }
-            
-                cout << "Finished viewing? (y/n) ";
-                cin >> finished;
+                    cout << "The results of semester " << i + 1 << " has not been published." << endl;
+            }
         }
-        else YearList = YearList->next;
+        else
+            YearList = YearList->next;
     }
-
-    return;
 }
