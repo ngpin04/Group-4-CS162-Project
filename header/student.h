@@ -1,5 +1,6 @@
 #pragma once
 #include "../header/user.h"
+#include "../header/schoolYear.h"
 struct student
 {
     int number;
@@ -15,3 +16,5 @@ struct studentList{
     student data;
     studentList* next;
 };
+
+void printCourseScore(int userID, semester *s);
