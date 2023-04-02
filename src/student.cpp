@@ -1,4 +1,3 @@
-#pragma once;
 #include <string>
 #include <iomanip>
 #include "../header/user.h"
