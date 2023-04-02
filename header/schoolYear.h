@@ -9,6 +9,7 @@ struct semester
 {
     date startDate;
     date endDate;
+    bool scorePublished = false; // = not time to view scores yet
     courseList* allCourses;
 };
 

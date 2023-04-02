@@ -14,6 +14,7 @@ struct course
     int maximum = 50;
     string dayOfWeek;
     int session;
+    bool resultsReleased;
     studentList* enrolledStudents;
     scoreList* scoreboard;
 };

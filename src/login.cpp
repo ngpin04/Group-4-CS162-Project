@@ -289,6 +289,10 @@ void menuAfterLogin(user *&curUser, yearList *YearList) {
             case 2:
             {
                 curUser->changePassword();
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> MAIN MENU" << endl;
+                cout << "==============================================================" << endl;
                 break;
             }
             case 3:
