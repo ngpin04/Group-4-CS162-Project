@@ -1,5 +1,6 @@
 #pragma once
 #include "../header/user.h"
+#include "../header/schoolYear.h"
 struct student
 {
     int number;
