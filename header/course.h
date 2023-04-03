@@ -6,9 +6,9 @@ using namespace std;
 
 struct course
 {
-    int id;
+    string id;
     string courseName;
-    generalClass className;
+    string className;
     string teacherName;
     int credit;
     int maximum = 50;
