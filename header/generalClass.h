@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-#include "../header/student.h"
+#include "student.h"
+
 using namespace std;
 
 struct generalClass

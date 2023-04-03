@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "../header/user.h"
-#include "../header/course.h"
-#include "../header/generalClass.h"
+#include "user.h"
+#include "course.h"
+#include "generalClass.h"
 using namespace std;
 
 struct semester

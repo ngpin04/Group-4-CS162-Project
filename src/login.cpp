@@ -252,7 +252,7 @@ void actionsAsStudent()
         {
         case 1:
         {
-            viewCourseInSemesterOfAStudent();
+            // viewCourseInSemesterOfAStudent(); no parameter
             break;
         }
         case 2:
