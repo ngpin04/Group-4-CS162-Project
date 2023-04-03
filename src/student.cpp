@@ -1,4 +1,3 @@
-#pragma once;
 #include <string>
 #include <iomanip>
 #include "../header/student.h"
@@ -81,5 +80,31 @@ void viewScoreboard(user *curUser, yearList *YearList)
         }
         else
             YearList = YearList->next;
+    }
+}
+
+void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
+{
+    courseList *curCourse = head->allCourses;
+    if (curCourse == nullptr){
+        cout << "There is no course in this semester." << endl;
+        return;
+    }
+    int count = 0;
+    while (curCourse)
+    {
+        studentList *curStudent = curCourse->data.enrolledStudents;
+        while (curStudent)
+        {
+            if (curStudent->data.id == curUser->id)
+            {
+                count++;
+                cout << count << ". " << curCourse->data.id
+                     << " - " << curCourse->data.courseName << endl;
+                break;
+            }
+            curStudent = curStudent->next;
+        }
+        curCourse = curCourse->next;
     }
 }

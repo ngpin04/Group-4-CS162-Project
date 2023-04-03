@@ -7,6 +7,7 @@ using namespace std;
 
 struct semester
 {
+    int semesterID = 0; // 1,2,3
     date startDate;
     date endDate;
     bool scorePublished = false; // = not time to view scores yet

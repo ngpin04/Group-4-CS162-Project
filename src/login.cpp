@@ -3,6 +3,7 @@
 #include "../header/startSem.h"
 #include "../header/login.h"
 #include "../header/console.h"
+#include "../header/student.h"
 using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
@@ -13,27 +14,11 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     cout << "==============================================" << endl
          << endl;
     cout << "Logging in..." << endl;
-    cout << "Enter username: ";
     string curUsername;
-    cin >> curUsername;
-    cout << "Enter password: ";
     string curPassword;
-    cin >> curPassword;
-    userList* cur = pHead;
-    while (cur)
-    {
-        if (curUsername == cur->data.username && curPassword == cur->data.password)
-        {
-            cout << "Login successfully!" << endl << endl;
-            curUser = &(cur->data);
-            return;
-        }
-        cur = cur->next;
-    }
-    cur = pHead;
+    userList *cur = pHead;
     do
     {
-        cout << endl << "No such account exists! Please re-enter username and password." << endl; // re-login until login ok
         cout << "Enter username: ";
         cin >> curUsername;
         cout << "Enter password: ";
@@ -48,6 +33,8 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
             }
             cur = cur->next;
         }
+        cout << endl
+             << "No such account exists! Please re-enter username and password." << endl; // re-login until login ok
     } while (curUser == nullptr);
 }
 
@@ -73,42 +60,39 @@ void startYear()
 
         switch (choice)
         {
-            case 1:
-            case 2:
-            case 3:
-            {
-                int tmp;
-                cout << "Add students to 1st-year class: "
-                     << endl;
-                cout << "Choose class: " << endl
-                     << endl;
-                cout << "1. Add one-by-one" << endl;
-                cout << "2. Import CSV file" << endl
-                     << endl;
-                cout << "Your choice: ";
-                cin >> tmp;
-                
-                if (tmp == 1)
-                {
+        case 1:
+        case 2:
+        case 3:
+        {
+            int tmp;
+            cout << "Add students to 1st-year class: "
+                 << endl;
+            cout << "Choose class: " << endl
+                 << endl;
+            cout << "1. Add one-by-one" << endl;
+            cout << "2. Import CSV file" << endl
+                 << endl;
+            cout << "Your choice: ";
+            cin >> tmp;
 
-                }
-                else if (tmp == 2)
-                {
-
-                }
-            }
-            case 0:
+            if (tmp == 1)
             {
-                clearScreen();
-                cout << "==============================================================" << endl;
-                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-                cout << "==============================================================" << endl;
-                return;
             }
+            else if (tmp == 2)
+            {
+            }
+        }
+        case 0:
+        {
+            clearScreen();
+            cout << "==============================================================" << endl;
+            cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+            cout << "==============================================================" << endl;
+            return;
+        }
         }
     }
 }
-
 
 void endSem()
 {
@@ -134,19 +118,19 @@ void endSem()
 
         switch (choice)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 0:
-            {
-                clearScreen();
-                cout << "==============================================================" << endl;
-                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-                cout << "==============================================================" << endl;
-                return;
-            }
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 0:
+        {
+            clearScreen();
+            cout << "==============================================================" << endl;
+            cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+            cout << "==============================================================" << endl;
+            return;
+        }
         }
     }
 }
@@ -174,23 +158,24 @@ void anyTime()
 
         switch (choice)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 0:
-            {
-                clearScreen();
-                cout << "==============================================================" << endl;
-                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-                cout << "==============================================================" << endl;
-                return;
-            }
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 0:
+        {
+            clearScreen();
+            cout << "==============================================================" << endl;
+            cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+            cout << "==============================================================" << endl;
+            return;
+        }
         }
     }
 }
 
-void actionsAsStaff(yearList *YearList) {
+void actionsAsStaff(yearList *YearList)
+{
     clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
@@ -212,34 +197,34 @@ void actionsAsStaff(yearList *YearList) {
 
         switch (choice)
         {
-            case 1:
-            {
-                startYear();
-                break;
-            }
-            case 2:
-            {
-                startSem(YearList);
-                break;
-            }
-            case 3:
-            {
-                endSem();
-                break;
-            }
-            case 4:
-            {
-                anyTime();
-                break;
-            }
-            case 0:
-            {
-                clearScreen();
-                cout << "==============================================================" << endl;
-                cout << "Logged In >> MAIN MENU" << endl;
-                cout << "==============================================================" << endl;
-                return;
-            }
+        case 1:
+        {
+            startYear();
+            break;
+        }
+        case 2:
+        {
+            startSem(YearList);
+            break;
+        }
+        case 3:
+        {
+            endSem();
+            break;
+        }
+        case 4:
+        {
+            anyTime();
+            break;
+        }
+        case 0:
+        {
+            clearScreen();
+            cout << "==============================================================" << endl;
+            cout << "Logged In >> MAIN MENU" << endl;
+            cout << "==============================================================" << endl;
+            return;
+        }
         }
     }
 }
@@ -265,21 +250,29 @@ void actionsAsStudent()
 
         switch (choice)
         {
-            case 1:
-            case 2:
-            case 0:
-            {
-                clearScreen();
-                cout << "==============================================================" << endl;
-                cout << "Logged In >> MAIN MENU" << endl;
-                cout << "==============================================================" << endl;
-                return;
-            }       
+        case 1:
+        {
+            viewCourseInSemesterOfAStudent();
+            break;
+        }
+        case 2:
+        {
+            
+        }
+        case 0:
+        {
+            clearScreen();
+            cout << "==============================================================" << endl;
+            cout << "Logged In >> MAIN MENU" << endl;
+            cout << "==============================================================" << endl;
+            return;
+        }
         }
     }
 }
 
-void menuAfterLogin(user *&curUser, yearList *YearList) {
+void menuAfterLogin(user *&curUser, yearList *YearList)
+{
     clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> MAIN MENU" << endl;
@@ -288,9 +281,11 @@ void menuAfterLogin(user *&curUser, yearList *YearList) {
 
     while (choice != 0)
     {
-        cout << endl << "Hi, " << curUser->username << "!" << endl << endl;
+        cout << endl
+             << "Hi, " << curUser->username << "!" << endl
+             << endl;
         cout << "Options: " << endl
-             << endl;       
+             << endl;
         cout << "\t1. View your profile" << endl;
         cout << "\t2. Change password" << endl;
         cout << "\t3. Possible actions" << endl;
@@ -300,29 +295,29 @@ void menuAfterLogin(user *&curUser, yearList *YearList) {
         cin >> choice;
         switch (choice)
         {
-            case 1:
-            case 2:
-            {
-                curUser->changePassword();
-                clearScreen();
-                cout << "==============================================================" << endl;
-                cout << "Logged In >> MAIN MENU" << endl;
-                cout << "==============================================================" << endl;
-                break;
-            }
-            case 3:
-            {
-                if (curUser->isStaff)
-                    actionsAsStaff(YearList);
-                else
-                    actionsAsStudent();
-                break;
-            }
-            case 0:
-            {
-                curUser = nullptr;
-                return;
-            }
+        case 1:
+        case 2:
+        {
+            curUser->changePassword();
+            clearScreen();
+            cout << "==============================================================" << endl;
+            cout << "Logged In >> MAIN MENU" << endl;
+            cout << "==============================================================" << endl;
+            break;
+        }
+        case 3:
+        {
+            if (curUser->isStaff)
+                actionsAsStaff(YearList);
+            else
+                actionsAsStudent();
+            break;
+        }
+        case 0:
+        {
+            curUser = nullptr;
+            return;
+        }
         }
     }
 }

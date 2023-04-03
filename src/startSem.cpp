@@ -1,6 +1,7 @@
 #include "../header/startSem.h"
 #include "../header/console.h"
 #include "../header/createSemester.h"
+#include "../header/addCourse.h"
 #include <iostream>
 
 using namespace std;
@@ -43,7 +44,7 @@ void startSem(yearList *YearList) {
             }
 
             switch (choice) {
-                case 2:
+                case 2: addCourse(newSem);
                 case 3:
                 case 4:
                 case 5:
