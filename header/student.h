@@ -15,3 +15,9 @@ struct studentList{
     student data;
     studentList* next;
 };
+
+void printCourseScore(int userID, semester *s);
+
+void viewScoreboard(user *curUser, yearList *YearList);
+
+void viewCourseInSemesterOfAStudent(semester *head, user *curUser);
