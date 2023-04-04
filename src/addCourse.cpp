@@ -25,5 +25,9 @@ void addCourse(semester *sem) {
     courseList *temp = new courseList;
     temp->data = newCourse;
     temp->next = nullptr;
-    sem->allCourses->next = temp;
+
+    courseList *lastCourse = sem->allCourses;
+    while (lastCourse->next != nullptr)
+        lastCourse = lastCourse->next;
+    lastCourse->next = temp;
 }   
