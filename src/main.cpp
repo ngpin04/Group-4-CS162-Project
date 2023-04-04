@@ -19,7 +19,7 @@ int main() {
             checkUserAtLogIn(userData, curUser);
         }
         else{
-            menuAfterLogin(curUser, YearList);
+            menuAfterLogin(curUser, YearList, curSemester, curYear);
         }
     }
     saveTime(curSemester, curYear);

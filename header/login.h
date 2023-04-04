@@ -8,8 +8,8 @@ void endSem();
 
 void anyTime();
 
-void actionsAsStaff();
+void actionsAsStaff(yearList *YearList);
 
-void actionsAsStudent();
+void actionsAsStudent(user *&curUser,semester *curSemester);
 
-void menuAfterLogin(user *&curUser, yearList *YearList);
+void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, schoolYear *curYear);

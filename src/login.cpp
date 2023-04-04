@@ -4,6 +4,7 @@
 #include "../header/login.h"
 #include "../header/console.h"
 #include "../header/student.h"
+#include "../header/studentAction.h"
 using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
@@ -229,7 +230,7 @@ void actionsAsStaff(yearList *YearList)
     }
 }
 
-void actionsAsStudent()
+void actionsAsStudent(user *&curUser,semester *curSemester)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -252,7 +253,7 @@ void actionsAsStudent()
         {
         case 1:
         {
-            // viewCourseInSemesterOfAStudent(); no parameter
+            viewCourseInSemesterOfAStudent(curUser,curSemester); //14. View a list of his/her courses. He/she will study these courses in this semester.
             break;
         }
         case 2:
@@ -271,7 +272,7 @@ void actionsAsStudent()
     }
 }
 
-void menuAfterLogin(user *&curUser, yearList *YearList)
+void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, schoolYear *curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -310,7 +311,7 @@ void menuAfterLogin(user *&curUser, yearList *YearList)
             if (curUser->isStaff)
                 actionsAsStaff(YearList);
             else
-                actionsAsStudent();
+                actionsAsStudent(curUser,curSemester);
             break;
         }
         case 0:
