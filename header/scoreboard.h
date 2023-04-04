@@ -1,5 +1,5 @@
 #pragma once
-#include "../header/student.h"
+#include "student.h"
 
 struct score
 {

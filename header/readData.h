@@ -1,7 +1,7 @@
 #pragma once
-#include "../header/user.h"
-#include "../header/schoolYear.h"
-#include "../header/readData.h"
+#include "user.h"
+#include "schoolYear.h"
+#include "readData.h"
 void readData(userList *User, string filename);
 
 void printData(userList *pHead);

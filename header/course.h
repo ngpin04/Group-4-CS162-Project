@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-#include "../header/scoreboard.h"
+#include "scoreboard.h"
+#include "student.h"
 using namespace std;
 
 struct course
