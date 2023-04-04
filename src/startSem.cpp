@@ -3,6 +3,7 @@
 #include "../header/createSemester.h"
 #include "../header/addCourse.h"
 #include "../header/uploadStudentList.h"
+#include "../header/viewCourse.h"
 #include <iostream>
 
 using namespace std;
@@ -47,7 +48,7 @@ void startSem(yearList *YearList) {
             switch (choice) {
                 case 2: addCourse(newSem);
                 case 3: uploadStudentList(newSem->allCourses);
-                case 4:
+                case 4: viewCourse(newSem->allCourses);
                 case 5:
                 case 6:
                 case 7:
