@@ -45,8 +45,20 @@ void createSchoolYear(yearList*& head)
     }
 }
 
-void createClasses(schoolYear& year)
+schoolYear findYear(yearList* head, int n)
 {
+    yearList* curYear = head;
+    while (curYear && curYear->data.start!=n)
+        curYear = curYear -> next;
+    return curYear->data;
+}
+
+void createClasses(yearList*& head)
+{
+    cout << "In which school year do you want to create classes? ";
+    int start, end;
+    cin >> start >> end;
+    schoolYear year = findYear(head, start);
     cout << "Enter the list of classes, enter 0 to stop: ";
     year.allClasses = new classList;
     classList* curClass = year.allClasses;

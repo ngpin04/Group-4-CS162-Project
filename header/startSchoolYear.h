@@ -2,7 +2,8 @@
 #include "schoolYear.h"
 
 void createSchoolYear(yearList*& cur);
-void createClasses(schoolYear& year);
+schoolYear findYear(yearList* head, int n);
+void createClasses(yearList*& head);
 void add1Stu(generalClass& c, classList* allClasses);
 generalClass findClass(classList* allClasses, string classname);
 void inputStu(student& stu);

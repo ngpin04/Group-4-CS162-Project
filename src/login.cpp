@@ -61,8 +61,16 @@ void startYear(yearList* YearList)
 
         switch (choice)
         {
-        case 1: createSchoolYear(YearList);
-        case 2: createClasses(YearList->data);
+        case 1: 
+        {
+            createSchoolYear(YearList);
+            break;
+        }
+        case 2: 
+        {
+            createClasses(YearList);
+            break;
+        }
         case 3:
         {
             int tmp;
@@ -84,6 +92,7 @@ void startYear(yearList* YearList)
             {
                 addManyStus(YearList->data.allClasses->data,YearList->data.allClasses,"students.csv");
             }
+            break;
         }
         case 0:
         {
