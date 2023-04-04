@@ -49,8 +49,7 @@ void createClasses(schoolYear& year)
 {
     cout << "Enter the list of classes, enter 0 to stop: ";
     year.allClasses = new classList;
-    classList* curClass;
-    curClass = year.allClasses;
+    classList* curClass = year.allClasses;
     string name;
     cin >> name;
     if (name=="0") year.allClasses = nullptr;
@@ -170,7 +169,7 @@ void addManyStus(generalClass& c, classList* allClasses, string filename)
     {
         c.studentHead = new studentList;
         studentList* curStu = c.studentHead;
-        while (fin.peek()!=EOF);
+        while (fin.peek()!=EOF)
         {
             fin.ignore(1000, '\n');
             student stu;
