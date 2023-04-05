@@ -1,4 +1,5 @@
 #include "../header/studentAction.h"
+#include "../header/console.h"
 #include <iostream>
 
 using namespace std;
@@ -84,13 +85,22 @@ void viewScoreboard(user *curUser, yearList *YearList)
     }
 }
 
-void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
+void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
 {
-    courseList *curCourse = head->allCourses;
-    if (curCourse == nullptr){
+    courseList *curCourse = curSemester->allCourses;
+
+    if (curCourse == nullptr)
+    {
         cout << "There is no course in this semester." << endl;
+        cout << "Press any key to continue..." << endl;
+        cin >> count;
+        clearScreen();
+        cout << "==============================================================" << endl;
+        cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+        cout << "==============================================================" << endl;
         return;
     }
+
     int count = 0;
     while (curCourse)
     {
@@ -108,4 +118,11 @@ void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
         }
         curCourse = curCourse->next;
     }
+    cout << "Press any key to continue..." << endl;
+    cin >> count;
+    clearScreen();
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << "==============================================================" << endl;
+    return;
 }

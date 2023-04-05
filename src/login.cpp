@@ -253,7 +253,7 @@ void actionsAsStudent(user *&curUser,semester *curSemester)
         {
         case 1:
         {
-            viewCourseInSemesterOfAStudent(curUser,curSemester); //14. View a list of his/her courses. He/she will study these courses in this semester.
+            viewCourseInSemesterOfAStudent(curSemester,curUser); //14. View a list of his/her courses. He/she will study these courses in this semester.
             break;
         }
         case 2:
