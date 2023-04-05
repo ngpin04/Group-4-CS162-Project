@@ -4,6 +4,7 @@
 #include "../header/addCourse.h"
 #include "../header/uploadStudentList.h"
 #include "../header/viewCourse.h"
+#include "../header/updateCourse.h"
 #include <iostream>
 
 using namespace std;
@@ -49,7 +50,7 @@ void startSem(yearList *YearList) {
                 case 2: addCourse(newSem);
                 case 3: uploadStudentList(newSem->allCourses);
                 case 4: viewCourse(newSem->allCourses);
-                case 5:
+                case 5: updateCourse(newSem->allCourses);
                 case 6:
                 case 7:
                 case 8: {
