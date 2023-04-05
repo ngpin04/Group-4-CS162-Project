@@ -4,6 +4,7 @@
 #include "../header/login.h"
 #include "../header/console.h"
 #include "../header/student.h"
+#include "../header/startSchoolYear.h"
 using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
@@ -38,7 +39,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     } while (curUser == nullptr);
 }
 
-void startYear()
+void startYear(yearList* YearList)
 {
     clearScreen();
     cout << "====================================================================" << endl;
@@ -60,8 +61,16 @@ void startYear()
 
         switch (choice)
         {
-        case 1:
-        case 2:
+        case 1: 
+        {
+            createSchoolYear(YearList);
+            break;
+        }
+        case 2: 
+        {
+            createClasses(YearList);
+            break;
+        }
         case 3:
         {
             int tmp;
@@ -77,10 +86,13 @@ void startYear()
 
             if (tmp == 1)
             {
+                add1Stu(YearList->data.allClasses->data,YearList->data.allClasses);
             }
             else if (tmp == 2)
             {
+                addManyStus(YearList->data.allClasses->data,YearList->data.allClasses,"students.csv");
             }
+            break;
         }
         case 0:
         {
@@ -199,7 +211,7 @@ void actionsAsStaff(yearList *YearList)
         {
         case 1:
         {
-            startYear();
+            startYear(YearList);
             break;
         }
         case 2:
@@ -252,7 +264,7 @@ void actionsAsStudent()
         {
         case 1:
         {
-            // viewCourseInSemesterOfAStudent(); no parameter
+            //viewCourseInSemesterOfAStudent();
             break;
         }
         case 2:
