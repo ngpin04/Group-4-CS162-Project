@@ -137,11 +137,10 @@ generalClass* findClass(classList* allClasses, string classname)
     while(curClass)
     {
         if (curClass->data.name==classname)
-            return &curClass->data;
+            return &(curClass->data);
         curClass = curClass -> next;
     }
-    if (!curClass) 
-        return nullptr;  
+    return nullptr;  
 }
 
 void inputStu(student& stu)

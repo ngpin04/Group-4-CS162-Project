@@ -24,6 +24,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
         cin >> curUsername;
         cout << "Enter password: ";
         cin >> curPassword;
+        cur = pHead;
         while (cur)
         {
             if (curUsername == cur->data.username && curPassword == cur->data.password)

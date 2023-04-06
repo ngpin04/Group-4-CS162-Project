@@ -22,7 +22,7 @@ struct user
 };
 
 struct userList {
-    userList *next;
+    userList *next = nullptr;
     user data;
     userList();
     userList(user data);
