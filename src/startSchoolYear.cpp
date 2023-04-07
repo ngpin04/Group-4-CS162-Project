@@ -45,12 +45,13 @@ void createSchoolYear(yearList*& head)
     }
 }
 
-schoolYear findYear(yearList* head, int n)
+schoolYear* findYear(yearList* head, int n)
 {
     yearList* curYear = head;
     while (curYear && curYear->data.start!=n)
         curYear = curYear -> next;
-    return curYear->data;
+    if (!curYear) return nullptr;
+    return &curYear->data;
 }
 
 void createClasses(yearList*& head)
@@ -58,13 +59,19 @@ void createClasses(yearList*& head)
     cout << "In which school year do you want to create classes? ";
     int start, end;
     cin >> start >> end;
-    schoolYear year = findYear(head, start);
+    schoolYear* year = findYear(head, start);
+    while (!year)
+    {
+        cout << "No such school year exists. Please enter the school year again: ";
+        cin >> start >> end;
+        year = findYear(head, start);
+    }
     cout << "Enter the list of classes, enter 0 to stop: ";
-    year.allClasses = new classList;
-    classList* curClass = year.allClasses;
+    year->allClasses = new classList;
+    classList* curClass = year->allClasses;
     string name;
     cin >> name;
-    if (name=="0") year.allClasses = nullptr;
+    if (name=="0") year->allClasses = nullptr;
     while(name!="0")
     {
         curClass -> data.name = name;
@@ -78,14 +85,13 @@ void createClasses(yearList*& head)
     }   
 }
 
-void add1Stu(generalClass& c, classList* allClasses)
+void add1Stu(classList*& allClasses)
 {
-    c.name ="";
     cout << "Which class do you want to add this student into? ";
     string classname;
     cin >> classname;
-    c = findClass(allClasses, classname);
-    while (c.name=="")
+    generalClass* c = findClass(allClasses, classname);
+    while (!c)
     {
         cout << "No such class exists. Please enter classname again: ";
         cin >> classname;
@@ -93,56 +99,48 @@ void add1Stu(generalClass& c, classList* allClasses)
     }
     student stu;
     inputStu(stu);
-    studentList* curStu = c.studentHead;
+    studentList* curStu = c->studentHead;
     studentList* tmp = new studentList;
     tmp -> data = stu;
     tmp -> next = nullptr;
     if (!curStu) //No students have been added
     {
-        c.studentHead = tmp;
+        c->studentHead = tmp;
         return;
     }
     while (curStu->next && curStu->next->data.id<stu.id)
         curStu = curStu -> next;
-    if (curStu==c.studentHead && c.studentHead->data.id<stu.id) //Only 1 student in class and id < the one we add
+    if (curStu==c->studentHead && c->studentHead->data.id<stu.id) //Only 1 student in class and id < the one we add
     {
-        c.studentHead -> next = tmp;
+        c->studentHead -> next = tmp;
     }
-    else if (curStu==c.studentHead && c.studentHead->data.id>stu.id) //Only 1 student in class and id > the one we add
+    else if (curStu==c->studentHead && c->studentHead->data.id>stu.id) //Only 1 student in class and id > the one we add
     {
-        tmp -> next = c.studentHead;
-        c.studentHead = tmp;
+        tmp -> next = c->studentHead;
+        c->studentHead = tmp;
     }
     else if (!curStu->next) //All students in class have id < the one we add
     {
         curStu -> next = new studentList;
         curStu -> next = tmp;
     }
-    else //The student we add have id in the middleof the list
+    else //The student we add have id in the middle of the list
     {
         tmp -> next = curStu -> next;
         curStu -> next = tmp;
     }
 }
 
-generalClass findClass(classList* allClasses, string classname)
+generalClass* findClass(classList* allClasses, string classname)
 {
     classList* curClass = allClasses;
-    generalClass c;
     while(curClass)
     {
         if (curClass->data.name==classname)
-        {
-            c = curClass->data;
-            return c;
-        }
+            return &(curClass->data);
         curClass = curClass -> next;
     }
-    if (!curClass) 
-    {
-        c.name = "";
-        return c;
-    }     
+    return nullptr;  
 }
 
 void inputStu(student& stu)
@@ -169,18 +167,24 @@ void inputStu(student& stu)
     cin >> stu.socialID;
 }
 
-void addManyStus(generalClass& c, classList* allClasses, string filename)
+void addManyStus(classList*& allClasses, string filename)
 {
     cout << "Which class do you want to add this student into? ";
     string classname;
     cin >> classname;
-    c = findClass(allClasses, classname);
+    generalClass* c = findClass(allClasses, classname);
+    while (!c)
+    {
+        cout << "No such class exists. Please enter classname again: ";
+        cin >> classname;
+        c = findClass(allClasses, classname);
+    }
     ifstream fin;
     fin.open(filename);
     if (fin.is_open())
     {
-        c.studentHead = new studentList;
-        studentList* curStu = c.studentHead;
+        c->studentHead = new studentList;
+        studentList* curStu = c->studentHead;
         while (fin.peek()!=EOF)
         {
             fin.ignore(1000, '\n');

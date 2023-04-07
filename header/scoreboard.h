@@ -14,5 +14,5 @@ struct score
 
 struct scoreList{
     score data;
-    scoreList* next;
+    scoreList* next = nullptr;
 };

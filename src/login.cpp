@@ -24,6 +24,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
         cin >> curUsername;
         cout << "Enter password: ";
         cin >> curPassword;
+        cur = pHead;
         while (cur)
         {
             if (curUsername == cur->data.username && curPassword == cur->data.password)
@@ -76,7 +77,7 @@ void startYear(yearList* YearList)
             int tmp;
             cout << "Add students to 1st-year class: "
                  << endl;
-            cout << "Choose class: " << endl
+            cout << "How do you want to add students? " << endl
                  << endl;
             cout << "1. Add one-by-one" << endl;
             cout << "2. Import CSV file" << endl
@@ -86,11 +87,11 @@ void startYear(yearList* YearList)
 
             if (tmp == 1)
             {
-                add1Stu(YearList->data.allClasses->data,YearList->data.allClasses);
+                add1Stu(YearList->data.allClasses);
             }
             else if (tmp == 2)
             {
-                addManyStus(YearList->data.allClasses->data,YearList->data.allClasses,"students.csv");
+                addManyStus(YearList->data.allClasses,"students.csv");
             }
             break;
         }
