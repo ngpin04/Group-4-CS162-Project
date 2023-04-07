@@ -13,6 +13,6 @@ struct student {
 
 struct studentList {
     student data;
-    studentList* next;
+    studentList* next = nullptr;
 };
 

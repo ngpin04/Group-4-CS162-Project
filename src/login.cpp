@@ -4,6 +4,7 @@
 #include "../header/login.h"
 #include "../header/console.h"
 #include "../header/student.h"
+#include "../header/startSchoolYear.h"
 #include "../header/studentAction.h"
 using namespace std;
 
@@ -24,6 +25,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
         cin >> curUsername;
         cout << "Enter password: ";
         cin >> curPassword;
+        cur = pHead;
         while (cur)
         {
             if (curUsername == cur->data.username && curPassword == cur->data.password)
@@ -39,7 +41,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     } while (curUser == nullptr);
 }
 
-void startYear()
+void startYear(yearList* YearList)
 {
     clearScreen();
     cout << "====================================================================" << endl;
@@ -61,14 +63,22 @@ void startYear()
 
         switch (choice)
         {
-        case 1:
-        case 2:
+        case 1: 
+        {
+            createSchoolYear(YearList);
+            break;
+        }
+        case 2: 
+        {
+            createClasses(YearList);
+            break;
+        }
         case 3:
         {
             int tmp;
             cout << "Add students to 1st-year class: "
                  << endl;
-            cout << "Choose class: " << endl
+            cout << "How do you want to add students? " << endl
                  << endl;
             cout << "1. Add one-by-one" << endl;
             cout << "2. Import CSV file" << endl
@@ -78,10 +88,13 @@ void startYear()
 
             if (tmp == 1)
             {
+                add1Stu(YearList->data.allClasses);
             }
             else if (tmp == 2)
             {
+                addManyStus(YearList->data.allClasses,"students.csv");
             }
+            break;
         }
         case 0:
         {
@@ -200,7 +213,7 @@ void actionsAsStaff(yearList *YearList)
         {
         case 1:
         {
-            startYear();
+            startYear(YearList);
             break;
         }
         case 2:
@@ -253,7 +266,7 @@ void actionsAsStudent(user *&curUser,semester *curSemester)
         {
         case 1:
         {
-            viewCourseInSemesterOfAStudent(curSemester,curUser); //14. View a list of his/her courses. He/she will study these courses in this semester.
+            // viewCourseInSemesterOfAStudent(); no parameter
             break;
         }
         case 2:
