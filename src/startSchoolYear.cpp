@@ -167,8 +167,11 @@ void inputStu(student& stu)
     cin >> stu.socialID;
 }
 
-void addManyStus(classList*& allClasses, string filename)
+void addManyStus(classList*& allClasses)
 {
+    cout << "Enter the name of the csv file that you want to upload: ";
+    string filename;
+    cin >> filename;
     cout << "Which class do you want to add this student into? ";
     string classname;
     cin >> classname;
@@ -204,5 +207,7 @@ void addManyStus(classList*& allClasses, string filename)
         }
         curStu -> next = nullptr;
     }
+    else 
+        cout << "Could not open the file" << endl;
     fin.close();
 }
