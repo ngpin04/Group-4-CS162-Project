@@ -92,7 +92,7 @@ void startYear(yearList* YearList)
             }
             else if (tmp == 2)
             {
-                addManyStus(YearList->data.allClasses,"students.csv");
+                addManyStus(YearList->data.allClasses);
             }
             break;
         }
