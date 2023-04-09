@@ -86,14 +86,15 @@ void viewScoreboard(user *curUser, yearList *YearList)
     }
 }
 
-void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
+//14. View a list of his/her courses. He/she will study these courses in this semester.
+void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser) 
 {
     courseList *curCourse = curSemester->allCourses;
-
     if (curCourse == nullptr)
     {
         cout << "There is no course in this semester." << endl;
-        cout << "Press any key to continue..." << endl;
+        cout << "Enter any character to continue: ";
+        string count;
         cin >> count;
         clearScreen();
         cout << "==============================================================" << endl;
@@ -101,7 +102,6 @@ void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
         cout << "==============================================================" << endl;
         return;
     }
-
     int count = 0;
     while (curCourse)
     {
@@ -119,8 +119,9 @@ void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
         }
         curCourse = curCourse->next;
     }
-    cout << "Press any key to continue..." << endl;
-    cin >> count;
+    cout << "Enter any character to continue: ";
+    string temp;
+    cin >> temp;
     clearScreen();
     cout << "==============================================================" << endl;
     cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;

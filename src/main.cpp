@@ -17,6 +17,8 @@ int main() {
         if (!curUser){
             printData(userData);
             checkUserAtLogIn(userData, curUser);
+            if (curUser == nullptr)
+                break;
         }
         else{
             menuAfterLogin(curUser, YearList, curSemester, curYear);
