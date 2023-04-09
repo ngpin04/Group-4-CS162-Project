@@ -5,14 +5,35 @@
 
 using namespace std;
 
+bool isInt(string s)
+{
+    if (s.empty()) return false;
+    for (char c : s)
+    {
+        if (!isdigit(c)) return false;
+    }
+    return true;
+}
+
+void startYear(string& input)
+{
+    do
+    {
+        cin >> input;
+        if (!isInt(input)) 
+            cout << "School year must be an integer. Please enter again: ";
+    } while (!isInt(input));
+}
+
 void createSchoolYear(yearList*& head)
 {
-    cout << "Enter the school year: ";
-    int start, end;
-    cin >> start >> end;
+    cout << "Enter the school year (For example enter 2022 to create the school year 2022-2023): ";
+    string input;
+    startYear(input);
+    int start = stoi(input);
     schoolYear year;
     year.start = start;
-    year.end = end;
+    year.end = start+1;
     yearList* cur = head;
     yearList* tmp = new yearList;
     tmp -> data = year;
@@ -57,13 +78,15 @@ schoolYear* findYear(yearList* head, int n)
 void createClasses(yearList*& head)
 {
     cout << "In which school year do you want to create classes? ";
-    int start, end;
-    cin >> start >> end;
+    string input;
+    startYear(input);
+    int start = stoi(input);
     schoolYear* year = findYear(head, start);
     while (!year)
     {
         cout << "No such school year exists. Please enter the school year again: ";
-        cin >> start >> end;
+        startYear(input);
+        start = stoi(input);
         year = findYear(head, start);
     }
     cout << "Enter the list of classes, enter 0 to stop: ";
@@ -167,9 +190,9 @@ void inputStu(student& stu)
     cin >> stu.socialID;
 }
 
-void addManyStus(classList*& allClasses, string filename)
+void addManyStus(classList*& allClasses)
 {
-    cout << "Which class do you want to add this student into? ";
+    cout << "Which class do you want to add these students into? ";
     string classname;
     cin >> classname;
     generalClass* c = findClass(allClasses, classname);
@@ -179,6 +202,9 @@ void addManyStus(classList*& allClasses, string filename)
         cin >> classname;
         c = findClass(allClasses, classname);
     }
+    cout << "Enter the name of the csv file that you want to upload: ";
+    string filename;
+    cin >> filename;
     ifstream fin;
     fin.open(filename);
     if (fin.is_open())
@@ -204,5 +230,7 @@ void addManyStus(classList*& allClasses, string filename)
         }
         curStu -> next = nullptr;
     }
+    else 
+        cout << "Could not open the file" << endl;
     fin.close();
 }
