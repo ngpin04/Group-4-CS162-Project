@@ -1,6 +1,8 @@
 #pragma once
 #include "schoolYear.h"
 
+bool isInt(string s);
+void startYear(string& input);
 void createSchoolYear(yearList*& cur);
 schoolYear* findYear(yearList* head, int n);
 void createClasses(yearList*& head);
