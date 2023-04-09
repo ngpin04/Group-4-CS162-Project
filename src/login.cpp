@@ -5,16 +5,18 @@
 #include "../header/console.h"
 #include "../header/student.h"
 #include "../header/startSchoolYear.h"
+#include "../header/studentAction.h"
+#include "../header/anyTime.h"
 using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
 {
     clearScreen();
-    cout << "==============================================" << endl;
-    cout << "|| Welcome to the Course Management System! ||" << endl;
-    cout << "==============================================" << endl
+    cout << "\t\t\t----------------------------------------------" << endl;
+    cout << "\t\t\t|  Welcome to the Course Management System!  |" << endl;
+    cout << "\t\t\t----------------------------------------------" << endl
          << endl;
-    cout << "Logging in..." << endl;
+    cout << "\t\t\tType 0 to exit." << endl << endl;
     string curUsername;
     string curPassword;
     userList *cur = pHead;
@@ -22,6 +24,10 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     {
         cout << "Enter username: ";
         cin >> curUsername;
+        if (curUsername == "0"){
+            curUser = nullptr;
+            return;
+        }
         cout << "Enter password: ";
         cin >> curPassword;
         cur = pHead;
@@ -148,7 +154,7 @@ void endSem()
     }
 }
 
-void anyTime()
+void anyTime(schoolYear* curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -171,7 +177,10 @@ void anyTime()
 
         switch (choice)
         {
-        case 1:
+        case 1:{
+            viewClass(curYear);
+            break;
+        }
         case 2:
         case 3:
         case 4:
@@ -187,7 +196,7 @@ void anyTime()
     }
 }
 
-void actionsAsStaff(yearList *YearList)
+void actionsAsStaff(yearList *YearList, schoolYear* curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -227,7 +236,7 @@ void actionsAsStaff(yearList *YearList)
         }
         case 4:
         {
-            anyTime();
+            anyTime(curYear);
             break;
         }
         case 0:
@@ -242,7 +251,7 @@ void actionsAsStaff(yearList *YearList)
     }
 }
 
-void actionsAsStudent()
+void actionsAsStudent(user *&curUser,semester *curSemester)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -265,12 +274,13 @@ void actionsAsStudent()
         {
         case 1:
         {
-            //viewCourseInSemesterOfAStudent();
+            viewCourseInSemesterOfAStudent(curSemester,curUser);
             break;
         }
         case 2:
         {
-            
+            printCourseScore(curUser->id,curSemester);
+            break;
         }
         case 0:
         {
@@ -284,7 +294,7 @@ void actionsAsStudent()
     }
 }
 
-void menuAfterLogin(user *&curUser, yearList *YearList)
+void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, schoolYear *curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -321,9 +331,9 @@ void menuAfterLogin(user *&curUser, yearList *YearList)
         case 3:
         {
             if (curUser->isStaff)
-                actionsAsStaff(YearList);
+                actionsAsStaff(YearList, curYear);
             else
-                actionsAsStudent();
+                actionsAsStudent(curUser,curSemester);
             break;
         }
         case 0:

@@ -1,6 +1,7 @@
 #pragma once
 #include "schoolYear.h"
 #include "user.h"
+#include "iomanip"
 
 void printCourseScore(int userID, semester *s);
 
