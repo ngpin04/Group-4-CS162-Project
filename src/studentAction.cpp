@@ -1,4 +1,5 @@
 #include "../header/studentAction.h"
+#include "../header/console.h"
 #include <iostream>
 #include <iomanip>
 
@@ -85,11 +86,20 @@ void viewScoreboard(user *curUser, yearList *YearList)
     }
 }
 
-void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
+//14. View a list of his/her courses. He/she will study these courses in this semester.
+void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser) 
 {
-    courseList *curCourse = head->allCourses;
-    if (curCourse == nullptr){
+    courseList *curCourse = curSemester->allCourses;
+    if (curCourse == nullptr)
+    {
         cout << "There is no course in this semester." << endl;
+        cout << "Enter any character to continue: ";
+        string count;
+        cin >> count;
+        clearScreen();
+        cout << "==============================================================" << endl;
+        cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+        cout << "==============================================================" << endl;
         return;
     }
     int count = 0;
@@ -109,4 +119,12 @@ void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
         }
         curCourse = curCourse->next;
     }
+    cout << "Enter any character to continue: ";
+    string temp;
+    cin >> temp;
+    clearScreen();
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << "==============================================================" << endl;
+    return;
 }
