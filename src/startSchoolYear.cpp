@@ -25,6 +25,7 @@ void startYear(string& input)
     } while (!isInt(input));
 }
 
+//1. Create a school year
 void createSchoolYear(yearList*& head)
 {
     cout << "Enter the school year (For example enter 2022 to create the school year 2022-2023): ";
@@ -75,6 +76,7 @@ schoolYear* findYear(yearList* head, int n)
     return &curYear->data;
 }
 
+//2. Create classes for 1st year students
 void createClasses(yearList*& head)
 {
     cout << "In which school year do you want to create classes? ";
@@ -108,18 +110,9 @@ void createClasses(yearList*& head)
     }   
 }
 
-void add1Stu(classList*& allClasses)
+//3. Add 1st year students one by one
+void add1Stu(classList*& allClasses, generalClass*& c)
 {
-    cout << "Which class do you want to add this student into? ";
-    string classname;
-    cin >> classname;
-    generalClass* c = findClass(allClasses, classname);
-    while (!c)
-    {
-        cout << "No such class exists. Please enter classname again: ";
-        cin >> classname;
-        c = findClass(allClasses, classname);
-    }
     student stu;
     inputStu(stu);
     studentList* curStu = c->studentHead;
@@ -190,18 +183,9 @@ void inputStu(student& stu)
     cin >> stu.socialID;
 }
 
-void addManyStus(classList*& allClasses)
+//4. Add 1st year students by csv file
+void addManyStus(classList*& allClasses, generalClass*& c)
 {
-    cout << "Which class do you want to add these students into? ";
-    string classname;
-    cin >> classname;
-    generalClass* c = findClass(allClasses, classname);
-    while (!c)
-    {
-        cout << "No such class exists. Please enter classname again: ";
-        cin >> classname;
-        c = findClass(allClasses, classname);
-    }
     cout << "Enter the name of the csv file that you want to upload: ";
     string filename;
     cin >> filename;
