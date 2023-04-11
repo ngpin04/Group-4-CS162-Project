@@ -25,6 +25,7 @@ void startYear(string& input)
     } while (!isInt(input));
 }
 
+//1. Create a school year
 void createSchoolYear(yearList*& head)
 {
     cout << "Enter the school year (For example enter 2022 to create the school year 2022-2023): ";
@@ -75,6 +76,7 @@ schoolYear* findYear(yearList* head, int n)
     return &curYear->data;
 }
 
+//2. Create classes for 1st year students
 void createClasses(yearList*& head)
 {
     cout << "In which school year do you want to create classes? ";
@@ -106,52 +108,6 @@ void createClasses(yearList*& head)
         }
         else curClass -> next = nullptr;
     }   
-}
-
-void add1Stu(classList*& allClasses)
-{
-    cout << "Which class do you want to add this student into? ";
-    string classname;
-    cin >> classname;
-    generalClass* c = findClass(allClasses, classname);
-    while (!c)
-    {
-        cout << "No such class exists. Please enter classname again: ";
-        cin >> classname;
-        c = findClass(allClasses, classname);
-    }
-    student stu;
-    inputStu(stu);
-    studentList* curStu = c->studentHead;
-    studentList* tmp = new studentList;
-    tmp -> data = stu;
-    tmp -> next = nullptr;
-    if (!curStu) //No students have been added
-    {
-        c->studentHead = tmp;
-        return;
-    }
-    while (curStu->next && curStu->next->data.id<stu.id)
-        curStu = curStu -> next;
-    if (curStu==c->studentHead && c->studentHead->data.id<stu.id) //Only 1 student in class and id < the one we add
-    {
-        c->studentHead -> next = tmp;
-    }
-    else if (curStu==c->studentHead && c->studentHead->data.id>stu.id) //Only 1 student in class and id > the one we add
-    {
-        tmp -> next = c->studentHead;
-        c->studentHead = tmp;
-    }
-    else if (!curStu->next) //All students in class have id < the one we add
-    {
-        curStu -> next = new studentList;
-        curStu -> next = tmp;
-    }
-    else //The student we add have id in the middle of the list
-    {
-        tmp -> next = curStu -> next;
-        curStu -> next = tmp;
-    }
 }
 
 generalClass* findClass(classList* allClasses, string classname)
@@ -190,18 +146,48 @@ void inputStu(student& stu)
     cin >> stu.socialID;
 }
 
-void addManyStus(classList*& allClasses)
+//3. Add 1st year students one by one
+void add1Stu(classList*& allClasses, generalClass*& c)
 {
-    cout << "Which class do you want to add these students into? ";
-    string classname;
-    cin >> classname;
-    generalClass* c = findClass(allClasses, classname);
-    while (!c)
+    student stu;
+    inputStu(stu);
+    studentList* curStu = c->studentHead;
+    studentList* tmp = new studentList;
+    tmp -> data = stu;
+    tmp -> next = nullptr;
+    if (!curStu) //No students have been added
     {
-        cout << "No such class exists. Please enter classname again: ";
-        cin >> classname;
-        c = findClass(allClasses, classname);
+        c->studentHead = tmp;
+        cout << "Added successfully" << endl;
+        return;
     }
+    while (curStu->next && curStu->next->data.id<stu.id)
+        curStu = curStu -> next;
+    if (curStu==c->studentHead && c->studentHead->data.id<stu.id) //Only 1 student in class and id < the one we add
+    {
+        c->studentHead -> next = tmp;
+    }
+    else if (curStu==c->studentHead && c->studentHead->data.id>stu.id) //Only 1 student in class and id > the one we add
+    {
+        tmp -> next = c->studentHead;
+        c->studentHead = tmp;
+    }
+    else if (!curStu->next) //All students in class have id < the one we add
+    {
+        curStu -> next = new studentList;
+        curStu -> next = tmp;
+    }
+    else //The student we add have id in the middle of the list
+    {
+        tmp -> next = curStu -> next;
+        curStu -> next = tmp;
+    }
+    cout << "Added successfully" << endl;
+}
+
+//4. Add 1st year students by csv file
+void addManyStus(classList*& allClasses, generalClass*& c)
+{
     cout << "Enter the name of the csv file that you want to upload: ";
     string filename;
     cin >> filename;
@@ -229,8 +215,31 @@ void addManyStus(classList*& allClasses)
             curStu = curStu -> next;
         }
         curStu -> next = nullptr;
+        cout << "Added successfully" << endl;
     }
     else 
         cout << "Could not open the file" << endl;
     fin.close();
+}
+
+void beforeAddStus(generalClass*& c, classList*& allClasses, int& tmp)
+{
+    cout << "Which class do you want to add this student into? ";
+    string classname;
+    cin >> classname;
+    c = findClass(allClasses, classname);
+    while (!c)
+    {
+        cout << "No such class exists. Please enter classname again: ";
+        cin >> classname;
+        c = findClass(allClasses, classname);
+    }
+    cout << "Add students to 1st-year class: " << endl;
+    cout << "How do you want to add students? " << endl
+         << endl;
+    cout << "1. Add one-by-one" << endl;
+    cout << "2. Import CSV file" << endl
+         << endl;
+    cout << "Your choice: ";
+    cin >> tmp;
 }

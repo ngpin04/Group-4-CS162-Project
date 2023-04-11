@@ -81,23 +81,15 @@ void startYear(yearList* YearList)
         case 3:
         {
             int tmp;
-            cout << "Add students to 1st-year class: "
-                 << endl;
-            cout << "How do you want to add students? " << endl
-                 << endl;
-            cout << "1. Add one-by-one" << endl;
-            cout << "2. Import CSV file" << endl
-                 << endl;
-            cout << "Your choice: ";
-            cin >> tmp;
-
+            generalClass* c;
+            beforeAddStus(c, YearList->data.allClasses, tmp);
             if (tmp == 1)
             {
-                add1Stu(YearList->data.allClasses);
+                add1Stu(YearList->data.allClasses, c);
             }
             else if (tmp == 2)
             {
-                addManyStus(YearList->data.allClasses);
+                addManyStus(YearList->data.allClasses, c);
             }
             break;
         }
