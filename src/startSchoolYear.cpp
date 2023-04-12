@@ -242,4 +242,9 @@ void beforeAddStus(generalClass*& c, classList*& allClasses, int& tmp)
          << endl;
     cout << "Your choice: ";
     cin >> tmp;
+    while (!(tmp==1 || tmp ==2))
+    {
+        cout << "Please choose from the two options: ";
+        cin >> tmp;
+    }
 }
