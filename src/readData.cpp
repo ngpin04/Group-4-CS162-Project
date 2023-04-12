@@ -2,7 +2,7 @@
 #include "../header/user.h"
 #include "../header/schoolYear.h"
 #include "../header/readData.h"
-
+//read the users account: username and password
 void readData(userList *User, string filename) {
     ifstream fi(filename);
     while (true) {
@@ -15,7 +15,7 @@ void readData(userList *User, string filename) {
     }
     fi.close();
 }
-
+//test function to print the users account
 void printData(userList *pHead){
     while(pHead){
         cout << pHead->data.username << endl;
@@ -44,4 +44,17 @@ void saveTime(semester* curSemester, schoolYear* curYear){
     fo << curYear->end << endl;
     fo << curSemester->semesterID << endl;
     fo.close();
+}
+//read the school year from the file
+void readYearList(yearList* YearList){
+    ifstream fi("data/schoolYear.txt");
+    while (true){
+        int num; fi >> num;
+        if (num == -1)
+            break;
+        YearList->data.input();
+        YearList->next = new yearList;
+        YearList = YearList->next;
+    }
+    fi.close();
 }

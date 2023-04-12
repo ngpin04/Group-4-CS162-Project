@@ -11,6 +11,7 @@ schoolYear *curYear = new schoolYear;
 int main() {
     readData(userData, "data/user.txt");
     readTime(curSemester, curYear);
+    readYearList(YearList);
     printData(userData);
     user* curUser = nullptr;
     while (true){
