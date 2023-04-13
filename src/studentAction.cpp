@@ -6,7 +6,7 @@
 using namespace std;
 
 // print score of a single semester
-void printCourseScore(int userID, semester *s)
+void printCourseScore(string userID, semester *s)
 {
     courseList *availCourses = s->allCourses;
 
@@ -52,7 +52,7 @@ void printCourseScore(int userID, semester *s)
 // gets school year from ID and retrieves scores of all 3 semesters
 void viewScoreboard(user *curUser, yearList *YearList)
 {
-    string userYear = to_string(curUser->id).substr(0, 2);
+    string userYear = (curUser->id).substr(0, 2);
 
     while (YearList)
     {

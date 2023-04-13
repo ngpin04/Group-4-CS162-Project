@@ -1,6 +1,6 @@
 #include "../header/schoolYear.h"
 
-void schoolYear::input(){
+void schoolYear::input(ifstream& fi){
     fi >> this->start;
     fi >> this->end;
     int temp;
