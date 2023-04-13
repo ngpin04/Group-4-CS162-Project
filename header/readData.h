@@ -11,3 +11,5 @@ void readTime(semester*& curSemester, schoolYear* curYear);
 void saveTime(semester* curSemester, schoolYear* curYear);
 
 void readYearList(yearList* YearList);
+
+void saveYearList(yearList* YearList);

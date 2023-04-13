@@ -12,7 +12,7 @@ struct date{
 
 struct user
 {
-    int id; //student or staff id
+    string id; //student or staff id
     bool isStaff = false; //default as student
     date birth;
     string username;

@@ -25,6 +25,7 @@ int main() {
             menuAfterLogin(curUser, YearList, curSemester, curYear);
         }
     }
-    saveTime(curSemester, curYear);
+    saveYearList(YearList);
+    //saveTime(curSemester, curYear); //unfinished
     return 0;
 }

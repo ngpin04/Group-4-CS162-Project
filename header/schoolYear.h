@@ -22,7 +22,7 @@ struct schoolYear //for example: 2020-2021
     int end;
     semester *sem1 = nullptr, *sem2 = nullptr, *sem3 = nullptr;
     classList* allClasses = nullptr;
-    void input();
+    void input(ifstream& fi);
 };
 
 struct yearList
