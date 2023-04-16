@@ -11,17 +11,21 @@ schoolYear *curYear = new schoolYear;
 int main() {
     readData(userData, "data/user.txt");
     readTime(curSemester, curYear);
+    readYearList(YearList);
     printData(userData);
     user* curUser = nullptr;
     while (true){
         if (!curUser){
             printData(userData);
             checkUserAtLogIn(userData, curUser);
+            if (curUser == nullptr)
+                break;
         }
         else{
-            menuAfterLogin(curUser, YearList);
+            menuAfterLogin(curUser, YearList, curSemester, curYear);
         }
     }
-    saveTime(curSemester, curYear);
+    saveYearList(YearList);
+    //saveTime(curSemester, curYear); //unfinished
     return 0;
 }

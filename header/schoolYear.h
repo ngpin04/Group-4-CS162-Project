@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <fstream>
+#include <iostream>
 #include "user.h"
 #include "course.h"
 #include "generalClass.h"
@@ -11,19 +13,20 @@ struct semester
     date startDate;
     date endDate;
     bool scorePublished = false; // = not time to view scores yet
-    courseList* allCourses;
+    courseList* allCourses = nullptr;
 };
 
 struct schoolYear //for example: 2020-2021
 {
     int start;
     int end;
-    semester *sem1, *sem2, *sem3;
-    classList* allClasses;
+    semester *sem1 = nullptr, *sem2 = nullptr, *sem3 = nullptr;
+    classList* allClasses = nullptr;
+    void input(ifstream& fi);
 };
 
 struct yearList
 {
     schoolYear data;
-    yearList* next;
+    yearList* next = nullptr;
 };  

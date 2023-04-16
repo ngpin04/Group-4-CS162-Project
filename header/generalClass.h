@@ -9,11 +9,11 @@ struct generalClass
     int firstYear;
     string name;
     string index;
-    studentList* studentHead;
+    studentList* studentHead = nullptr;
 };
 
 struct classList
 {
     generalClass data;
-    classList* next;
+    classList* next = nullptr;
 };

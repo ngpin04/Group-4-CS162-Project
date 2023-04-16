@@ -1,10 +1,13 @@
 #pragma once
 #include "schoolYear.h"
 
+bool isInt(string s);
+void startYear(string& input);
 void createSchoolYear(yearList*& cur);
-schoolYear findYear(yearList* head, int n);
+schoolYear* findYear(yearList* head, int n);
 void createClasses(yearList*& head);
-void add1Stu(generalClass& c, classList* allClasses);
-generalClass findClass(classList* allClasses, string classname);
+generalClass* findClass(classList* allClasses, string classname);
 void inputStu(student& stu);
-void addManyStus(generalClass& c, classList* allClasses, string filename);
+void add1Stu(classList*& allClasses, generalClass*& c);
+void addManyStus(classList*& allClasses, generalClass*& c);
+void beforeAddStus(generalClass*& c, classList*& allClasses, int& tmp);

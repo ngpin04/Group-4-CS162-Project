@@ -3,7 +3,7 @@
 
 struct student {
     int number;
-    int id;
+    string id;
     string firstName;
     string lastName;
     bool isFemale = false;
@@ -13,6 +13,6 @@ struct student {
 
 struct studentList {
     student data;
-    studentList* next;
+    studentList* next = nullptr;
 };
 

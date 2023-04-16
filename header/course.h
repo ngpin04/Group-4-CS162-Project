@@ -15,13 +15,13 @@ struct course
     string dayOfWeek;
     int session;
     bool resultsReleased;
-    studentList* enrolledStudents;
-    scoreList* scoreboard;
+    studentList* enrolledStudents = nullptr;
+    scoreList* scoreboard = nullptr;
 };
 
 struct courseList
 {
     course data;
-    courseList* next;
+    courseList* next = nullptr;
 };
 

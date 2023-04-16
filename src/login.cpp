@@ -5,16 +5,18 @@
 #include "../header/console.h"
 #include "../header/student.h"
 #include "../header/startSchoolYear.h"
+#include "../header/studentAction.h"
+#include "../header/anyTime.h"
 using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
 {
     clearScreen();
-    cout << "==============================================" << endl;
-    cout << "|| Welcome to the Course Management System! ||" << endl;
-    cout << "==============================================" << endl
+    cout << "\t\t\t----------------------------------------------" << endl;
+    cout << "\t\t\t|  Welcome to the Course Management System!  |" << endl;
+    cout << "\t\t\t----------------------------------------------" << endl
          << endl;
-    cout << "Logging in..." << endl;
+    cout << "\t\t\tType 0 to exit." << endl << endl;
     string curUsername;
     string curPassword;
     userList *cur = pHead;
@@ -22,8 +24,13 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     {
         cout << "Enter username: ";
         cin >> curUsername;
+        if (curUsername == "0"){
+            curUser = nullptr;
+            return;
+        }
         cout << "Enter password: ";
         cin >> curPassword;
+        cur = pHead;
         while (cur)
         {
             if (curUsername == cur->data.username && curPassword == cur->data.password)
@@ -74,23 +81,15 @@ void startYear(yearList* YearList)
         case 3:
         {
             int tmp;
-            cout << "Add students to 1st-year class: "
-                 << endl;
-            cout << "Choose class: " << endl
-                 << endl;
-            cout << "1. Add one-by-one" << endl;
-            cout << "2. Import CSV file" << endl
-                 << endl;
-            cout << "Your choice: ";
-            cin >> tmp;
-
+            generalClass* c;
+            beforeAddStus(c, YearList->data.allClasses, tmp);
             if (tmp == 1)
             {
-                add1Stu(YearList->data.allClasses->data,YearList->data.allClasses);
+                add1Stu(YearList->data.allClasses, c);
             }
             else if (tmp == 2)
             {
-                addManyStus(YearList->data.allClasses->data,YearList->data.allClasses,"students.csv");
+                addManyStus(YearList->data.allClasses, c);
             }
             break;
         }
@@ -147,7 +146,7 @@ void endSem()
     }
 }
 
-void anyTime()
+void anyTime(schoolYear* curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -170,7 +169,10 @@ void anyTime()
 
         switch (choice)
         {
-        case 1:
+        case 1:{
+            viewClass(curYear);
+            break;
+        }
         case 2:
         case 3:
         case 4:
@@ -186,7 +188,7 @@ void anyTime()
     }
 }
 
-void actionsAsStaff(yearList *YearList)
+void actionsAsStaff(yearList *YearList, schoolYear* curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -226,7 +228,7 @@ void actionsAsStaff(yearList *YearList)
         }
         case 4:
         {
-            anyTime();
+            anyTime(curYear);
             break;
         }
         case 0:
@@ -241,7 +243,7 @@ void actionsAsStaff(yearList *YearList)
     }
 }
 
-void actionsAsStudent()
+void actionsAsStudent(user *&curUser,semester *curSemester)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -264,12 +266,13 @@ void actionsAsStudent()
         {
         case 1:
         {
-            //viewCourseInSemesterOfAStudent();
+            viewCourseInSemesterOfAStudent(curSemester,curUser);
             break;
         }
         case 2:
         {
-            
+            printCourseScore(curUser->id,curSemester);
+            break;
         }
         case 0:
         {
@@ -283,7 +286,7 @@ void actionsAsStudent()
     }
 }
 
-void menuAfterLogin(user *&curUser, yearList *YearList)
+void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, schoolYear *curYear)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -320,9 +323,9 @@ void menuAfterLogin(user *&curUser, yearList *YearList)
         case 3:
         {
             if (curUser->isStaff)
-                actionsAsStaff(YearList);
+                actionsAsStaff(YearList, curYear);
             else
-                actionsAsStudent();
+                actionsAsStudent(curUser,curSemester);
             break;
         }
         case 0:

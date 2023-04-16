@@ -1,10 +1,12 @@
 #include "../header/studentAction.h"
+#include "../header/console.h"
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
 
-void printCourseScore(int userID, semester *s)
+// print score of a single semester
+void printCourseScore(string userID, semester *s)
 {
     courseList *availCourses = s->allCourses;
 
@@ -19,9 +21,9 @@ void printCourseScore(int userID, semester *s)
 
             if (enrolledStd->data.id == userID)
             {
-                cout << left << setw(10) << availCourses->data.id
-                     << left << setw(15) << availCourses->data.courseName
-                     << left << setw(10) << availCourses->data.credit;
+                cout << "| " << left << setw(10) << availCourses->data.id
+                     << " | " << left << setw(50) << availCourses->data.courseName
+                     << " | " << left << setw(10) << availCourses->data.credit;
 
                 if (!resultsReleased)
                 {
@@ -29,10 +31,10 @@ void printCourseScore(int userID, semester *s)
                 }
                 else
                 {
-                    cout << left << setw(10) << scoreboard->data.total
-                         << left << setw(10) << scoreboard->data.midterm
-                         << left << setw(10) << scoreboard->data.finalMark
-                         << left << setw(10) << scoreboard->data.other << endl;
+                    cout << " | " << left << setw(10) << scoreboard->data.total
+                         << " | " << left << setw(10) << scoreboard->data.midterm
+                         << " | " << left << setw(10) << scoreboard->data.finalMark
+                         << " | " << left << setw(10) << scoreboard->data.other << " |" << endl;
                 }
             }
             else
@@ -47,9 +49,10 @@ void printCourseScore(int userID, semester *s)
     return;
 }
 
+// gets school year from ID and retrieves scores of all 3 semesters
 void viewScoreboard(user *curUser, yearList *YearList)
 {
-    string userYear = to_string(curUser->id).substr(0, 2);
+    string userYear = (curUser->id).substr(0, 2);
 
     while (YearList)
     {
@@ -64,17 +67,19 @@ void viewScoreboard(user *curUser, yearList *YearList)
 
                 if (scorePublished)
                 {
-                    cout << "SCOREBOARD OF SEMESTER " << i + 1 << ": " << endl;
-                    cout << left << setw(10) << "COURSE ID"
-                         << left << setw(15) << "COURSE NAME"
-                         << left << setw(10) << "CREDITS"
-                         << left << setw(10) << "TOTAL"
-                         << left << setw(10) << "MIDTERM"
-                         << left << setw(10) << "FINAL"
-                         << left << setw(10) << "OTHER";
-                    cout << "-----------------------------------------------------------------------------------------------" << endl;
+                    cout << "                                                      SCOREBOARD OF SEMESTER " << i + 1 << "                                                      " << endl;
+                    cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
+                    cout << "| " << left << setw(10) << "COURSE ID"
+                         << " | " << left << setw(50) << "COURSE NAME"
+                         << " | " << left << setw(10) << "CREDITS"
+                         << " | " << left << setw(10) << "TOTAL"
+                         << " | " << left << setw(10) << "MIDTERM"
+                         << " | " << left << setw(10) << "FINAL"
+                         << " | " << left << setw(10) << "OTHER" << " |" << endl;
+                    cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
 
                     printCourseScore(curUser->id, s[i]);
+                    cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl << endl;
                 }
                 else
                     cout << "The results of semester " << i + 1 << " has not been published." << endl;
@@ -85,11 +90,20 @@ void viewScoreboard(user *curUser, yearList *YearList)
     }
 }
 
-void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
+//14. View a list of his/her courses. He/she will study these courses in this semester.
+void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser) 
 {
-    courseList *curCourse = head->allCourses;
-    if (curCourse == nullptr){
+    courseList *curCourse = curSemester->allCourses;
+    if (curCourse == nullptr)
+    {
         cout << "There is no course in this semester." << endl;
+        cout << "Enter any character to continue: ";
+        string count;
+        cin >> count;
+        clearScreen();
+        cout << "==============================================================" << endl;
+        cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+        cout << "==============================================================" << endl;
         return;
     }
     int count = 0;
@@ -109,4 +123,12 @@ void viewCourseInSemesterOfAStudent(semester *head, user *curUser)
         }
         curCourse = curCourse->next;
     }
+    cout << "Enter any character to continue: ";
+    string temp;
+    cin >> temp;
+    clearScreen();
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << "==============================================================" << endl;
+    return;
 }
