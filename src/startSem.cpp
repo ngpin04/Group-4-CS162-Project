@@ -25,11 +25,11 @@ void startSem(yearList *YearList) {
         cout << "\t1. Create a semester" << endl;
         cout << "\t2. Add course to semester" << endl;
         cout << "\t3. Upload list of students to course" << endl;
-        cout << "\t3. View list of courses" << endl;
-        cout << "\t4. Update course information" << endl;
-        cout << "\t5. Add a student to course" << endl;
-        cout << "\t6. Remove a student from course" << endl;
-        cout << "\t7. Delete a course" << endl;
+        cout << "\t4. View list of courses" << endl;
+        cout << "\t5. Update course information" << endl;
+        cout << "\t6. Add a student to course" << endl;
+        cout << "\t7. Remove a student from course" << endl;
+        cout << "\t8. Delete a course" << endl;
         cout << "\t0. Return to Possible Actions"
              << endl;
         cout << "Your choice: ";
