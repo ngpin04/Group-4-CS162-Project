@@ -26,7 +26,7 @@ void startYear(string& input)
 }
 
 //1. Create a school year
-void createSchoolYear(yearList*& head)
+void createSchoolYear(yearList*& head, schoolYear*& curYear)
 {
     cout << "Enter the school year (For example enter 2022 to create the school year 2022-2023): ";
     string input;
@@ -35,6 +35,7 @@ void createSchoolYear(yearList*& head)
     schoolYear year;
     year.start = start;
     year.end = start+1;
+    curYear = &year;
     yearList* cur = head;
     yearList* tmp = new yearList;
     tmp -> data = year;
@@ -147,7 +148,7 @@ void inputStu(student& stu)
 }
 
 //3. Add 1st year students one by one
-void add1Stu(classList*& allClasses, generalClass*& c)
+void add1Stu(generalClass*& c)
 {
     student stu;
     inputStu(stu);
@@ -186,7 +187,7 @@ void add1Stu(classList*& allClasses, generalClass*& c)
 }
 
 //4. Add 1st year students by csv file
-void addManyStus(classList*& allClasses, generalClass*& c)
+void addManyStus(generalClass*& c)
 {
     cout << "Enter the name of the csv file that you want to upload: ";
     string filename;
