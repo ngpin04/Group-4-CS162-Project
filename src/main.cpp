@@ -11,6 +11,7 @@ schoolYear *curYear = new schoolYear;
 int main() {
     readData(userData, "data/user.txt");
     readTime(curSemester, curYear);
+    readYearList(YearList);
     printData(userData);
     user* curUser = nullptr;
     while (true){
@@ -24,6 +25,7 @@ int main() {
             menuAfterLogin(curUser, YearList, curSemester, curYear);
         }
     }
-    saveTime(curSemester, curYear);
+    saveYearList(YearList);
+    //saveTime(curSemester, curYear); //unfinished
     return 0;
 }

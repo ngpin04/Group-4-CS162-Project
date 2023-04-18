@@ -42,7 +42,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
             cur = cur->next;
         }
         cout << endl
-             << "No such account exists! Please re-enter username and password." << endl; // re-login until login ok
+             << "Account and password are invalid! Please re-enter username and password." << endl; // re-login until login ok
     } while (curUser == nullptr);
 }
 
