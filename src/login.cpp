@@ -82,7 +82,7 @@ void startYear(yearList* YearList, schoolYear*& curYear)
         {
             int tmp;
             generalClass* c;
-            beforeAddStus(c, YearList->data.allClasses, tmp);
+            beforeAddStus(c, YearList, tmp);
             if (tmp == 1)
             {
                 add1Stu(c);
