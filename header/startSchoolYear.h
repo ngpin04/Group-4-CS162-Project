@@ -6,7 +6,7 @@ void startYear(string& input);
 void createSchoolYear(yearList*& head, schoolYear*& curYear);
 schoolYear* findYear(yearList* head, int n);
 void createClasses(yearList*& head);
-generalClass* findClass(yearList* head, int y, string classname);
+generalClass* findClass(yearList* year, string classname);
 void inputStu(student& stu);
 void add1Stu(generalClass*& c);
 void addManyStus(generalClass*& c);

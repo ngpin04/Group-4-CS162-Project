@@ -111,11 +111,9 @@ void createClasses(yearList*& head)
     }   
 }
 
-generalClass* findClass(yearList* head, int y, string classname)
+generalClass* findClass(yearList* year, string classname)
 {
-    while (head->data.start != y)
-        head = head -> next;
-    classList* curClass = head -> data.allClasses;
+    classList* curClass = year -> data.allClasses;
     while(curClass)
     {
         if (curClass->data.name==classname)
@@ -228,18 +226,25 @@ void addManyStus(generalClass*& c)
 void beforeAddStus(generalClass*& c, yearList*& year, int& tmp)
 {
     cout << "In which school year do you want to add student(s) into? ";
-    string input;
-    startYear(input);
-    int y = stoi(input);
+    int y;
+    yearList* tmpYear;
+    do
+    {
+        tmpYear = year;
+        cin >> y;
+        while (tmpYear && tmpYear->data.start != y)
+            tmpYear = tmpYear -> next;
+        if (!tmpYear) cout << "No such school year exists. Please enter the school year again: ";
+    } while (!tmpYear);
     cout << "Which class do you want to add student(s) into? ";
     string classname;
     cin >> classname;
-    c = findClass(year, y, classname);
+    c = findClass(tmpYear, classname);
     while (!c)
     {
         cout << "No such class exists. Please enter classname again: ";
         cin >> classname;
-        c = findClass(year, y, classname);
+        c = findClass(tmpYear, classname);
     }
     cout << "Add students to 1st-year class: " << endl;
     cout << "How do you want to add students? " << endl
