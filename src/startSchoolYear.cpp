@@ -26,7 +26,7 @@ void startYear(string& input)
 }
 
 //1. Create a school year
-void createSchoolYear(yearList*& head)
+void createSchoolYear(yearList*& head, schoolYear*& curYear)
 {
     cout << "Enter the school year (For example enter 2022 to create the school year 2022-2023): ";
     string input;
@@ -35,6 +35,7 @@ void createSchoolYear(yearList*& head)
     schoolYear year;
     year.start = start;
     year.end = start+1;
+    curYear = &year;
     yearList* cur = head;
     yearList* tmp = new yearList;
     tmp -> data = year;
@@ -110,9 +111,9 @@ void createClasses(yearList*& head)
     }   
 }
 
-generalClass* findClass(classList* allClasses, string classname)
+generalClass* findClass(yearList* year, string classname)
 {
-    classList* curClass = allClasses;
+    classList* curClass = year -> data.allClasses;
     while(curClass)
     {
         if (curClass->data.name==classname)
@@ -147,7 +148,7 @@ void inputStu(student& stu)
 }
 
 //3. Add 1st year students one by one
-void add1Stu(classList*& allClasses, generalClass*& c)
+void add1Stu(generalClass*& c)
 {
     student stu;
     inputStu(stu);
@@ -186,7 +187,7 @@ void add1Stu(classList*& allClasses, generalClass*& c)
 }
 
 //4. Add 1st year students by csv file
-void addManyStus(classList*& allClasses, generalClass*& c)
+void addManyStus(generalClass*& c)
 {
     cout << "Enter the name of the csv file that you want to upload: ";
     string filename;
@@ -222,17 +223,28 @@ void addManyStus(classList*& allClasses, generalClass*& c)
     fin.close();
 }
 
-void beforeAddStus(generalClass*& c, classList*& allClasses, int& tmp)
+void beforeAddStus(generalClass*& c, yearList*& year, int& tmp)
 {
-    cout << "Which class do you want to add this student into? ";
+    cout << "In which school year do you want to add student(s) into? ";
+    int y;
+    yearList* tmpYear;
+    do
+    {
+        tmpYear = year;
+        cin >> y;
+        while (tmpYear && tmpYear->data.start != y)
+            tmpYear = tmpYear -> next;
+        if (!tmpYear) cout << "No such school year exists. Please enter the school year again: ";
+    } while (!tmpYear);
+    cout << "Which class do you want to add student(s) into? ";
     string classname;
     cin >> classname;
-    c = findClass(allClasses, classname);
+    c = findClass(tmpYear, classname);
     while (!c)
     {
         cout << "No such class exists. Please enter classname again: ";
         cin >> classname;
-        c = findClass(allClasses, classname);
+        c = findClass(tmpYear, classname);
     }
     cout << "Add students to 1st-year class: " << endl;
     cout << "How do you want to add students? " << endl

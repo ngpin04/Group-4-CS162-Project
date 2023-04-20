@@ -23,7 +23,7 @@ void updateCourse(courseList *current) {
     cout << "\t5. Update number of credits" << endl;
     cout << "\t6. Update maximum number of students" << endl;
     cout << "\t7. Update day of week and session" << endl;
-    
+    cin >> action;
     switch (action) {
         case 0: {
             return;

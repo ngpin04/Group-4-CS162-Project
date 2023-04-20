@@ -46,7 +46,7 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     } while (curUser == nullptr);
 }
 
-void startYear(yearList* YearList)
+void startYear(yearList* YearList, schoolYear*& curYear)
 {
     clearScreen();
     cout << "====================================================================" << endl;
@@ -70,7 +70,7 @@ void startYear(yearList* YearList)
         {
         case 1: 
         {
-            createSchoolYear(YearList);
+            createSchoolYear(YearList, curYear);
             break;
         }
         case 2: 
@@ -82,14 +82,14 @@ void startYear(yearList* YearList)
         {
             int tmp;
             generalClass* c;
-            beforeAddStus(c, YearList->data.allClasses, tmp);
+            beforeAddStus(c, YearList, tmp);
             if (tmp == 1)
             {
-                add1Stu(YearList->data.allClasses, c);
+                add1Stu(c);
             }
             else if (tmp == 2)
             {
-                addManyStus(YearList->data.allClasses, c);
+                addManyStus(c);
             }
             break;
         }
@@ -213,7 +213,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear)
         {
         case 1:
         {
-            startYear(YearList);
+            startYear(YearList, curYear);
             break;
         }
         case 2:
