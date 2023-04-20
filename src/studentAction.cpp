@@ -49,42 +49,51 @@ void printCourseScore(string userID, semester *s)
     return;
 }
 
-// gets school year from ID and retrieves scores of all 3 semesters
+// gets school year from ID, print and display score of semester
 void viewScoreboard(user *curUser, yearList *YearList)
 {
     string userYear = (curUser->id).substr(0, 2);
 
     while (YearList)
     {
+        semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
+
         string curYear = to_string(YearList->data.start % 100);
         if (userYear == curYear)
         {
-            semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
+            int curSem;
+            cout << "Enter current semester: ";
+            cin >> curSem;
 
-            for (int i = 0; i < 3; i++)
+            while (curSem != 1 && curSem != 2 && curSem != 3)
             {
-                bool scorePublished = s[i]->scorePublished;
-
-                if (scorePublished)
-                {
-                    cout << "                                                      SCOREBOARD OF SEMESTER " << i + 1 << "                                                      " << endl;
-                    cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
-                    cout << "| " << left << setw(10) << "COURSE ID"
-                         << " | " << left << setw(50) << "COURSE NAME"
-                         << " | " << left << setw(10) << "CREDITS"
-                         << " | " << left << setw(10) << "TOTAL"
-                         << " | " << left << setw(10) << "MIDTERM"
-                         << " | " << left << setw(10) << "FINAL"
-                         << " | " << left << setw(10) << "OTHER" << " |" << endl;
-                    cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
-
-                    printCourseScore(curUser->id, s[i]);
-                    cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl << endl;
-                }
-                else
-                    cout << "The results of semester " << i + 1 << " has not been published." << endl;
+                cout << "Invalid semester. Please try again: ";
+                cin >> curSem;
             }
+
+            bool scorePublished = s[curSem-1]->scorePublished;
+
+            if (scorePublished)
+            {
+                cout << "                                                      SCOREBOARD OF SEMESTER " << curSem << "                                                      " << endl;
+                cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
+                cout << "| " << left << setw(10) << "COURSE ID"
+                     << " | " << left << setw(50) << "COURSE NAME"
+                     << " | " << left << setw(10) << "CREDITS"
+                     << " | " << left << setw(10) << "TOTAL"
+                     << " | " << left << setw(10) << "MIDTERM"
+                     << " | " << left << setw(10) << "FINAL"
+                     << " | " << left << setw(10) << "OTHER" << " |" << endl;
+                cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
+
+                printCourseScore(curUser->id, s[curSem-1]);
+                cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl << endl;
+            }
+
+            else
+                cout << "The results of semester " << curSem << " has not been published." << endl;
         }
+        
         else
             YearList = YearList->next;
     }
