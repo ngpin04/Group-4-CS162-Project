@@ -7,6 +7,7 @@
 #include "../header/updateCourse.h"
 #include "../header/removeStudent.h"
 #include "../header/deleteCourse.h"
+#include "../header/addStudent.h"
 #include <iostream>
 
 using namespace std;
@@ -53,9 +54,10 @@ void startSem(yearList *YearList) {
                 case 3: uploadStudentList(newSem->allCourses);
                 case 4: viewCourse(newSem->allCourses);
                 case 5: updateCourse(newSem->allCourses);
-                case 6: removeStudent(newSem->allCourses);
-                case 7: deleteCourse(newSem->allCourses);
+                case 6: addStudent(newSem->allCourses);
+                case 7: removeStudent(newSem->allCourses);
                 case 8: {
+                    deleteCourse(newSem->allCourses);
                     break;
                 }
             }
