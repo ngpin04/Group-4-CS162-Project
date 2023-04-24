@@ -40,9 +40,10 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
     yearList* tmp = new yearList;
     tmp -> data = year;
     tmp -> next = nullptr;
-    if (!cur) //No school years have been added
+    if (!cur || cur->data.start == -1) //No school years have been added
     {
         head = tmp;
+        cout << "Create school year successfully!" << endl;
         return;
     }
     while (cur->next && cur->next->data.start<start)
@@ -56,6 +57,10 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         tmp -> next = head;
         head = tmp;
     }
+    else if (cur==head && head->data.start==start) //We added that year before
+    {
+        delete tmp;
+    }
     else if (!cur->next) //All years added < the one we add
     {
         cur -> next = new yearList;
@@ -66,6 +71,7 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         tmp -> next = cur -> next;
         cur -> next = tmp;
     }
+    cout << "Create school year successfully!" << endl;
 }
 
 schoolYear* findYear(yearList* head, int n)
