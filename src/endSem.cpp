@@ -1,25 +1,8 @@
-#pragma once
-#include "../header/schoolYear.h"
-#include "../header/course.h"
-#include "../header/console.h"
-#include <string>
+#include <iostream>
+#include "../header/endSem.h"
 
 // 23. View the scoreboard of a class, including final marks of all courses in the semester,
 // GPA in this semester, and the total GPA
-
-struct mark
-{
-    string courseName;
-    float finalMark;
-    mark *nextCourse = nullptr;
-};
-
-struct classScores
-{
-    string id;
-    mark *markOfCourses = nullptr;
-    classScores *nextStd = nullptr;
-};
 
 void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass)
 {
@@ -87,7 +70,7 @@ void getMarksFromCourses(classScores *scoresOfClass, semester *curSem)
     return;
 }
 
-void scoreboardOfClass(classList *classes, yearList *YearList)
+void scoreboardOfClass(yearList *YearList)
 {
     // Find the class
     string inputClass;
@@ -106,6 +89,7 @@ void scoreboardOfClass(classList *classes, yearList *YearList)
     bool found = false;
     generalClass thisClass;
 
+    classList *classes = YearList->data.allClasses;
     while (classes)
     {
         if (inputClass == classes->data.name)
@@ -157,6 +141,19 @@ void scoreboardOfClass(classList *classes, yearList *YearList)
             }
 
             getMarksFromCourses(scoresOfClass, s[curSem - 1]);
+
+            classScores* ptr = scoresOfClass;
+            while (ptr)
+            {
+                cout << ptr->id << " " << "Scores: ";
+                mark* tmp = ptr->markOfCourses;
+                while (tmp)
+                {
+                    cout << tmp->finalMark << " ";
+                    tmp = tmp->nextCourse;
+                }    
+                ptr = ptr->nextStd;
+            }
         }
         else
             YearList = YearList->next;
