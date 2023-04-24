@@ -49,18 +49,18 @@ void printCourseScore(string userID, semester *s)
     return;
 }
 
-// gets school year from ID, print and display score of semester
+//24. View his/her scoreboard (retrieves school year and calls print function)
 void viewScoreboard(user *curUser, yearList *YearList)
 {
     string userYear = (curUser->id).substr(0, 2);
 
     while (YearList)
     {
-        semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
-
         string curYear = to_string(YearList->data.start % 100);
         if (userYear == curYear)
         {
+            semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
+
             int curSem;
             cout << "Enter current semester: ";
             cin >> curSem;

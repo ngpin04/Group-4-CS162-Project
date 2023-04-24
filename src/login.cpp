@@ -7,6 +7,7 @@
 #include "../header/startSchoolYear.h"
 #include "../header/studentAction.h"
 #include "../header/anyTime.h"
+#include "../header/endSem.h"
 using namespace std;
 
 void checkUserAtLogIn(userList *pHead, user *&curUser)
@@ -105,7 +106,7 @@ void startYear(yearList* YearList, schoolYear*& curYear)
     }
 }
 
-void endSem()
+void endSem(yearList* YearList)
 {
     clearScreen();
     cout << "==================================================================" << endl;
@@ -134,6 +135,9 @@ void endSem()
         case 3:
         case 4:
         case 5:
+        {
+            scoreboardOfClass(YearList);
+        }
         case 0:
         {
             clearScreen();
@@ -223,7 +227,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear)
         }
         case 3:
         {
-            endSem();
+            endSem(YearList);
             break;
         }
         case 4:
