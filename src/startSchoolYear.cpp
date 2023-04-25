@@ -44,7 +44,7 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
     if (!cur) //No school years have been added
     {
         head = tmp;
-        cout << "Created school year successfully!" << endl;
+        cout << "Created school year successfully!" << endl << endl;
         return;
     }
     while (cur->next && cur->next->data.start<start)
@@ -72,7 +72,7 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         tmp -> next = cur -> next;
         cur -> next = tmp;
     }
-    cout << "Create school year successfully!" << endl;
+    cout << "Create school year successfully!" << endl << endl;
 }
 
 schoolYear* findYear(yearList* head, int n)
@@ -116,7 +116,7 @@ void createClasses(yearList*& head)
         }
         else curClass -> next = nullptr;
     }
-    cout << "Created classes successfully!" << endl;   
+    cout << "Created classes successfully!" << endl << endl;   
 }
 
 generalClass* findClass(yearList* year, string classname)
@@ -167,7 +167,7 @@ void add1Stu(generalClass*& c)
     if (!curStu) //No students have been added
     {
         c->studentHead = tmp;
-        cout << "Added successfully" << endl;
+        cout << "Added successfully!" << endl << endl;
         return;
     }
     while (curStu->next && curStu->next->data.id<stu.id)
@@ -191,7 +191,7 @@ void add1Stu(generalClass*& c)
         tmp -> next = curStu -> next;
         curStu -> next = tmp;
     }
-    cout << "Added successfully" << endl;
+    cout << "Added successfully!" << endl << endl;
 }
 
 //4. Add 1st year students by csv file
@@ -220,10 +220,10 @@ void addManyStus(generalClass*& c)
         }
         curStu->next = nullptr;
         fin.close();
-        cout << "Added successfully" << endl;
+        cout << "Added successfully!" << endl << endl;
     }
     else 
-        cout << "Could not open the file" << endl;
+        cout << "Could not open the file" << endl << endl;
 }
 
 void beforeAddStus(generalClass*& c, yearList*& year, int& tmp)

@@ -71,16 +71,19 @@ void startYear(yearList* YearList, schoolYear*& curYear)
         {
         case 1: 
         {
+            clearScreen();
             createSchoolYear(YearList, curYear);
             break;
         }
         case 2: 
         {
+            clearScreen();
             createClasses(YearList);
             break;
         }
         case 3:
         {
+            clearScreen();
             int tmp;
             generalClass* c;
             beforeAddStus(c, YearList, tmp);
