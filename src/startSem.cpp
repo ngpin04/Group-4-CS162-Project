@@ -7,6 +7,7 @@
 #include "../header/updateCourse.h"
 #include "../header/removeStudent.h"
 #include "../header/deleteCourse.h"
+#include "../header/addStudent.h"
 #include <iostream>
 
 using namespace std;
@@ -25,11 +26,11 @@ void startSem(yearList *YearList) {
         cout << "\t1. Create a semester" << endl;
         cout << "\t2. Add course to semester" << endl;
         cout << "\t3. Upload list of students to course" << endl;
-        cout << "\t3. View list of courses" << endl;
-        cout << "\t4. Update course information" << endl;
-        cout << "\t5. Add a student to course" << endl;
-        cout << "\t6. Remove a student from course" << endl;
-        cout << "\t7. Delete a course" << endl;
+        cout << "\t4. View list of courses" << endl;
+        cout << "\t5. Update course information" << endl;
+        cout << "\t6. Add a student to course" << endl;
+        cout << "\t7. Remove a student from course" << endl;
+        cout << "\t8. Delete a course" << endl;
         cout << "\t0. Return to Possible Actions"
              << endl;
         cout << "Your choice: ";
@@ -53,9 +54,10 @@ void startSem(yearList *YearList) {
                 case 3: uploadStudentList(newSem->allCourses);
                 case 4: viewCourse(newSem->allCourses);
                 case 5: updateCourse(newSem->allCourses);
-                case 6: removeStudent(newSem->allCourses);
-                case 7: deleteCourse(newSem->allCourses);
+                case 6: addStudent(newSem->allCourses);
+                case 7: removeStudent(newSem->allCourses);
                 case 8: {
+                    deleteCourse(newSem->allCourses);
                     break;
                 }
             }
