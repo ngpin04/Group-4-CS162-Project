@@ -2,7 +2,7 @@
 #include "user.h"
 
 struct student {
-    int number;
+    int number = -1;
     string id;
     string firstName;
     string lastName;

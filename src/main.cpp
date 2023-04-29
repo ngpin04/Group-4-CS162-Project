@@ -10,9 +10,10 @@ schoolYear *curYear = new schoolYear;
 
 int main() {
     readData(userData, "data/user.txt");
-    readTime(curSemester, curYear);
     readYearList(YearList);
-    printData(userData);
+    readAllCourse(YearList);
+    readTime(curSemester, curYear);
+    //printData(userData);
     user* curUser = nullptr;
     while (true){
         if (!curUser){

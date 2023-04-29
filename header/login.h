@@ -4,7 +4,7 @@
 
 void checkUserAtLogIn(userList *pHead, user *&curUser);
 
-void endSem();
+void endSem(yearList* YearList);
 
 void anyTime(schoolYear* curYear);
 
