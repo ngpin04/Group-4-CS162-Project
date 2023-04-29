@@ -3,13 +3,13 @@
 
 struct score
 {
-    int number;
-    int id;
+    int number =-1;
+    int id =-1;
     string fullname;
-    double total;
-    double finalMark;
-    double midterm;
-    double other;
+    double total = -1.00;
+    double finalMark = -1.00;
+    double midterm = -1.00;
+    double other = 0.00;
 };
 
 struct scoreList{

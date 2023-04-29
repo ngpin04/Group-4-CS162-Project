@@ -10,13 +10,14 @@ struct course
     string courseName;
     string className;
     string teacherName;
-    int credit;
+    int credit = 4;
     int maximum = 50;
     string dayOfWeek;
-    int session;
-    bool resultsReleased;
+    int session = 1;
+    bool resultsReleased = false;
     studentList* enrolledStudents = nullptr;
     scoreList* scoreboard = nullptr;
+    void input(ifstream& fi);
 };
 
 struct courseList
