@@ -11,6 +11,7 @@ void readStudentList(studentList *&StudentList, ifstream &fi)
     }
     StudentList = new studentList;
     fi >> StudentList->data.id;
+    fi.ignore(100, '\n');
     getline(fi, StudentList->data.firstName);
     getline(fi, StudentList->data.lastName);
     fi >> StudentList->data.isFemale;
@@ -29,6 +30,7 @@ void readStudentList(studentList *&StudentList, ifstream &fi)
         }
         cur->next = new studentList;
         fi >> cur->next->data.id;
+        fi.ignore(100, '\n');
         getline(fi,cur->next->data.firstName);
         getline(fi,cur->next->data.lastName);
         fi >> cur->next->data.isFemale;
@@ -51,6 +53,7 @@ void readScoreList(scoreList *&ScoreList, ifstream &fi)
     }
     ScoreList = new scoreList;
     fi >> ScoreList->data.id;
+    fi.ignore(100, '\n');
     getline(fi, ScoreList->data.fullname);
     fi >> ScoreList->data.midterm;
     fi >> ScoreList->data.finalMark;
@@ -67,6 +70,7 @@ void readScoreList(scoreList *&ScoreList, ifstream &fi)
         }
         cur->next = new scoreList;
         fi >> ScoreList->data.id;
+        fi.ignore(100, '\n');
         getline(fi, ScoreList->data.fullname);
         fi >> ScoreList->data.midterm;
         fi >> ScoreList->data.finalMark;

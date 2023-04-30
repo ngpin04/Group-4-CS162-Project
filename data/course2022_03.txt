@@ -1,0 +1,17 @@
+1
+CS163
+Introduction to Computer Science III
+22TT1
+Dinh Ba Tien
+4 50 TUE 4 0
+0
+0
+2
+CS163
+Introduction to Computer Science III
+22TT2
+Dinh Ba Tien
+4 50 TUE 3 0
+0
+0
+-1

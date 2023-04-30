@@ -6,10 +6,11 @@ using namespace std;
 
 struct generalClass
 {
-    int firstYear;
+    int firstYear = -1;
     string name;
-    string index;
+    string index = "unused";
     studentList* studentHead = nullptr;
+    void input(ifstream& fi);
 };
 
 struct classList

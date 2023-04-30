@@ -1,0 +1,17 @@
+1
+CS162
+Introduction to Computer Science II
+22TT1
+Dinh Ba Tien
+4 50 SAT 3 0
+0
+0
+2
+CS162
+Introduction to Computer Science II
+22TT2
+Dinh Ba Tien
+4 50 MON 1 0
+0
+0
+-1
