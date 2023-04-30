@@ -6,7 +6,7 @@
 
 void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass)
 {
-    classScores *tmpStudent = nullptr;
+    classScores *cur = nullptr;
 
     while (studentsOfClass)
     {
@@ -15,12 +15,12 @@ void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass)
         if (!scoresOfClass)
         {
             scoresOfClass = newStd;
-            tmpStudent = scoresOfClass;
+            cur = scoresOfClass;
         }
         else
         {
-            tmpStudent->nextStd = newStd;
-            tmpStudent = tmpStudent->nextStd;
+            cur->nextStd = newStd;
+            cur = cur->nextStd;
         }
         studentsOfClass = studentsOfClass->next;
     }
@@ -30,81 +30,102 @@ void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass)
 
 void getMarksFromCourses(classScores *scoresOfClass, semester *curSem)
 {
-    classScores *thisStudent = scoresOfClass;
-    while (thisStudent)
+    classScores *curStudentOnList = scoresOfClass;
+    while (curStudentOnList->id != "-1")
     {
-        courseList *theseCourses = curSem->allCourses;
-        while (theseCourses)
+        courseList *courseInSem = curSem->allCourses;
+        // traverse the list of courses in this semester
+        while (courseInSem)
         {
-            studentList *enrolled = theseCourses->data.enrolledStudents;
-            mark *tmpMark = nullptr;
-            while (enrolled)
+            studentList *enrolledInThisCourse = courseInSem->data.enrolledStudents;
+            mark *tmp = nullptr;
+            // traverse the list of learners of the course to find the target student
+            while (enrolledInThisCourse)
             {
-                if (enrolled->data.id == thisStudent->id)
+                if (enrolledInThisCourse->data.id == curStudentOnList->id)
                 {
                     mark *newMark = new mark;
-                    newMark->courseName = theseCourses->data.courseName;
-                    newMark->finalMark = theseCourses->data.scoreboard->data.finalMark;
+                    newMark->courseName = courseInSem->data.courseName;
+                    newMark->value = courseInSem->data.scoreboard->data.finalMark;
 
-                    if (!thisStudent->markOfCourses)
+                    // Array of marks (of this student) is empty
+                    if (!curStudentOnList->markOfCourses)
                     {
-                        thisStudent->markOfCourses = newMark;
-                        tmpMark = thisStudent->markOfCourses;
+                        curStudentOnList->markOfCourses = newMark;
+                        tmp = curStudentOnList->markOfCourses;
                     }
                     else
                     {
-                        tmpMark->nextCourse = newMark;
-                        tmpMark = tmpMark->nextCourse;
+                        tmp->nextCourse = newMark;
+                        tmp = tmp->nextCourse;
                     }
-
                     break;
                 }
                 else
-                    enrolled = enrolled->next;
+                    enrolledInThisCourse = enrolledInThisCourse->next;
             }
-            theseCourses = theseCourses->next;
+            courseInSem = courseInSem->next;
         }
-        thisStudent = thisStudent->nextStd;
+        curStudentOnList = curStudentOnList->nextStd;
     }
 
     return;
 }
 
+void printClassScoreboard(classScores *scoresOfClass, generalClass thisClass)
+{
+    clearScreen();
+    cout << "==================================================================" << endl;
+    cout << "              SCOREBOARD OF CLASS " << thisClass.name << "        " << endl;
+    cout << "==================================================================" << endl;
+}
+
 void scoreboardOfClass(yearList *YearList)
 {
+    // Find the school year
+    int start;
+    bool foundYear = false;
+    yearList *thisYear;
+
+    while (!foundYear)
+    {
+        cout << "Enter the starting year of the class, or 0 to exit: ";
+        cin >> start;
+
+        if (start == 0)
+        {
+            clearScreen();
+            cout << "==================================================================" << endl;
+            cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
+            cout << "==================================================================" << endl;
+            return;
+        }
+
+        yearList *findTheYear = YearList;
+        while (findTheYear)
+        {
+            if (findTheYear->data.start == start)
+            {
+                thisYear = findTheYear;
+                foundYear = true;
+                break;
+            }
+            else
+                findTheYear = findTheYear->next;
+        }
+
+        if (!foundYear)
+            cout << "Unable to find the year. Please try again." << endl;
+    }
+
     // Find the class
     string inputClass;
-    cout << "Enter a class name, 0 to exit: ";
-    cin >> inputClass;
-
-    if (inputClass == "0")
-    {
-        clearScreen();
-        cout << "==================================================================" << endl;
-        cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
-        cout << "==================================================================" << endl;
-        return;
-    }
-
-    bool found = false;
+    bool foundClass = false;
     generalClass thisClass;
 
-    classList *classes = YearList->data.allClasses;
-    while (classes)
+    while (!foundClass)
     {
-        if (inputClass == classes->data.name)
-        {
-            thisClass = classes->data;
-            found = true;
-            break;
-        }
-        else
-            classes = classes->next;
-    }
-
-    if (!found)
-    {
-        cout << "There is no such class. Please try again or 0 to exit: ";
+        cout << "Enter a class name, 0 to exit: ";
         cin >> inputClass;
 
         if (inputClass == "0")
@@ -115,6 +136,22 @@ void scoreboardOfClass(yearList *YearList)
             cout << "==================================================================" << endl;
             return;
         }
+
+        classList *classesThisYear = thisYear->data.allClasses;
+        while (classesThisYear)
+        {
+            if (inputClass == classesThisYear->data.name)
+            {
+                thisClass = classesThisYear->data;
+                foundClass = true;
+                break;
+            }
+            else
+                classesThisYear = classesThisYear->next;
+        }
+
+        if (!foundClass)
+            cout << "There's no such class. Please try again." << endl;
     }
 
     // Get all student IDs of the class
@@ -122,40 +159,45 @@ void scoreboardOfClass(yearList *YearList)
     studentList *studentsOfClass = thisClass.studentHead;
     getAllIDs(scoresOfClass, studentsOfClass);
 
-    // Find current year -> current semester and get the marks
-    int thisYear = thisClass.firstYear;
-    while (YearList)
+    // Find current semsester and get the marks
+    semester *s[3] = {thisYear->data.sem1, thisYear->data.sem2, thisYear->data.sem3};
+
+    int curSem;
+    bool foundSem = false;
+
+    while (!foundSem)
     {
-        if (thisYear == YearList->data.start)
+        cout << "Enter current semester, or 0 to exit: ";
+        cin >> curSem;
+
+        if (curSem == 0)
         {
-            semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
-
-            int curSem;
-            cout << "Enter current semester: ";
-            cin >> curSem;
-
-            while (curSem != 1 && curSem != 2 && curSem != 3)
-            {
-                cout << "Invalid semester. Please try again: ";
-                cin >> curSem;
-            }
-
-            getMarksFromCourses(scoresOfClass, s[curSem - 1]);
-
-            classScores* ptr = scoresOfClass;
-            while (ptr)
-            {
-                cout << ptr->id << " " << "Scores: ";
-                mark* tmp = ptr->markOfCourses;
-                while (tmp)
-                {
-                    cout << tmp->finalMark << " ";
-                    tmp = tmp->nextCourse;
-                }    
-                ptr = ptr->nextStd;
-            }
+            clearScreen();
+            cout << "==================================================================" << endl;
+            cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
+            cout << "==================================================================" << endl;
+            return;
         }
+
+        if (curSem == 1 || curSem == 2 || curSem == 3)
+            foundSem = true;
         else
-            YearList = YearList->next;
+            cout << "Unable to find the semester. Please try again." << endl;
     }
+
+    getMarksFromCourses(scoresOfClass, s[curSem - 1]);
+
+    // classScores *ptr = scoresOfClass;
+    // while (ptr)
+    // {
+    //     cout << ptr->id << " "
+    //          << "Scores: ";
+    //     mark *tmp = ptr->markOfCourses;
+    //     while (tmp)
+    //     {
+    //         cout << tmp->finalMark << " ";
+    //         tmp = tmp->nextCourse;
+    //     }
+    //     ptr = ptr->nextStd;
+    // }
 }
