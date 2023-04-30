@@ -16,7 +16,7 @@ int main() {
     readAllClasses(YearList);
     user* curUser = nullptr;
     while (true){
-        if (!curUser){
+        if (curUser == nullptr){
             printData(userData);
             checkUserAtLogIn(userData, curUser);
             if (curUser == nullptr)

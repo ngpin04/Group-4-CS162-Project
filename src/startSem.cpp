@@ -35,7 +35,14 @@ void startSem(yearList *YearList) {
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-
+        if (!(cin >> choice)) {
+            cin.clear(); // clears the error flags
+            // this line discards all the input waiting in the stream
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            choice = 100;
+            cout << "invalid input, please try again!" << endl;
+            continue;
+        }
         if (choice == 0) {
             clearScreen();
             cout << "==============================================================" << endl;
