@@ -18,6 +18,9 @@ struct classScores
     classScores *nextStd = nullptr;
 };
 
+void returnDefault();
+void exportStu(courseList* course);
+void importScoreboard(courseList*& course);
 void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass);
 void getMarksFromCourses(classScores *scoresOfClass, semester *curSem);
 void scoreboardOfClass(yearList *YearList);

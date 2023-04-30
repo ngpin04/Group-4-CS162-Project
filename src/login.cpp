@@ -107,7 +107,7 @@ void startYear(yearList* YearList, schoolYear*& curYear)
     }
 }
 
-void endSem(yearList* YearList)
+void endSem(yearList* YearList, semester* curSem)
 {
     clearScreen();
     cout << "==================================================================" << endl;
@@ -132,12 +132,21 @@ void endSem(yearList* YearList)
         switch (choice)
         {
         case 1:
+        {
+            exportStu(curSem->allCourses);
+            break;
+        }
         case 2:
+        {
+            importScoreboard(curSem->allCourses);
+            break;
+        }
         case 3:
         case 4:
         case 5:
         {
             scoreboardOfClass(YearList);
+            break;
         }
         case 0:
         {
@@ -193,7 +202,7 @@ void anyTime(schoolYear* curYear)
     }
 }
 
-void actionsAsStaff(yearList *YearList, schoolYear* curYear)
+void actionsAsStaff(yearList *YearList, schoolYear* curYear, semester *curSemester)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -228,7 +237,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear)
         }
         case 3:
         {
-            endSem(YearList);
+            endSem(YearList, curSemester);
             break;
         }
         case 4:
@@ -328,7 +337,7 @@ void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, sc
         case 3:
         {
             if (curUser->isStaff)
-                actionsAsStaff(YearList, curYear);
+                actionsAsStaff(YearList, curYear, curSemester);
             else
                 actionsAsStudent(curUser,curSemester);
             break;
