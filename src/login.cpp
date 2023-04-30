@@ -23,13 +23,13 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     userList *cur = pHead;
     do
     {
-        // cout << "Enter username: "; cout.flush();
+        cout << "Enter username: "; cout.flush();
         cin >> curUsername;
         if (curUsername == "0"){
             curUser = nullptr;
             return;
         }
-        // cout << "Enter password: "; cout.flush();
+        cout << "Enter password: "; cout.flush();
         cin >> curPassword;
         cur = pHead;
         while (cur)
@@ -42,8 +42,8 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
             }
             cur = cur->next;
         }
-        // cout << endl
-        //      << "Account and password are invalid! Please re-enter username and password." << endl; // re-login until login ok
+        cout << endl
+             << "Account and password are invalid! Please re-enter username and password." << endl; // re-login until login ok
     } while (curUser == nullptr);
 }
 
@@ -65,12 +65,9 @@ void startYear(yearList* YearList, schoolYear*& curYear)
         cout << "\t0. Return to Possible Actions"
              << endl;
         cout << "Your choice: ";
-        if (!(cin >> choice)) {
-            cin.clear(); // clears the error flags
-            // this line discards all the input waiting in the stream
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin >> choice;
+        if (!check(cin)) {
             choice = 100;
-            cout << "invalid input, please try again!" << endl;
             continue;
         }
         switch (choice)
@@ -138,12 +135,8 @@ void endSem(yearList* YearList)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-        if (!(cin >> choice)) {
-            cin.clear(); // clears the error flags
-            // this line discards all the input waiting in the stream
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!check(cin)) {
             choice = 100;
-            cout << "invalid input, please try again!" << endl;
             continue;
         }
         switch (choice)
@@ -188,12 +181,8 @@ void anyTime(schoolYear* curYear)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-        if (!(cin >> choice)) {
-            cin.clear(); // clears the error flags
-            // this line discards all the input waiting in the stream
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!check(cin)) {
             choice = 100;
-            cout << "invalid input, please try again!" << endl;
             continue;
         }
         switch (choice)
@@ -237,12 +226,8 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-        if (!(cin >> choice)) {
-            cin.clear(); // clears the error flags
-            // this line discards all the input waiting in the stream
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!check(cin)) {
             choice = 100;
-            cout << "invalid input, please try again!" << endl;
             continue;
         }
         switch (choice)
@@ -297,14 +282,10 @@ void actionsAsStudent(user *&curUser,semester *curSemester)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-        if (!(cin >> choice)) {
-            cin.clear(); // clears the error flags
-            // this line discards all the input waiting in the stream
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!check(cin)) {
             choice = 100;
-            cout << "invalid input, please try again!" << endl;
             continue;
-        }
+        }   
         switch (choice)
         {
         case 1:
@@ -351,12 +332,8 @@ void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, sc
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-        if (!(cin >> choice)) {
-            cin.clear(); // clears the error flags
-            // this line discards all the input waiting in the stream
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!check(cin)) {
             choice = 100;
-            cout << "invalid input, please try again!" << endl;
             continue;
         }
         switch (choice)
