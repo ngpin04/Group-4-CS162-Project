@@ -50,9 +50,9 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
 void startYear(yearList* YearList, schoolYear*& curYear)
 {
     clearScreen();
-    cout << "====================================================================" << endl;
+    cout << "================================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> YEAR-START ACTIONS" << endl;
-    cout << "====================================================================" << endl;
+    cout << "================================================================" << endl;
     int choice = 100;
 
     while (choice != 0)
@@ -71,19 +71,16 @@ void startYear(yearList* YearList, schoolYear*& curYear)
         {
         case 1: 
         {
-            clearScreen();
             createSchoolYear(YearList, curYear);
             break;
         }
         case 2: 
         {
-            clearScreen();
             createClasses(YearList);
             break;
         }
         case 3:
         {
-            clearScreen();
             int tmp;
             generalClass* c;
             beforeAddStus(c, YearList, tmp);
