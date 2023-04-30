@@ -3,6 +3,7 @@
 
 bool isInt(string s);
 void checkYear(string& input);
+void returnActions();
 void createSchoolYear(yearList*& head, schoolYear*& curYear);
 schoolYear* findYear(yearList* head, int n);
 void createClasses(yearList*& head);
