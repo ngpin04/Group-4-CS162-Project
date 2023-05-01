@@ -85,7 +85,7 @@ void scoreboardOfClass(yearList *YearList)
     // Find the school year
     int start;
     bool foundYear = false;
-    yearList *thisYear;
+    yearList *thisYear = nullptr;
 
     while (!foundYear)
     {

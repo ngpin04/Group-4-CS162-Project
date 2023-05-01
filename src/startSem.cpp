@@ -34,7 +34,7 @@ void startSem(yearList *YearList) {
         cout << "\t0. Return to Possible Actions"
              << endl;
         cout << "Your choice: ";
-        cin >> choice;
+        //cin >> choice;
         if (!(cin >> choice)) {
             cin.clear(); // clears the error flags
             // this line discards all the input waiting in the stream
@@ -54,6 +54,7 @@ void startSem(yearList *YearList) {
         } else {
             if (newSem == nullptr) {
                 cout << "Semester has not been created, please try again." << endl;
+                continue;
             }
 
             switch (choice) {
