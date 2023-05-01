@@ -8,10 +8,12 @@ void addCourse(semester *sem) {
     cout << "Please enter course id: ";
     cin >> newCourse.id;
     cout << "Please enter course name: ";
-    cin >> newCourse.courseName;
+    cin.ignore(100, '\n');
+    getline(cin, newCourse.courseName);
     cout << "Please enter class name: ";
     cin >> newCourse.className;
     cout << "Please enter teacher name: ";
+    cin.ignore(100, '\n');
     getline(cin, newCourse.teacherName);
     cout << "Please enter the number of credits: ";
     cin >> newCourse.credit;

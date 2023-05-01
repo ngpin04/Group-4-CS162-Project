@@ -161,7 +161,7 @@ void endSem(yearList* YearList)
     }
 }
 
-void anyTime(schoolYear* curYear)
+void anyTime(schoolYear* curYear,semester* curSem)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -191,8 +191,13 @@ void anyTime(schoolYear* curYear)
             viewClass(curYear);
             break;
         }
-        case 2:
-        case 3:
+        case 2: {
+            viewStudent(curYear);
+            break;
+        }
+        case 3: {
+            viewCourse(curSem);
+        }
         case 4:
         case 0:
         {
@@ -206,7 +211,7 @@ void anyTime(schoolYear* curYear)
     }
 }
 
-void actionsAsStaff(yearList *YearList, schoolYear* curYear)
+void actionsAsStaff(yearList *YearList, schoolYear* curYear,semester* curSem)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -249,7 +254,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear)
         }
         case 4:
         {
-            anyTime(curYear);
+            anyTime(curYear,curSem);
             break;
         }
         case 0:
@@ -351,7 +356,7 @@ void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, sc
         case 3:
         {
             if (curUser->isStaff)
-                actionsAsStaff(YearList, curYear);
+                actionsAsStaff(YearList, curYear, curSemester);
             else
                 actionsAsStudent(curUser,curSemester);
             break;
