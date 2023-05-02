@@ -7,7 +7,8 @@ using namespace std;
 struct mark
 {
     string courseName;
-    double value = -1;
+    double value = -1.00;
+    int credits;
     mark *nextCourse = nullptr;
 };
 
@@ -20,5 +21,7 @@ struct classScores
 
 void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass);
 void getMarksFromCourses(classScores *scoresOfClass, semester *curSemester);
-void printClassScoreboard(classScores* scoresOfClass, studentList* studentsOfClass);
-void scoreboardOfClass(schoolYear *curYear, semester *curSemester);
+double gpaThisSem(classScores *curStudent);
+double gpaOverall(classScores *scoresOfClass, yearList *YearList);
+void printClassScoreboard(yearList *YearList, classScores* scoresOfClass, generalClass thisClass);
+void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSemester);

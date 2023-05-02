@@ -4,7 +4,7 @@
 struct score
 {
     int number =-1;
-    int id =-1;
+    string id = "-1";
     string fullname;
     double total = -1.00;
     double finalMark = -1.00;

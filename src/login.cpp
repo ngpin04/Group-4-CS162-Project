@@ -114,7 +114,7 @@ void startYear(yearList* YearList, schoolYear*& curYear)
     }
 }
 
-void endSem(schoolYear* curYear, semester* curSemester)
+void endSem(yearList *YearList, schoolYear* curYear, semester* curSemester)
 {
     clearScreen();
     cout << "==================================================================" << endl;
@@ -147,7 +147,7 @@ void endSem(schoolYear* curYear, semester* curSemester)
         case 4:
         case 5:
         {
-            scoreboardOfClass(curYear, curSemester);
+            scoreboardOfClass(YearList, curYear, curSemester);
             break;
         }
         case 0:
@@ -250,7 +250,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear, semester *curSemest
         }
         case 3:
         {
-            endSem(curYear, curSemester);
+            endSem(YearList, curYear, curSemester);
             break;
         }
         case 4:
