@@ -7,7 +7,7 @@ using namespace std;
 struct mark
 {
     string courseName;
-    float value;
+    double value = -1;
     mark *nextCourse = nullptr;
 };
 
@@ -19,6 +19,6 @@ struct classScores
 };
 
 void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass);
-void getMarksFromCourses(classScores *scoresOfClass, semester *curSem);
+void getMarksFromCourses(classScores *scoresOfClass, semester *curSemester);
 void printClassScoreboard(classScores* scoresOfClass, studentList* studentsOfClass);
-void scoreboardOfClass(yearList *YearList);
+void scoreboardOfClass(schoolYear *curYear, semester *curSemester);
