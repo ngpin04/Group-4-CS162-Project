@@ -142,7 +142,15 @@ void endSem(yearList *YearList, schoolYear* curYear, semester* curSemester)
         switch (choice)
         {
         case 1:
+        {
+            exportStu(curSem->allCourses);
+            break;
+        }
         case 2:
+        {
+            importScoreboard(curSem->allCourses);
+            break;
+        }
         case 3:
         case 4:
         case 5:
