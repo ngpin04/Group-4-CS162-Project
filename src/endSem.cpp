@@ -81,8 +81,30 @@ void exportStu(courseList* course)
     }
 }
 
+double toDouble(const string& str)
+{
+    if (str == "" || str ==" ") return 0.0;
+    double result = 0.0;
+    double factor = 1.0;
+    bool decimal = false;
+    for (char c : str) 
+    {
+        if (c == '.') decimal = true;
+        else if (c >= '0' && c <= '9') 
+        {
+            if (decimal) 
+            {
+                factor *= 0.1;
+                result += factor * (c - '0');
+            } 
+            else 
+                result = 10.0 * result + (c - '0');
+        }
+    }
+    return result;
+}
+
 // 20. Import the scoreboard of a course
-//trying to find a way to replace stod
 void importScoreboard(courseList*& course)
 {
     cout << "List of courses in this semester: " << endl;
@@ -133,13 +155,13 @@ void importScoreboard(courseList*& course)
             getline(str, word, ','); //social ID
             
             getline(str, word, ',');
-            sc->data.midterm = stod(word);
+            sc->data.midterm = toDouble(word);
             getline(str, word, ',');
-            sc->data.finalMark = stod(word);
+            sc->data.finalMark = toDouble(word);
             getline(str, word, ',');
-            sc->data.other = stod(word);
+            sc->data.other = toDouble(word);
             getline(str, word, ',');
-            sc->data.total = stod(word);
+            sc->data.total = toDouble(word);
             if (fin.peek() != EOF)
             {
                 sc->next = new scoreList;
