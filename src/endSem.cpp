@@ -235,7 +235,7 @@ void getMarksFromCourses(classScores *&scoresOfClass, semester *curSemester)
         // traverse the list of courses in this semester
         while (courseInSem)
         {
-            studentList *enrolledInThisCourse = courseInSem->data.enrolledStudents;
+            scoreList *enrolledInThisCourse = courseInSem->data.scoreboard;
             mark *tmp = nullptr;
 
             // traverse the list of learners of the course to find the target student
@@ -245,7 +245,7 @@ void getMarksFromCourses(classScores *&scoresOfClass, semester *curSemester)
                 {
                     mark *newMark = new mark;
                     newMark->courseName = courseInSem->data.courseName;
-                    newMark->value = courseInSem->data.scoreboard->data.finalMark;
+                    newMark->value = enrolledInThisCourse->data.finalMark;
                     newMark->credits = courseInSem->data.credit;
 
                     // Array of marks (of this student) is empty
@@ -284,7 +284,7 @@ double gpaThisSem(classScores *curStudent)
     mark *list = curStudent->markOfCourses;
     while (list)
     {
-        allScores += list->value;
+        allScores += list->value * list->credits;
         totalCredits += list->credits;
         list = list->nextCourse;
     }
@@ -338,8 +338,6 @@ double gpaOverall(classScores *scoresOfClass, yearList *YearList)
 
         thisYear = thisYear->next;
     }
-
-    cout << endl << total << " " << totalCredits << endl;
 
     gpa = total / totalCredits;
     return gpa;
