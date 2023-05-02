@@ -155,7 +155,6 @@ void inputStu(student& stu)
     cin.ignore();
     getline(cin, stu.firstName);
     cout << "Last name: ";
-    cin.ignore();
     getline(cin, stu.lastName);
     cout << "Gender (0 for male, 1 for female): ";
     int n;
@@ -209,6 +208,14 @@ void add1Stu(generalClass*& c)
     returnActions();
 }
 
+int to_num(const string &str)
+{
+    int res = 0;
+    for (char c : str)
+        res = 10 * res + (c - '0');
+    return res;
+}
+
 //4. Add 1st year students by csv file
 void addManyStus(generalClass*& c)
 {
@@ -220,21 +227,35 @@ void addManyStus(generalClass*& c)
     {
         c->studentHead = new studentList;
         studentList* curStu = c->studentHead;
-        string line;
+        string line, word;
         getline(fin, line); // read and discard the first line of the file
         while (getline(fin, line))
         {
-            stringstream ss(line);
             student stu;
-            char comma;
-            int num;
-            ss >> num >> comma >> stu.id >> comma >> stu.firstName >> comma >> stu.lastName >> comma >> stu.isFemale >> comma
-               >> stu.birth.day >> comma >> stu.birth.month >> comma >> stu.birth.year >> comma >> stu.socialID;
+            stringstream str(line);
+            getline(str, word, ',');
+            getline(str, word, ',');
+            stu.id = word;
+            getline(str, word, ',');
+            stu.firstName = word;
+            getline(str, word, ',');
+            stu.lastName = word;
+            getline(str, word, ',');
+            stu.isFemale = to_num(word);
+            getline(str, word, ',');
+            stu.birth.day = to_num(word);
+            getline(str, word, ',');
+            stu.birth.month = to_num(word);
+            getline(str, word, ',');
+            stu.birth.year = to_num(word);
+            getline(str, word, ',');
+            stu.socialID = word;
+            
             curStu->data = stu;
             curStu->next = new studentList;
             curStu = curStu->next;
         }
-        curStu->next = nullptr;
+        curStu = nullptr;
         fin.close();
         cout << "Added successfully!" << endl;
         returnActions();
