@@ -21,7 +21,6 @@ struct classScores
 
 void returnDefault();
 void exportStu(courseList* course);
-int toNum(const string &str);
 void importScoreboard(courseList*& course);
 void viewScoreboard(semester* curSem);
 void getAllIDs(classScores *&scoresOfClass, studentList *studentsOfClass);

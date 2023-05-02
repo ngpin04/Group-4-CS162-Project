@@ -252,10 +252,13 @@ void addManyStus(generalClass*& c)
             stu.socialID = word;
             
             curStu->data = stu;
-            curStu->next = new studentList;
-            curStu = curStu->next;
+            if (fin.peek() != EOF)
+            {
+                curStu->next = new studentList;
+                curStu = curStu->next;
+            }
+            else curStu->next = nullptr;
         }
-        curStu = nullptr;
         fin.close();
         cout << "Added successfully!" << endl;
         returnActions();

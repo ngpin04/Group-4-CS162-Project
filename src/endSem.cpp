@@ -81,35 +81,30 @@ void exportStu(courseList* course)
     }
 }
 
-int toNum(const string &str)
-{
-    int res = 0;
-    for (char c : str)
-        res = 10 * res + (c - '0');
-    return res;
-}
-
 // 20. Import the scoreboard of a course
+//trying to find a way to replace stod
 void importScoreboard(courseList*& course)
 {
-    cout << "Enter the ID of the course that you want to import the scoreboard from: ";
+    cout << "List of courses in this semester: " << endl;
     string id;
-    scoreList* sc = nullptr;
-    courseList* tmp;
-    while (!sc)
+    
+    int index = 1;
+    courseList* curCourse = course;
+    while (curCourse)
     {
-        cin >> id;
-        tmp = course;
-        while (tmp && tmp->data.id != id)
-            tmp = tmp -> next;
-        if (!tmp) cout << "No such course exists. Please enter another course ID: ";
-        else
-        {
-            sc = tmp -> data.scoreboard;
-            break;
-        } 
+        cout << "\t" << index << ". " << curCourse->data.id << " - " << curCourse->data.className << endl;
+        index++;
+        curCourse = curCourse->next;
     }
-    cout << "Enter the name of the csv file that you want to import: ";
+    cout << "Enter the number of the class you want to target: ";
+    int choice;
+    cin >> choice;
+    for (int i = 1; i < choice; i++)
+    {
+        course = course->next;
+    }
+    scoreList* sc = course->data.scoreboard;
+    cout << "Enter the file name (including .csv): ";
     string filename;
     cin >> filename;
     ifstream fin(filename);
@@ -120,28 +115,38 @@ void importScoreboard(courseList*& course)
         while (getline(fin, line))
         {
             student stu;
-            char comma;
             stringstream str(line);
             getline(str, word, ','); //no
-            getline(str, word, ','); //id
+            getline(str, word, ',');
+
+            sc->data.id = word;
+
             getline(str, word, ',');
             stu.firstName = word;
             getline(str, word, ',');
             stu.lastName = word;
-            getline(str, word, ','); //gender
-            getline(str, word, ','); //day
-            getline(str, word, ','); //month
-            getline(str, word, ','); //year
-            getline(str, word, ','); //social ID
+
             sc->data.fullname = stu.lastName + " " + stu.firstName;
-            str >> sc->data.midterm >> comma
-               >> sc->data.finalMark >> comma
-               >> sc->data.other >> comma
-               >> sc->data.total;
-            sc->next = new scoreList;
-            sc = sc->next;
+
+            getline(str, word, ','); //gender
+            getline(str, word, ','); //date of birth
+            getline(str, word, ','); //social ID
+            
+            getline(str, word, ',');
+            sc->data.midterm = stod(word);
+            getline(str, word, ',');
+            sc->data.finalMark = stod(word);
+            getline(str, word, ',');
+            sc->data.other = stod(word);
+            getline(str, word, ',');
+            sc->data.total = stod(word);
+            if (fin.peek() != EOF)
+            {
+                sc->next = new scoreList;
+                sc = sc->next;
+            }
+            else sc->next = nullptr;
         }
-        sc = nullptr;
         fin.close();
         cout << "Imported successfully!" << endl;
         returnDefault();
