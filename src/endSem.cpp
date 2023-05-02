@@ -81,6 +81,14 @@ void exportStu(courseList* course)
     }
 }
 
+int toNum(const string &str)
+{
+    int res = 0;
+    for (char c : str)
+        res = 10 * res + (c - '0');
+    return res;
+}
+
 // 20. Import the scoreboard of a course
 void importScoreboard(courseList*& course)
 {
@@ -107,23 +115,33 @@ void importScoreboard(courseList*& course)
     ifstream fin(filename);
     if (fin.is_open())
     {
-        string line;
+        string line, word;
         getline(fin, line); // read and discard the first line of the file
         while (getline(fin, line))
         {
-            stringstream ss(line);
             student stu;
             char comma;
-            int num;
-            ss >> num >> comma >> stu.id >> comma >> stu.firstName >> comma >> stu.lastName >> comma >> stu.isFemale >> comma
-               >> stu.birth.day >> comma >> stu.birth.month >> comma >> stu.birth.year >> comma >> stu.socialID >> comma;
-            sc->data.id = stu.id;
+            stringstream str(line);
+            getline(str, word, ','); //no
+            getline(str, word, ','); //id
+            getline(str, word, ',');
+            stu.firstName = word;
+            getline(str, word, ',');
+            stu.lastName = word;
+            getline(str, word, ','); //gender
+            getline(str, word, ','); //day
+            getline(str, word, ','); //month
+            getline(str, word, ','); //year
+            getline(str, word, ','); //social ID
             sc->data.fullname = stu.lastName + " " + stu.firstName;
-            ss >> sc->data.midterm >> comma
+            str >> sc->data.midterm >> comma
                >> sc->data.finalMark >> comma
                >> sc->data.other >> comma
                >> sc->data.total;
+            sc->next = new scoreList;
+            sc = sc->next;
         }
+        sc = nullptr;
         fin.close();
         cout << "Imported successfully!" << endl;
         returnDefault();
