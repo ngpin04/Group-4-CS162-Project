@@ -8,7 +8,7 @@ using namespace std;
 // 23. View the scoreboard of a class, including final marks of all courses in the semester,
 // GPA in this semester, and the total GPA
 
-void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass)
+void getAllIDs(classScores *&scoresOfClass, studentList *studentsOfClass)
 {
     classScores *cur = nullptr;
 
@@ -27,16 +27,13 @@ void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass)
             cur = cur->nextStd;
         }
 
-        if (studentsOfClass)
-            studentsOfClass = studentsOfClass->next;
-        else
-            break;
+        studentsOfClass = studentsOfClass->next;
     }
 
     return;
 }
 
-void getMarksFromCourses(classScores *scoresOfClass, semester *curSemester)
+void getMarksFromCourses(classScores *&scoresOfClass, semester *curSemester)
 {
     classScores *curStudentOnList = scoresOfClass;
 
@@ -75,22 +72,13 @@ void getMarksFromCourses(classScores *scoresOfClass, semester *curSemester)
                     break;
                 }
 
-                if (enrolledInThisCourse->next)
-                    enrolledInThisCourse = enrolledInThisCourse->next;
-                else
-                    break;
+                enrolledInThisCourse = enrolledInThisCourse->next;
             }
 
-            if (courseInSem->next)
-                courseInSem = courseInSem->next;
-            else
-                break;
+            courseInSem = courseInSem->next;
         }
 
-        if (curStudentOnList->nextStd)
-            curStudentOnList = curStudentOnList->nextStd;
-        else
-            break;
+        curStudentOnList = curStudentOnList->nextStd;
     }
 
     return;
@@ -107,11 +95,7 @@ double gpaThisSem(classScores *curStudent)
     {
         allScores += list->value;
         totalCredits += list->credits;
-
-        if (list->nextCourse)
-            list = list->nextCourse;
-        else
-            break;
+        list = list->nextCourse;
     }
 
     gpa = allScores / totalCredits;
@@ -146,6 +130,7 @@ double gpaOverall(classScores *scoresOfClass, yearList *YearList)
                     // find the student in each course
                     while (curStudent)
                     {
+
                         if (curStudent->data.id == currentID)
                         {
                             total += curStudent->data.finalMark * courseInSem->data.credit;
@@ -153,44 +138,39 @@ double gpaOverall(classScores *scoresOfClass, yearList *YearList)
                             break;
                         }
 
-                        if (curStudent->next)
-                            curStudent = curStudent->next;
-                        else
-                            break;
+                        curStudent = curStudent->next;
                     }
 
-                    if (courseInSem->next)
-                        courseInSem = courseInSem->next;
-                    else
-                        break;
+                    courseInSem = courseInSem->next;
                 }
             }
         }
 
-        if (thisYear->next)
-            thisYear = thisYear->next;
-        else
-            break;
+        thisYear = thisYear->next;
     }
+
+    cout << "total: " << total << endl;
+    cout << "credits: " << totalCredits << endl;
 
     gpa = total / totalCredits;
     return gpa;
 }
 
-void printClassScoreboard(yearList *YearList, classScores *scoresOfClass, generalClass thisClass)
+void printClassScoreboard(yearList *YearList, classScores *scoresOfClass, classList *curClass)
 {
     clearScreen();
-    cout << "\t\t | SCOREBOARD OF CLASS " << thisClass.name << " | \t\t" << endl;
+    cout << "\t\t | SCOREBOARD OF CLASS " << curClass->data.name << " | \t\t" << endl;
 
     classScores *cur1 = scoresOfClass;
-    studentList *cur2 = thisClass.studentHead;
+    studentList *cur2 = curClass->data.studentHead;
     int i = 1;
 
     if (!cur1)
         cout << "There is no score to display." << endl;
     while (cur1)
     {
-        cout << i << ". " << cur2->data.lastName << " " << cur2->data.firstName << endl;
+        cout << i << ". " << cur2->data.lastName << " " << cur2->data.firstName << endl
+             << "\tID: " << cur2->data.id << endl;
         mark *curMark = cur1->markOfCourses;
         while (curMark)
         {
@@ -220,56 +200,50 @@ void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSem
     // Find the class
     string inputClass;
     bool foundClass = false;
-    generalClass thisClass;
 
-    while (!foundClass)
-    {
-        cout << "Enter a class name, 0 to exit: ";
-        cin >> inputClass;
+    if (!curYear->allClasses)
+	{
+		cout << "No class found!" << endl;
+		cout << "Enter any character to continue: ";
+		string temp;
+		cin >> temp;
+		clearScreen();
+		cout << "==============================================================" << endl;
+		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << "==============================================================" << endl;
+		return;
+	}
 
-        if (inputClass == "0")
-        {
-            clearScreen();
-            cout << "==================================================================" << endl;
-            cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
-            cout << "==================================================================" << endl;
-            return;
-        }
+	classList* curClass = curYear->allClasses;
+	int index = 1;
+	while (curClass)
+	{
+		cout << "\t" << index << ". " << curClass->data.name << endl;
+		index++;
+		curClass = curClass->next;
+	}
+	cout << "Enter the class whose scoreboard you want to view: ";
+    int choice;
+	cin >> choice;
 
-        classList *classesThisYear = curYear->allClasses;
-        while (classesThisYear)
-        {
-            if (inputClass == classesThisYear->data.name)
-            {
-                thisClass = classesThisYear->data;
-                foundClass = true;
-                break;
-            }
-            else
-            {
-                if (classesThisYear->next)
-                    classesThisYear = classesThisYear->next;
-                else
-                    break;
-            }
-        }
-
-        if (!foundClass)
-            cout << "There's no such class. Please try again." << endl;
-    }
+	curClass = curYear->allClasses;
+	for (int i = 1; i < choice; i++)
+	{
+		curClass = curClass->next;
+	}
 
     // Get all student IDs of the class
     classScores *scoresOfClass = nullptr;
-    studentList *studentsOfClass = thisClass.studentHead;
+    studentList *studentsOfClass = curClass->data.studentHead;
     getAllIDs(scoresOfClass, studentsOfClass);
 
     getMarksFromCourses(scoresOfClass, curSemester);
-    printClassScoreboard(YearList, scoresOfClass, thisClass);
+    printClassScoreboard(YearList, scoresOfClass, curClass);
 
     int x = 1;
     while (x != 0)
     {
-        cout << "Done viewing? Enter 0 to exit: ";
+        cout << endl << "Done viewing? Enter 0 to exit: ";
         cin >> x;
         if (!check(cin))
         {

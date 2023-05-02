@@ -62,6 +62,7 @@ void viewStudent(schoolYear* curYear)
 	cout << "Enter the class you want to view: ";
 	int choice;
 	cin >> choice;
+
 	curClass = curYear->allClasses;
 	for (int i = 1; i < choice; i++)
 	{
@@ -80,6 +81,7 @@ void viewStudent(schoolYear* curYear)
 		cout << "==============================================================" << endl;
 		return;
 	}
+
 	studentList* curStudent = curClass->data.studentHead;
 	index = 1;
 	cout << "\t       ------------------------------------------------------------------------------------\n";
@@ -101,6 +103,7 @@ void viewStudent(schoolYear* curYear)
 		else
 			cout << " Male ";
 		cout << " | " << setw(2) << curStudent->data.birth.day << '/' << setw(2) << curStudent->data.birth.month << '/' << setw(2) << curStudent->data.birth.year << " | " << curStudent->data.socialID << endl;
+		
 		index++;
 		curStudent = curStudent->next;
 	}

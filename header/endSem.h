@@ -19,9 +19,9 @@ struct classScores
     classScores *nextStd = nullptr;
 };
 
-void getAllIDs(classScores *scoresOfClass, studentList *studentsOfClass);
-void getMarksFromCourses(classScores *scoresOfClass, semester *curSemester);
+void getAllIDs(classScores *&scoresOfClass, studentList *studentsOfClass);
+void getMarksFromCourses(classScores *&scoresOfClass, semester *curSemester);
 double gpaThisSem(classScores *curStudent);
 double gpaOverall(classScores *scoresOfClass, yearList *YearList);
-void printClassScoreboard(yearList *YearList, classScores* scoresOfClass, generalClass thisClass);
+void printClassScoreboard(yearList *YearList, classScores* scoresOfClass, classList* curClass);
 void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSemester);

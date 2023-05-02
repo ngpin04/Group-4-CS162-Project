@@ -2,7 +2,6 @@
 #include "../header/console.h"
 #include <iostream>
 #include <iomanip>
-
 using namespace std;
 
 // print score of a single semester
@@ -23,7 +22,7 @@ void printCourseScore(string userID, semester *s)
             {
                 cout << "| " << left << setw(10) << availCourses->data.id
                      << " | " << left << setw(50) << availCourses->data.courseName
-                     << " | " << left << setw(10) << availCourses->data.credit;
+                     << " | " << left << setw(10) << availCourses->data.credit << " | ";
 
                 if (!resultsReleased)
                 {
@@ -31,18 +30,17 @@ void printCourseScore(string userID, semester *s)
                 }
                 else
                 {
-                    cout << " | " << left << setw(10) << scoreboard->data.total
+                    cout << left << setw(10) << scoreboard->data.total
                          << " | " << left << setw(10) << scoreboard->data.midterm
                          << " | " << left << setw(10) << scoreboard->data.finalMark
                          << " | " << left << setw(10) << scoreboard->data.other << " |" << endl;
                 }
             }
-            else
-            {
-                enrolledStd = enrolledStd->next;
-                scoreboard = scoreboard->next;
-            }
+            
+            enrolledStd = enrolledStd->next;
+            scoreboard = scoreboard->next;
         }
+        
         availCourses = availCourses->next;
     }
 
