@@ -471,5 +471,17 @@ void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSem
 }
 //current working on this version
 void scoreboardOfClass2(yearList* YearList, schoolYear* curYear, semester* curSemester) {
+    if (!curYear->allClasses) {
+        cout << "No class found in this current year!" << endl;
+        cout << "Enter any character to continue: ";
+        string temp;
+        cin >> temp;
+        clearScreen();
+        cout << "==============================================================" << endl;
+        cout << "Logged In >> Main Menu >> Possible Actions >> END-SEMESTER ACTIONS" << endl;
+        cout << "==============================================================" << endl;
+        return;
+    }
+
     
 }
