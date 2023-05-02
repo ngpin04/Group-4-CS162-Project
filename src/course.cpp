@@ -69,14 +69,13 @@ void readScoreList(scoreList *&ScoreList, ifstream &fi)
             break;
         }
         cur->next = new scoreList;
-        fi >> ScoreList->data.id;
+        fi >> cur->next->data.id;
         fi.ignore(100, '\n');
-        getline(fi, ScoreList->data.fullname);
-        fi >> ScoreList->data.midterm;
-        fi >> ScoreList->data.finalMark;
-        fi >> ScoreList->data.other;
-        fi >> ScoreList->data.total;
-        scoreList *cur = ScoreList;
+        getline(fi, cur->next->data.fullname);
+        fi >> cur->next->data.midterm;
+        fi >> cur->next->data.finalMark;
+        fi >> cur->next->data.other;
+        fi >> cur->next->data.total;
         cur = cur->next;
     }
 }

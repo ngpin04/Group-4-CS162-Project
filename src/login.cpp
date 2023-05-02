@@ -152,6 +152,10 @@ void endSem(yearList *YearList, schoolYear* curYear, semester* curSemester)
             break;
         }
         case 3:
+        {
+			viewScoreboard(curSemester);
+			break;
+		}
         case 4:
         case 5:
         {

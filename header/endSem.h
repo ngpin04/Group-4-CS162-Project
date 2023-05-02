@@ -22,9 +22,11 @@ struct classScores
 void returnDefault();
 void exportStu(courseList* course);
 void importScoreboard(courseList*& course);
+void viewScoreboard(semester* curSem);
 void getAllIDs(classScores *&scoresOfClass, studentList *studentsOfClass);
 void getMarksFromCourses(classScores *&scoresOfClass, semester *curSemester);
 double gpaThisSem(classScores *curStudent);
 double gpaOverall(classScores *scoresOfClass, yearList *YearList);
 void printClassScoreboard(yearList *YearList, classScores* scoresOfClass, classList* curClass);
 void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSemester);
+void scoreboardOfClass2(yearList* YearList, schoolYear* curYear, semester* curSemester);

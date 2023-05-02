@@ -135,6 +135,49 @@ void importScoreboard(courseList*& course)
     }
 }
 
+//21. View a scoreboard of a course
+void viewScoreboard(semester* curSem) {
+    	cout << "List of courses in this semester: " << endl;
+	string id;
+	
+	int index = 1;
+	courseList* curCourse = curSem->allCourses;
+    while (curCourse)
+    {
+		cout << "\t" << index << ". " << curCourse->data.id << " - " << curCourse->data.className << endl;
+		index++;
+		curCourse = curCourse->next;
+	}
+	cout << "Enter the number of the class you want to target: ";
+	int choice;
+	cin >> choice;
+    for (int i = 1; i < choice; i++)
+    {
+		curSem->allCourses = curSem->allCourses->next;
+	}
+	scoreList* sc = curSem->allCourses->data.scoreboard;
+	cout << "No" << "\t"
+		 << "Student ID" << "\t"
+		 << "Full name" << "\t"
+		 << "Midterm" << "\t"
+		 << "Final" << "\t"
+		 << "Other" << "\t"
+		 << "Total" << endl;
+	int i = 1;
+    while (sc)
+    {
+		cout << i++ << "\t"
+			 << sc->data.id << "\t"
+			 << sc->data.fullname << "\t"
+			 << sc->data.midterm << "\t"
+			 << sc->data.finalMark << "\t"
+			 << sc->data.other << "\t"
+			 << sc->data.total << endl;
+		sc = sc->next;
+	}
+	returnDefault();
+}
+
 // 23. View the scoreboard of a class, including final marks of all courses in the semester,
 // GPA in this semester, and the total GPA
 
@@ -324,7 +367,7 @@ void printClassScoreboard(yearList *YearList, classScores *scoresOfClass, classL
 
     return;
 }
-
+//the unfinished version
 void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSemester)
 {
     // Find the class
@@ -390,4 +433,8 @@ void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSem
             cout << "==================================================================" << endl;
             return;
     }
+}
+//current working on this version
+void scoreboardOfClass2(yearList* YearList, schoolYear* curYear, semester* curSemester) {
+    
 }
