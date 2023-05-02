@@ -303,7 +303,6 @@ double gpaOverall(classScores *scoresOfClass, yearList *YearList)
                     // find the student in each course
                     while (curStudent)
                     {
-
                         if (curStudent->data.id == currentID)
                         {
                             total += curStudent->data.finalMark * courseInSem->data.credit;
@@ -322,8 +321,7 @@ double gpaOverall(classScores *scoresOfClass, yearList *YearList)
         thisYear = thisYear->next;
     }
 
-    cout << "total: " << total << endl;
-    cout << "credits: " << totalCredits << endl;
+    cout << endl << total << " " << totalCredits << endl;
 
     gpa = total / totalCredits;
     return gpa;
@@ -340,29 +338,23 @@ void printClassScoreboard(yearList *YearList, classScores *scoresOfClass, classL
 
     if (!cur1)
         cout << "There is no score to display." << endl;
-    while (cur1)
+
+    while (cur1 && cur2)
     {
         cout << i << ". " << cur2->data.lastName << " " << cur2->data.firstName << endl
              << "\tID: " << cur2->data.id << endl;
         mark *curMark = cur1->markOfCourses;
         while (curMark)
         {
-            cout << "\t" << curMark->courseName << ": " << curMark->value << endl;
-            if (curMark->nextCourse)
-                curMark = curMark->nextCourse;
-            else
-                break;
+            cout << "\t" << curMark->courseName << ": " << setprecision(2) << fixed << curMark->value << endl;
+            curMark = curMark->nextCourse;
         }
         cout << "\tGPA this semester: " << setprecision(2) << fixed << gpaThisSem(cur1) << endl;
         cout << "\tOverall GPA: " << setprecision(2) << fixed << gpaOverall(cur1, YearList) << endl;
 
-        if (cur2->next)
-        {
-            cur2 = cur2->next;
-            i++;
-        }
-        else
-            break;
+        cur1 = cur1->nextStd;
+        cur2 = cur2->next;
+        i++;
     }
 
     return;
