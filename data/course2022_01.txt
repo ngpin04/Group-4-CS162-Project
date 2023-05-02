@@ -28,7 +28,7 @@ Lam Tu
 1
 22125041
 Mai Dang Khoa
-7 7 7 7
+7 7.2 7 7
 2
 22125011
 Nguyen Phu Binh
@@ -36,7 +36,7 @@ Nguyen Phu Binh
 3
 22125069
 Lam Tu Nhi
-8 8 8 8
+8 8.4 8 8
 -1
 999999
 CS161
