@@ -23,13 +23,13 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
     userList *cur = pHead;
     do
     {
-        cout << "Enter username: ";
+        cout << "Enter username: "; cout.flush();
         cin >> curUsername;
         if (curUsername == "0"){
             curUser = nullptr;
             return;
         }
-        cout << "Enter password: ";
+        cout << "Enter password: "; cout.flush();
         cin >> curPassword;
         cur = pHead;
         while (cur)
@@ -50,9 +50,9 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
 void startYear(yearList* YearList, schoolYear*& curYear)
 {
     clearScreen();
-    cout << "====================================================================" << endl;
+    cout << "================================================================" << endl;
     cout << "Logged In >> Main Menu >> Possible Actions >> YEAR-START ACTIONS" << endl;
-    cout << "====================================================================" << endl;
+    cout << "================================================================" << endl;
     int choice = 100;
 
     while (choice != 0)
@@ -66,42 +66,50 @@ void startYear(yearList* YearList, schoolYear*& curYear)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-
+        if (!check(cin)) {
+            choice = 100;
+            continue;
+        }
         switch (choice)
         {
-        case 1: 
-        {
-            createSchoolYear(YearList, curYear);
-            break;
-        }
-        case 2: 
-        {
-            createClasses(YearList);
-            break;
-        }
-        case 3:
-        {
-            int tmp;
-            generalClass* c;
-            beforeAddStus(c, YearList, tmp);
-            if (tmp == 1)
+            case 1: 
             {
-                add1Stu(c);
+                createSchoolYear(YearList, curYear);
+                break;
             }
-            else if (tmp == 2)
+            case 2: 
             {
-                addManyStus(c);
+                createClasses(YearList);
+                break;
             }
-            break;
-        }
-        case 0:
-        {
-            clearScreen();
-            cout << "==============================================================" << endl;
-            cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-            cout << "==============================================================" << endl;
-            return;
-        }
+            case 3:
+            {
+                int tmp;
+                generalClass* c;
+                beforeAddStus(c, YearList, tmp);
+                if (tmp == 1)
+                {
+                    add1Stu(c);
+                }
+                else if (tmp == 2)
+                {
+                    addManyStus(c);
+                }
+                updateStuOfYearsAfter(YearList, curYear);
+                break;
+            }
+            case 0:
+            {
+                clearScreen();
+                cout << "==============================================================" << endl;
+                cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+                cout << "==============================================================" << endl;
+                return;
+            }
+            default: {
+                cout << "invalid choice, please try again\n";
+                break;
+            }
         }
     }
 }
@@ -127,7 +135,10 @@ void endSem(schoolYear* curYear, semester* curSemester)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-
+        if (!check(cin)) {
+            choice = 100;
+            continue;
+        }
         switch (choice)
         {
         case 1:
@@ -151,7 +162,7 @@ void endSem(schoolYear* curYear, semester* curSemester)
     }
 }
 
-void anyTime(schoolYear* curYear)
+void anyTime(schoolYear* curYear,semester* curSem)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -171,15 +182,23 @@ void anyTime(schoolYear* curYear)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-
+        if (!check(cin)) {
+            choice = 100;
+            continue;
+        }
         switch (choice)
         {
         case 1:{
             viewClass(curYear);
             break;
         }
-        case 2:
-        case 3:
+        case 2: {
+            viewStudent(curYear);
+            break;
+        }
+        case 3: {
+            viewCourse(curSem);
+        }
         case 4:
         case 0:
         {
@@ -213,7 +232,10 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear, semester *curSemest
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-
+        if (!check(cin)) {
+            choice = 100;
+            continue;
+        }
         switch (choice)
         {
         case 1:
@@ -233,7 +255,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear, semester *curSemest
         }
         case 4:
         {
-            anyTime(curYear);
+            anyTime(curYear, curSemester);
             break;
         }
         case 0:
@@ -266,7 +288,10 @@ void actionsAsStudent(user *&curUser,semester *curSemester)
              << endl;
         cout << "Your choice: ";
         cin >> choice;
-
+        if (!check(cin)) {
+            choice = 100;
+            continue;
+        }   
         switch (choice)
         {
         case 1:
@@ -313,6 +338,10 @@ void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, sc
              << endl;
         cout << "Your choice: ";
         cin >> choice;
+        if (!check(cin)) {
+            choice = 100;
+            continue;
+        }
         switch (choice)
         {
         case 1:

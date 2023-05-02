@@ -3,7 +3,7 @@ using namespace std;
 
 semester *createSemester(yearList *current) {
     semester *s = new semester;
-    cout << "Please input 2 integers indicating the school year of this semester: \n";
+    cout << "Please input 2 integers indicating the school year of this semester:";
     int start, end; cin >> start >> end;
     while (current != nullptr && current->data.start != start) 
         current = current->next;
@@ -14,7 +14,7 @@ semester *createSemester(yearList *current) {
         return nullptr;
     }
     
-    cout << "Please input a number from 1 to 3 to indicate the semester: " << endl;
+    cout << "Please input a number from 1 to 3 to indicate the semester: ";
     int index; cin >> index;
     if (index == 1)
         current->data.sem1 = s;

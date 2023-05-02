@@ -5,17 +5,18 @@
 
 userList *userData = new userList;
 yearList *YearList = new yearList;
-semester *curSemester = new semester;
-schoolYear *curYear = new schoolYear;
+semester *curSemester = nullptr;
+schoolYear *curYear = nullptr;
 
 int main() {
     readData(userData, "data/user.txt");
-    readTime(curSemester, curYear);
     readYearList(YearList);
-    printData(userData);
+    readAllCourse(YearList);
+    readTime(curSemester, curYear, YearList);
+    readAllClasses(YearList);
     user* curUser = nullptr;
     while (true){
-        if (!curUser){
+        if (curUser == nullptr){
             printData(userData);
             checkUserAtLogIn(userData, curUser);
             if (curUser == nullptr)
@@ -25,7 +26,7 @@ int main() {
             menuAfterLogin(curUser, YearList, curSemester, curYear);
         }
     }
-    saveYearList(YearList);
+    //saveYearList(YearList);
     //saveTime(curSemester, curYear); //unfinished
     return 0;
 }

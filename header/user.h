@@ -5,9 +5,9 @@
 using namespace std;
 
 struct date{
-    int day;
-    int month;
-    int year;
+    int day = -1;
+    int month = -1;
+    int year = -1;
 };
 
 struct user

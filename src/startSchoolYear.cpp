@@ -1,7 +1,9 @@
 #include "../header/login.h"
 #include "../header/schoolYear.h"
 #include "../header/startSchoolYear.h"
+#include "../header/console.h"
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -15,7 +17,7 @@ bool isInt(string s)
     return true;
 }
 
-void startYear(string& input)
+void checkYear(string& input)
 {
     do
     {
@@ -25,24 +27,37 @@ void startYear(string& input)
     } while (!isInt(input));
 }
 
+void returnActions()
+{
+    cout << "Enter any character to continue: ";
+    string tmp;
+    cin >> tmp;
+    clearScreen();
+    cout << "================================================================" << endl;
+    cout << "Logged In >> Main Menu >> Possible Actions >> YEAR-START ACTIONS" << endl;
+    cout << "================================================================" << endl;
+}
+
 //1. Create a school year
 void createSchoolYear(yearList*& head, schoolYear*& curYear)
 {
     cout << "Enter the school year (For example enter 2022 to create the school year 2022-2023): ";
     string input;
-    startYear(input);
+    checkYear(input);
     int start = stoi(input);
     schoolYear year;
     year.start = start;
     year.end = start+1;
-    curYear = &year;
     yearList* cur = head;
     yearList* tmp = new yearList;
     tmp -> data = year;
     tmp -> next = nullptr;
+    curYear = &(tmp -> data);
     if (!cur) //No school years have been added
     {
         head = tmp;
+        cout << "Created school year successfully!" << endl;
+        returnActions();
         return;
     }
     while (cur->next && cur->next->data.start<start)
@@ -56,6 +71,10 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         tmp -> next = head;
         head = tmp;
     }
+    else if (cur==head && head->data.start==start) //We added that year before
+    {
+        delete tmp;
+    }
     else if (!cur->next) //All years added < the one we add
     {
         cur -> next = new yearList;
@@ -66,6 +85,8 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         tmp -> next = cur -> next;
         cur -> next = tmp;
     }
+    cout << "Create school year successfully!" << endl;
+    returnActions();
 }
 
 schoolYear* findYear(yearList* head, int n)
@@ -82,13 +103,13 @@ void createClasses(yearList*& head)
 {
     cout << "In which school year do you want to create classes? ";
     string input;
-    startYear(input);
+    checkYear(input);
     int start = stoi(input);
     schoolYear* year = findYear(head, start);
     while (!year)
     {
         cout << "No such school year exists. Please enter the school year again: ";
-        startYear(input);
+        checkYear(input);
         start = stoi(input);
         year = findYear(head, start);
     }
@@ -108,7 +129,9 @@ void createClasses(yearList*& head)
             curClass = curClass -> next;
         }
         else curClass -> next = nullptr;
-    }   
+    }
+    cout << "Created classes successfully!" << endl;
+    returnActions();
 }
 
 generalClass* findClass(yearList* year, string classname)
@@ -126,8 +149,6 @@ generalClass* findClass(yearList* year, string classname)
 void inputStu(student& stu)
 {
     cout << "Enter the student's info" << endl;
-    cout << "Order: "; 
-    cin >> stu.number;
     cout << "Student ID: ";
     cin >> stu.id;
     cout << "First name: ";
@@ -159,7 +180,8 @@ void add1Stu(generalClass*& c)
     if (!curStu) //No students have been added
     {
         c->studentHead = tmp;
-        cout << "Added successfully" << endl;
+        cout << "Added successfully!" << endl;
+        returnActions();
         return;
     }
     while (curStu->next && curStu->next->data.id<stu.id)
@@ -183,7 +205,8 @@ void add1Stu(generalClass*& c)
         tmp -> next = curStu -> next;
         curStu -> next = tmp;
     }
-    cout << "Added successfully" << endl;
+    cout << "Added successfully!" << endl;
+    returnActions();
 }
 
 //4. Add 1st year students by csv file
@@ -192,35 +215,35 @@ void addManyStus(generalClass*& c)
     cout << "Enter the name of the csv file that you want to upload: ";
     string filename;
     cin >> filename;
-    ifstream fin;
-    fin.open(filename);
+    ifstream fin(filename);
     if (fin.is_open())
     {
         c->studentHead = new studentList;
         studentList* curStu = c->studentHead;
-        while (fin.peek()!=EOF)
+        string line;
+        getline(fin, line); // read and discard the first line of the file
+        while (getline(fin, line))
         {
-            fin.ignore(1000, '\n');
+            stringstream ss(line);
             student stu;
-            fin >> stu.number;
-            fin >> stu.id;
-            fin.ignore();
-            getline(fin, stu.firstName,',');
-            fin.ignore();
-            getline(fin, stu.lastName,',');
-            fin >> stu.isFemale;
-            fin >> stu.birth.day >> stu.birth.month >> stu.birth.year;
-            fin >> stu.socialID;
-            curStu -> data = stu;
-            curStu -> next = new studentList;
-            curStu = curStu -> next;
+            char comma;
+            int num;
+            ss >> num >> comma >> stu.id >> comma >> stu.firstName >> comma >> stu.lastName >> comma >> stu.isFemale >> comma
+               >> stu.birth.day >> comma >> stu.birth.month >> comma >> stu.birth.year >> comma >> stu.socialID;
+            curStu->data = stu;
+            curStu->next = new studentList;
+            curStu = curStu->next;
         }
-        curStu -> next = nullptr;
-        cout << "Added successfully" << endl;
+        curStu->next = nullptr;
+        fin.close();
+        cout << "Added successfully!" << endl;
+        returnActions();
     }
-    else 
+    else
+    {
         cout << "Could not open the file" << endl;
-    fin.close();
+        returnActions();
+    }
 }
 
 void beforeAddStus(generalClass*& c, yearList*& year, int& tmp)
@@ -258,5 +281,42 @@ void beforeAddStus(generalClass*& c, yearList*& year, int& tmp)
     {
         cout << "Please choose from the two options: ";
         cin >> tmp;
+    }
+}
+
+void updateStuOfYearsAfter(yearList*& year, schoolYear* curYear)
+{
+    yearList* cur = year;
+    while (cur && cur->data.start != curYear->start)
+        cur = cur -> next; //Find the current year
+    if (cur) //make sure cur != nullptr
+    {
+        int s = cur->data.start, e = cur->data.end;
+        yearList* tmp = year;
+        while (tmp && tmp->data.start != curYear->start)
+                tmp = tmp -> next;
+        if (tmp) // make sure tmp != nullptr
+        {
+            int cnt = 1;
+            while (cnt<4) //Create 3 other school years
+            {
+                tmp = tmp -> next; //Find the next year
+                if (tmp)
+                {
+                    tmp -> data.allClasses = cur -> data.allClasses;
+                    ++s;
+                    ++e;
+                }
+                else
+                {
+                    tmp = new yearList;
+                    tmp -> next = nullptr;
+                    tmp -> data.start = ++s;
+                    tmp -> data.end = ++e;
+                    tmp -> data.allClasses = cur -> data.allClasses;
+                }
+                ++cnt;
+            }
+        }
     }
 }

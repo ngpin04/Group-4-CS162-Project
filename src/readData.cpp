@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "../header/user.h"
 #include "../header/schoolYear.h"
 #include "../header/readData.h"
@@ -23,11 +24,18 @@ void printData(userList *pHead){
     }
 }
 //read the current time into the program before working with user
-void readTime(semester*& curSemester, schoolYear* curYear){
+void readTime(semester*& curSemester, schoolYear*& curYear, yearList* YearList){
     ifstream fi("data/current.txt");
-    fi >> curYear->start;
-    fi >> curYear->end;
     int temp = 0;
+    fi >> temp;
+    while (YearList) {
+        if (YearList && YearList->data.start == temp) {
+			curYear = &(YearList->data);
+			break;
+		}
+		YearList = YearList->next;
+    }
+    fi >> temp;
     fi >> temp;
     if (temp == 1)
         curSemester = curYear->sem1;
@@ -63,7 +71,7 @@ void saveYearList(yearList* YearList){
     ofstream fo("data/schoolYearOutput.txt");
     int index = 1;
     while (YearList){
-        if (YearList->data.start==0)
+        if (YearList->data.start==-1)
             break;
         fo << index++ << endl;
         fo << YearList->data.start << " ";
@@ -108,4 +116,71 @@ void saveYearList(yearList* YearList){
     }
     fo << -1;
     fo.close();
+}
+
+void readCourseList(courseList*& CourseList, string filename){
+    ifstream fi(filename);
+    if (!fi){
+        CourseList = nullptr;
+        return;
+    }
+    while (true){
+        int i;
+        fi >> i;
+        if (i == -1)
+            break;
+        courseList* temp = CourseList;
+        CourseList = new courseList;
+        CourseList->data.input(fi);
+        CourseList->next = temp;
+    }
+    fi.close();
+}
+
+void readAllCourse(yearList* YearList){
+    string prefix = "data/course";
+    while (YearList){
+        if (YearList && YearList->data.start == -1)
+            return;
+        string filename = prefix + to_string(YearList->data.start) + "_01.txt"; 
+        readCourseList(YearList->data.sem1->allCourses, filename);
+        filename = prefix + to_string(YearList->data.start) + "_02.txt";
+        readCourseList(YearList->data.sem2->allCourses, filename);
+        filename = prefix + to_string(YearList->data.start) + "_03.txt";
+        readCourseList(YearList->data.sem3->allCourses, filename);
+        YearList = YearList->next;
+    }
+}
+
+void readClass(classList*& ClassList, string filename) {
+    ifstream fi(filename);
+    if (!fi) {
+        ClassList = nullptr;
+        return;
+    }
+    while (true) {
+        int i;
+        fi >> i;
+        if (i == -1)
+            break;
+        classList* temp = ClassList;
+        ClassList = new classList;
+        fi >> ClassList->data.firstYear;
+        fi.ignore(100, '\n');
+        getline(fi, ClassList->data.name);
+        ClassList->data.input(fi);
+        ClassList->next = temp;
+    }
+    fi.close();
+}
+
+void readAllClasses(yearList* YearList) {
+    string prefix = "data/class";
+    while (YearList) {
+        if (YearList && YearList->data.start == -1)
+            return;
+        string filename = prefix + to_string(YearList->data.start) + ".txt";
+        readClass(YearList->data.allClasses, filename);
+        YearList = YearList->next;
+    }
 }
