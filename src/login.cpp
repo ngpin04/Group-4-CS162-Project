@@ -143,12 +143,12 @@ void endSem(yearList *YearList, schoolYear* curYear, semester* curSemester)
         {
         case 1:
         {
-            exportStu(curSem->allCourses);
+            exportStu(curSemester->allCourses);
             break;
         }
         case 2:
         {
-            importScoreboard(curSem->allCourses);
+            importScoreboard(curSemester->allCourses);
             break;
         }
         case 3:

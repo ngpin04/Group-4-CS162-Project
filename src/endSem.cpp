@@ -21,24 +21,26 @@ void returnDefault()
 // 19. Export a list of students in a course to a CSV file
 void exportStu(courseList* course)
 {
-    cout << "Enter the ID of the course that you want to export student list from: ";
+    cout << "List of courses in this semester: " << endl;
     string id;
-    studentList* stu = nullptr;
-    courseList* tmp;
-    while (!stu)
+    
+    int index = 1;
+    courseList* curCourse = course;
+    while (curCourse)
     {
-        cin >> id;
-        tmp = course;
-        while (tmp && tmp->data.id != id)
-            tmp = tmp -> next;
-        if (!tmp) cout << "No such course exists. Please enter another course ID: ";
-        else
-        {
-            stu = tmp -> data.enrolledStudents;
-            break;
-        } 
+        cout << "\t" << index << ". " << curCourse->data.id << " - " << curCourse->data.className << endl;
+        index++;
+        curCourse = curCourse->next;
     }
-    cout << "Enter the name of the csv file that you want to export: ";
+    cout << "Enter the number of the class you want to target: ";
+    int choice;
+    cin >> choice;
+    for (int i = 1; i < choice; i++)
+    {
+        course = course->next;
+    }
+    studentList* stu = course->data.enrolledStudents;
+    cout << "Enter the file name (including .csv): ";
     string filename;
     cin >> filename;
     ofstream fout(filename);
