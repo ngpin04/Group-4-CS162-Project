@@ -210,8 +210,12 @@ void anyTime(schoolYear* curYear,semester* curSem)
         }
         case 3: {
             viewCourse(curSem);
+            break;
         }
-        case 4:
+        case 4: {
+            viewStudentOfACourse(curSem);
+            break;
+        }
         case 0:
         {
             clearScreen();

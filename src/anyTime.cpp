@@ -20,6 +20,7 @@ void viewClass(schoolYear* curYear)
 	}
 	classList* curClass = curYear->allClasses;
 	int index = 1;
+
 	while (curClass)
 	{
 		cout << index << ". " << curClass->data.name << endl;
@@ -91,8 +92,7 @@ void viewStudent(schoolYear* curYear)
 	{
 		string fullname = curStudent->data.lastName + " " + curStudent->data.firstName;
 		cout << "\t\t" << setw(2) << index << " | " << curStudent->data.id << " | " << fullname;
-		if (fullname.size() >= 30)
-			cout << fullname;
+		if (fullname.size() >= 30);
 		else {
 			for (int i = 0; i < (30 - fullname.size()); i++)
 				cout << " ";
@@ -103,7 +103,7 @@ void viewStudent(schoolYear* curYear)
 		else
 			cout << " Male ";
 		cout << " | " << setw(2) << curStudent->data.birth.day << '/' << setw(2) << curStudent->data.birth.month << '/' << setw(2) << curStudent->data.birth.year << " | " << curStudent->data.socialID << endl;
-		
+
 		index++;
 		curStudent = curStudent->next;
 	}
@@ -134,9 +134,25 @@ void viewCourse(semester* curSemester)
 	}
 	courseList* curCourse = curSemester->allCourses;
 	int index = 1;
+	cout << "       ------------------------------------------------------------------------------------------------------------------\n";
+	cout << "        No |     ID     |                         Name                       | Cre | Capacity | Day | Session | Teacher" << endl;
+	cout << "       ------------------------------------------------------------------------------------------------------------------\n";
 	while (curCourse)
 	{
-		cout << index << ". " << curCourse->data.courseName << endl;
+		string fullname = curCourse->data.courseName;
+		cout << "\t" << setw(2) << index << " | "  << curCourse->data.id;
+		if (curCourse->data.id.size() >= 10);
+		else {
+			for (int i = 0; i < (10 - curCourse->data.id.size()); i++)
+				cout << " ";
+		}
+		cout << " | " << fullname;
+		if (fullname.size() >= 50);
+		else {
+			for (int i = 0; i < (50 - fullname.size()); i++)
+				cout << " ";
+		}
+		cout << " | " << setw(3) << curCourse->data.credit << " | " << setw(8) << curCourse->data.maximum << " | " << curCourse->data.dayOfWeek << " | " << setw(7) << curCourse->data.session << " | " << curCourse->data.teacherName << endl;
 		index++;
 		curCourse = curCourse->next;
 	}
@@ -149,4 +165,77 @@ void viewCourse(semester* curSemester)
 	cout << "==============================================================" << endl;
 }
 
-//
+//18. View a list of students of a course
+void viewStudentOfACourse(semester* curSem) {
+	if (curSem->allCourses == nullptr)
+	{
+		cout << endl
+			<< "No course found!" << endl;
+		cout << "Enter any character to continue: ";
+		string temp;
+		cin >> temp;
+		clearScreen();
+		cout << "==============================================================" << endl;
+		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << "==============================================================" << endl;
+		return;
+	}
+	courseList* curCourse = curSem->allCourses;
+	int index = 1;
+	while (curCourse)
+	{
+		cout << "\t" << index << ". " << curCourse->data.id << " - " << curCourse->data.className << endl;
+		index++;
+		curCourse = curCourse->next;
+	}
+	cout << "Enter the course you want to view: ";
+	int choice;
+	cin >> choice;
+	curCourse = curSem->allCourses;
+	for (int i = 1; i < choice; i++)
+	{
+		curCourse = curCourse->next;
+	}
+	if (curCourse->data.enrolledStudents == nullptr) {
+		cout << "No student found!" << endl;
+		cout << "Enter any character to continue: ";
+		string temp;
+		cin >> temp;
+		clearScreen();
+		cout << "==============================================================" << endl;
+		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << "==============================================================" << endl;
+		return;
+	}
+	studentList* curStudent = curCourse->data.enrolledStudents;
+	index = 1;
+	cout << "\t       ------------------------------------------------------------------------------------\n";
+	cout << "\t        No |    ID    |             Fullname           |  Sex   |    Birth   |   SocialID" << endl;
+	cout << "\t       ------------------------------------------------------------------------------------\n";
+	while (curStudent)
+	{
+		string fullname = curStudent->data.lastName + " " + curStudent->data.firstName;
+		cout << "\t\t" << setw(2) << index << " | " << curStudent->data.id << " | " << fullname;
+		if (fullname.size() >= 30);
+		else {
+			for (int i = 0; i < (30 - fullname.size()); i++)
+				cout << " ";
+		}
+		cout << " | ";
+		if (curStudent->data.isFemale)
+			cout << "Female";
+		else
+			cout << " Male ";
+		cout << " | " << setw(2) << curStudent->data.birth.day << '/' << setw(2) << curStudent->data.birth.month << '/' << setw(2) << curStudent->data.birth.year << " | " << curStudent->data.socialID << endl;
+
+		index++;
+		curStudent = curStudent->next;
+	}
+	cout << endl << "Enter any character to continue: ";
+	string temp;
+	cin >> temp;
+	clearScreen();
+	cout << "==============================================================" << endl;
+	cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+	cout << "==============================================================" << endl;
+}

@@ -6,3 +6,5 @@ void viewClass(schoolYear *curYear);
 void viewStudent(schoolYear* curYear);
 //17. View a list of courses of a semester.
 void viewCourse(semester* curSemester);
+//18. View a list of students of a course.
+void viewStudentOfACourse(semester* curSem);
