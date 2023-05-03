@@ -12,7 +12,7 @@ int to_number(const string &str) {
 
 void uploadStudentList(courseList *current) {
     string filename; 
-    cout << "Please enter the name of the csv file that you upload: ";
+    cout << " Please enter the name of the csv file that you upload: ";
 	cin>> filename;
 
 	string line, word;
@@ -52,6 +52,6 @@ void uploadStudentList(courseList *current) {
 		}
 	}
 	else {
-		cout<<"Could not open the file\n";
+		cout<<" Could not open the file\n";
     }
 }

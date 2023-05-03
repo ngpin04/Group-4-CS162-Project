@@ -33,9 +33,9 @@ void returnActions()
     string tmp;
     cin >> tmp;
     clearScreen();
-    cout << "================================================================" << endl;
-    cout << "Logged In >> Main Menu >> Possible Actions >> YEAR-START ACTIONS" << endl;
-    cout << "================================================================" << endl;
+    cout << " ================================================================" << endl;
+    cout << " Logged In >> Main Menu >> Possible Actions >> YEAR-START ACTIONS" << endl;
+    cout << " ================================================================" << endl;
 }
 
 //1. Create a school year
