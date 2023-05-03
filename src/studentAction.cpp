@@ -108,12 +108,15 @@ void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
         string count;
         cin >> count;
         clearScreen();
-        cout << "==============================================================" << endl;
-        cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-        cout << "==============================================================" << endl;
+        cout << " ==============================================================" << endl;
+        cout << " Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+        cout << " ==============================================================" << endl;
         return;
     }
     int count = 0;
+    cout << "       ------------------------------------------------------------------------------------------------------------------\n";
+    cout << "        No |     ID     |                         Name                       | Cre | Capacity | Day | Session | Teacher" << endl;
+    cout << "       ------------------------------------------------------------------------------------------------------------------\n";
     while (curCourse)
     {
         studentList *curStudent = curCourse->data.enrolledStudents;
@@ -122,8 +125,20 @@ void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
             if (curStudent->data.id == curUser->id)
             {
                 count++;
-                cout << count << ". " << curCourse->data.id
-                     << " - " << curCourse->data.courseName << endl;
+                string fullname = curCourse->data.courseName;
+                cout << "\t" << setw(2) << count << " | " << curCourse->data.id;
+                if (curCourse->data.id.size() >= 10);
+                else {
+                    for (int i = 0; i < (10 - curCourse->data.id.size()); i++)
+                        cout << " ";
+                }
+                cout << " | " << fullname;
+                if (fullname.size() >= 50);
+                else {
+                    for (int i = 0; i < (50 - fullname.size()); i++)
+                        cout << " ";
+                }
+                cout << " | " << setw(3) << curCourse->data.credit << " | " << setw(8) << curCourse->data.maximum << " | " << curCourse->data.dayOfWeek << " | " << setw(7) << curCourse->data.session << " | " << curCourse->data.teacherName << endl;
                 break;
             }
             curStudent = curStudent->next;
@@ -134,8 +149,8 @@ void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
     string temp;
     cin >> temp;
     clearScreen();
-    cout << "==============================================================" << endl;
-    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-    cout << "==============================================================" << endl;
+    cout << " ==============================================================" << endl;
+    cout << " Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << " ==============================================================" << endl;
     return;
 }
