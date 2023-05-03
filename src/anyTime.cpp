@@ -8,14 +8,14 @@ void viewClass(schoolYear* curYear)
 	if (curYear->allClasses == nullptr)
 	{
 		cout << endl
-			<< "No class found!" << endl;
-		cout << "Enter any character to continue: ";
+			<< " No class found!" << endl;
+		cout << " Enter any character to continue: ";
 		string temp;
 		cin >> temp;
 		clearScreen();
-		cout << "==============================================================" << endl;
-		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-		cout << "==============================================================" << endl;
+		cout << " ==============================================================" << endl;
+		cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << " ==============================================================" << endl;
 		return;
 	}
 	classList* curClass = curYear->allClasses;
@@ -27,13 +27,13 @@ void viewClass(schoolYear* curYear)
 		index++;
 		curClass = curClass->next;
 	}
-	cout << "Enter any character to continue: ";
+	cout << " Enter any character to continue: ";
 	string temp;
 	cin >> temp;
 	clearScreen();
-	cout << "==============================================================" << endl;
-	cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-	cout << "==============================================================" << endl;
+	cout << " ==============================================================" << endl;
+	cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+	cout << " ==============================================================" << endl;
 }
 
 //16. View a list of students of a class.
@@ -42,14 +42,14 @@ void viewStudent(schoolYear* curYear)
 	if (curYear->allClasses == nullptr)
 	{
 		cout << endl
-			<< "No class found!" << endl;
-		cout << "Enter any character to continue: ";
+			<< " No class found!" << endl;
+		cout << " Enter any character to continue: ";
 		string temp;
 		cin >> temp;
 		clearScreen();
-		cout << "==============================================================" << endl;
-		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-		cout << "==============================================================" << endl;
+		cout << " ==============================================================" << endl;
+		cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << " ==============================================================" << endl;
 		return;
 	}
 	classList* curClass = curYear->allClasses;
@@ -60,7 +60,7 @@ void viewStudent(schoolYear* curYear)
 		index++;
 		curClass = curClass->next;
 	}
-	cout << "Enter the class you want to view: ";
+	cout << " Enter the class you want to view: ";
 	int choice;
 	cin >> choice;
 
@@ -72,14 +72,14 @@ void viewStudent(schoolYear* curYear)
 	if (curClass->data.studentHead == nullptr)
 	{
 		cout << endl
-			<< "No student found!" << endl;
-		cout << "Enter any character to continue: ";
+			<< " No student found!" << endl;
+		cout << " Enter any character to continue: ";
 		string temp;
 		cin >> temp;
 		clearScreen();
-		cout << "==============================================================" << endl;
-		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-		cout << "==============================================================" << endl;
+		cout << " ==============================================================" << endl;
+		cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << " ==============================================================" << endl;
 		return;
 	}
 
@@ -107,13 +107,13 @@ void viewStudent(schoolYear* curYear)
 		index++;
 		curStudent = curStudent->next;
 	}
-	cout << endl << "Enter any character to continue: ";
+	cout << endl << " Enter any character to continue: ";
 	string temp;
 	cin >> temp;
 	clearScreen();
-	cout << "==============================================================" << endl;
-	cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-	cout << "==============================================================" << endl;
+	cout << " ==============================================================" << endl;
+	cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+	cout << " ==============================================================" << endl;
 }
 
 //17. View a list of courses of a semester.
@@ -122,14 +122,14 @@ void viewCourse(semester* curSemester)
 	if (curSemester->allCourses == nullptr)
 	{
 		cout << endl
-			<< "No course found!" << endl;
-		cout << "Enter any character to continue: ";
+			<< " No course found!" << endl;
+		cout << " Enter any character to continue: ";
 		string temp;
 		cin >> temp;
 		clearScreen();
-		cout << "==============================================================" << endl;
-		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-		cout << "==============================================================" << endl;
+		cout << " ==============================================================" << endl;
+		cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << " ==============================================================" << endl;
 		return;
 	}
 	courseList* curCourse = curSemester->allCourses;
@@ -156,13 +156,13 @@ void viewCourse(semester* curSemester)
 		index++;
 		curCourse = curCourse->next;
 	}
-	cout << "Enter any character to continue: ";
+	cout << " Enter any character to continue: ";
 	string temp;
 	cin >> temp;
 	clearScreen();
-	cout << "==============================================================" << endl;
-	cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-	cout << "==============================================================" << endl;
+	cout << " ==============================================================" << endl;
+	cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+	cout << " ==============================================================" << endl;
 }
 
 //18. View a list of students of a course
@@ -170,14 +170,14 @@ void viewStudentOfACourse(semester* curSem) {
 	if (curSem->allCourses == nullptr)
 	{
 		cout << endl
-			<< "No course found!" << endl;
-		cout << "Enter any character to continue: ";
+			<< " No course found!" << endl;
+		cout << " Enter any character to continue: ";
 		string temp;
 		cin >> temp;
 		clearScreen();
-		cout << "==============================================================" << endl;
-		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-		cout << "==============================================================" << endl;
+		cout << " ==============================================================" << endl;
+		cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << " ==============================================================" << endl;
 		return;
 	}
 	courseList* curCourse = curSem->allCourses;
@@ -188,7 +188,7 @@ void viewStudentOfACourse(semester* curSem) {
 		index++;
 		curCourse = curCourse->next;
 	}
-	cout << "Enter the course you want to view: ";
+	cout << " Enter the course you want to view: ";
 	int choice;
 	cin >> choice;
 	curCourse = curSem->allCourses;
@@ -197,14 +197,14 @@ void viewStudentOfACourse(semester* curSem) {
 		curCourse = curCourse->next;
 	}
 	if (curCourse->data.enrolledStudents == nullptr) {
-		cout << "No student found!" << endl;
-		cout << "Enter any character to continue: ";
+		cout << " No student found!" << endl;
+		cout << " Enter any character to continue: ";
 		string temp;
 		cin >> temp;
 		clearScreen();
-		cout << "==============================================================" << endl;
-		cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-		cout << "==============================================================" << endl;
+		cout << " ==============================================================" << endl;
+		cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+		cout << " ==============================================================" << endl;
 		return;
 	}
 	studentList* curStudent = curCourse->data.enrolledStudents;
@@ -231,11 +231,11 @@ void viewStudentOfACourse(semester* curSem) {
 		index++;
 		curStudent = curStudent->next;
 	}
-	cout << endl << "Enter any character to continue: ";
+	cout << endl << " Enter any character to continue: ";
 	string temp;
 	cin >> temp;
 	clearScreen();
-	cout << "==============================================================" << endl;
-	cout << "Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
-	cout << "==============================================================" << endl;
+	cout << " ==============================================================" << endl;
+	cout << " Logged In >> Main Menu >> Possible Actions >> ANY-TIME ACTIONS" << endl;
+	cout << " ==============================================================" << endl;
 }
