@@ -8,6 +8,7 @@ using namespace std;
 void printCourseScore(string userID, semester *s)
 {
     courseList *availCourses = s->allCourses;
+    int index = 1;
 
     while (availCourses)
     {
@@ -20,9 +21,10 @@ void printCourseScore(string userID, semester *s)
 
             if (enrolledStd->data.id == userID)
             {
-                cout << "| " << left << setw(10) << availCourses->data.id
+                cout << "| " << left << setw(7) << index << ". "
+                     << " | " << left << setw(10) << availCourses->data.id
                      << " | " << left << setw(50) << availCourses->data.courseName
-                     << " | " << left << setw(10) << availCourses->data.credit << " | ";
+                     << " | " << left << setw(7) << availCourses->data.credit << " | ";
 
                 if (!resultsReleased)
                 {
@@ -30,24 +32,25 @@ void printCourseScore(string userID, semester *s)
                 }
                 else
                 {
-                    cout << left << setw(10) << scoreboard->data.total
-                         << " | " << left << setw(10) << scoreboard->data.midterm
-                         << " | " << left << setw(10) << scoreboard->data.finalMark
-                         << " | " << left << setw(10) << scoreboard->data.other << " |" << endl;
+                    cout << left << setw(7) << scoreboard->data.total
+                         << " | " << left << setw(7) << scoreboard->data.midterm
+                         << " | " << left << setw(7) << scoreboard->data.finalMark
+                         << " | " << left << setw(7) << scoreboard->data.other << " |" << endl;
                 }
             }
-            
+
             enrolledStd = enrolledStd->next;
             scoreboard = scoreboard->next;
+            index++;
         }
-        
+
         availCourses = availCourses->next;
     }
 
     return;
 }
 
-//24. View his/her scoreboard (retrieves school year and calls print function)
+// 24. View his/her scoreboard (retrieves school year and calls print function)
 void viewScoreboard(user *curUser, yearList *YearList)
 {
     string userYear = (curUser->id).substr(0, 2);
@@ -69,36 +72,48 @@ void viewScoreboard(user *curUser, yearList *YearList)
                 cin >> curSem;
             }
 
-            bool scorePublished = s[curSem-1]->scorePublished;
+            bool scorePublished = s[curSem - 1]->scorePublished;
 
             if (scorePublished)
             {
-                cout << "                                                      SCOREBOARD OF SEMESTER " << curSem << "                                                      " << endl;
-                cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
-                cout << "| " << left << setw(10) << "COURSE ID"
+                cout << "                                                  SCOREBOARD OF SEMESTER " << curSem << "                                                  " << endl;
+                cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl;
+                cout << "| " << left << setw(7) << "NUMBER"
+                     << " | " << left << setw(10) << "COURSE ID"
                      << " | " << left << setw(50) << "COURSE NAME"
-                     << " | " << left << setw(10) << "CREDITS"
-                     << " | " << left << setw(10) << "TOTAL"
-                     << " | " << left << setw(10) << "MIDTERM"
-                     << " | " << left << setw(10) << "FINAL"
-                     << " | " << left << setw(10) << "OTHER" << " |" << endl;
-                cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl;
+                     << " | " << left << setw(7) << "CREDITS"
+                     << " | " << left << setw(7) << "TOTAL"
+                     << " | " << left << setw(7) << "MIDTERM"
+                     << " | " << left << setw(7) << "FINAL"
+                     << " | " << left << setw(7) << "OTHER"
+                     << " |" << endl;
+                cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl;
 
-                printCourseScore(curUser->id, s[curSem-1]);
-                cout << "+----------------------------------------------------------------------------------------------------------------------------------+" << endl << endl;
+                printCourseScore(curUser->id, s[curSem - 1]);
+                cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl
+                     << endl;
             }
 
             else
                 cout << "The results of semester " << curSem << " has not been published." << endl;
         }
-        
+
         else
             YearList = YearList->next;
     }
+
+    string x;
+    cout << "Done viewing? Enter any character to exit: " << endl;
+    cin >> x;
+    clearScreen();
+    cout << "==============================================================" << endl;
+    cout << "Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+    cout << "==============================================================" << endl;
+    return;
 }
 
-//14. View a list of his/her courses. He/she will study these courses in this semester.
-void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser) 
+// 14. View a list of his/her courses. He/she will study these courses in this semester.
+void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
 {
     courseList *curCourse = curSemester->allCourses;
     if (curCourse == nullptr)

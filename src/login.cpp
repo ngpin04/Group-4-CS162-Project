@@ -286,7 +286,7 @@ void actionsAsStaff(yearList *YearList, schoolYear* curYear, semester *curSemest
     }
 }
 
-void actionsAsStudent(user *&curUser,semester *curSemester)
+void actionsAsStudent(yearList *YearList, user *&curUser,semester *curSemester)
 {
     clearScreen();
     cout << "==============================================================" << endl;
@@ -317,7 +317,7 @@ void actionsAsStudent(user *&curUser,semester *curSemester)
         }
         case 2:
         {
-            printCourseScore(curUser->id,curSemester);
+            viewScoreboard(curUser, YearList);
             break;
         }
         case 0:
@@ -375,7 +375,7 @@ void menuAfterLogin(user *&curUser, yearList *YearList,semester *curSemester, sc
             if (curUser->isStaff)
                 actionsAsStaff(YearList, curYear, curSemester);
             else
-                actionsAsStudent(curUser, curSemester);
+                actionsAsStudent(YearList, curUser, curSemester);
             break;
         }
         case 0:
