@@ -29,7 +29,11 @@ void addCourse(semester *sem) {
     temp->next = nullptr;
 
     courseList *lastCourse = sem->allCourses;
-    while (lastCourse->next != nullptr)
-        lastCourse = lastCourse->next;
-    lastCourse->next = temp;
+    if (lastCourse == nullptr)
+        lastCourse = temp;
+    else {
+        while (lastCourse->next != nullptr)
+            lastCourse = lastCourse->next;
+        lastCourse->next = temp;
+    }
 }   
