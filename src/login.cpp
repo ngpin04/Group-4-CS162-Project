@@ -79,14 +79,14 @@ void startYear(yearList* YearList, schoolYear*& curYear)
 		}
 		case 2:
 		{
-			createClasses(YearList);
+			createClasses(curYear);
 			break;
 		}
 		case 3:
 		{
 			int tmp;
 			generalClass* c;
-			beforeAddStus(c, YearList, tmp);
+			beforeAddStus(c, curYear->allClasses, tmp);
 			if (tmp == 1)
 			{
 				add1Stu(c);
