@@ -352,13 +352,16 @@ void actionsAsStaff(yearList* YearList, schoolYear*& curYear, semester*& curSeme
 	}
 }
 
+
 void actionsAsStudent(user*& curUser, semester* curSemester, schoolYear* curYear)
+
 {
 	clearScreen();
 	cout << " ==============================================================" << endl;
 	cout << " Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
 	cout << " ==============================================================" << endl;
 	int choice = 100;
+
 
 	while (choice != 0)
 	{
@@ -398,6 +401,7 @@ void actionsAsStudent(user*& curUser, semester* curSemester, schoolYear* curYear
 		}
 		}
 	}
+
 }
 
 void menuAfterLogin(user*& curUser, yearList* YearList, semester*& curSemester, schoolYear*& curYear)
@@ -407,6 +411,7 @@ void menuAfterLogin(user*& curUser, yearList* YearList, semester*& curSemester, 
 	cout << " Logged In >> MAIN MENU" << endl;
 	cout << " ==============================================================" << endl;
 	int choice = 100;
+
 
 	while (choice != 0)
 	{
@@ -453,4 +458,5 @@ void menuAfterLogin(user*& curUser, yearList* YearList, semester*& curSemester, 
 		}
 		}
 	}
+
 }
