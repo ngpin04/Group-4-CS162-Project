@@ -5,6 +5,6 @@
 
 void printCourseScore(string userID, semester *s);
 
-void viewScoreboard(user *curUser, yearList *YearList);
+void viewScoreboard(user *curUser, semester *curSemester);
 
 void viewCourseInSemesterOfAStudent(semester *head, user *curUser);

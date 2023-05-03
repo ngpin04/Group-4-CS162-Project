@@ -388,7 +388,7 @@ void actionsAsStudent(user*& curUser, semester* curSemester, schoolYear* curYear
 		}
 		case 2:
 		{
-			printCourseScore(curUser->id, curSemester);
+			viewScoreboard(curUser, curSemester);
 			break;
 		}
 		case 0:
