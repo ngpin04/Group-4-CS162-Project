@@ -3,6 +3,7 @@
 #include "../header/user.h"
 #include "../header/schoolYear.h"
 #include "../header/readData.h"
+
 //read the users account: username and password
 void readData(userList *User, string filename) {
     ifstream fi(filename);
@@ -66,6 +67,7 @@ void readYearList(yearList* YearList){
     }
     fi.close();
 }
+
 //save the school year to text file
 void saveYearList(yearList* YearList){
     ofstream fo("data/schoolYearOutput.txt");

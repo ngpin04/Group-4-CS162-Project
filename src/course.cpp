@@ -106,3 +106,69 @@ void course::input(ifstream &fi)
         readScoreList(this->scoreboard, fi);
     }
 }
+
+void saveStudentList(studentList *ptr, ofstream &fo) {
+    if (ptr == nullptr) {
+        fo << -1 << "\n";
+        return;
+    }
+    while (ptr != nullptr) {
+        fo << "1\n";
+        fo << ptr->data.id << "\n";
+        fo << ptr->data.firstName << "\n";
+        fo << ptr->data.lastName << "\n";
+        fo << ptr->data.isFemale << "\n";
+        fo << ptr->data.birth.day << "\n";
+        fo << ptr->data.birth.month << "\n";
+        fo << ptr->data.birth.year << "\n";
+        fo << ptr->data.socialID << "\n";
+        ptr = ptr->next;
+    }   
+    fo << "-1\n";
+}
+
+void saveScoreList(scoreList *&ScoreList, ofstream &fo)
+{
+    if (ScoreList == nullptr) {
+        fo << "-1\n";
+        return;
+    }
+    scoreList *cur = ScoreList;
+    while (cur != nullptr) {
+        fo << "1\n";
+        fo << cur->data.id << "\n";
+        fo << cur->data.fullname << "\n";
+        fo << cur->data.midterm << "\n";
+        fo << cur->data.finalMark << "\n";
+        fo << cur->data.other << "\n";
+        fo << cur->data.total << "\n";
+        cur = cur->next;
+    }
+    fo << "-1\n";
+}
+
+// save the course to the file
+void course::output(ofstream &fo)
+{
+    fo << this->id << "\n";
+    fo << this->courseName << "\n";
+    fo << this->className << "\n";
+    fo << this->teacherName << "\n";
+    fo << this->credit << "\n";
+    fo << this->maximum << "\n";
+    fo << this->dayOfWeek << "\n";
+    fo << this->session << "\n";
+    fo << this->resultsReleased << "\n";
+
+    if (this->enrolledStudents == nullptr) {
+        fo << 0 << "\n";
+    } else {
+        saveStudentList(this->enrolledStudents, fo);
+    }
+
+    if (this->scoreboard == nullptr) {
+        fo << 0 << "\n";
+    } else {
+        saveScoreList(this->scoreboard, fo);
+    }
+}

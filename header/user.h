@@ -19,6 +19,7 @@ struct user
     string password = "KHTN123@"; //the dafault password need to be set to ddmmyyyy of the user
     void changePassword();
     void input(ifstream &fi);
+    void output(ofstream &fo);
 };
 
 struct userList {

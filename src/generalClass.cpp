@@ -40,3 +40,24 @@ void generalClass::input(ifstream& fi) {
         cur = cur->next;
     }
 }
+
+void generalClass::output(ofstream& fo) {
+    if (this->studentHead == nullptr)
+        return;
+    studentList* cur = this->studentHead;
+
+    while (cur != nullptr) {
+        fo << 1 << "\n";
+        fo << cur->data.id << "\n";
+        fo << cur->data.firstName << "\n";
+        fo << cur->data.lastName << "\n";
+        fo << cur->data.isFemale << "\n";
+        fo << cur->data.birth.day << "\n";
+        fo << cur->data.birth.month << "\n";
+        fo << cur->data.birth.year << "\n";
+        fo << cur->data.socialID << "\n";
+    }
+    
+
+    fo << -1 << "\n";
+}
