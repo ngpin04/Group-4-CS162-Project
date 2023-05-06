@@ -5,105 +5,117 @@
 using namespace std;
 
 // print score of a single semester
-void printCourseScore(string userID, semester *s)
-{
-    courseList *availCourses = s->allCourses;
-    int index = 1;
+// void printCourseScore(string userID, semester *s)
+// {
+//     courseList *availCourses = s->allCourses;
+//     int index = 1;
 
-    while (availCourses)
-    {
-        studentList *enrolledStd = availCourses->data.enrolledStudents;
-        scoreList *scoreboard = availCourses->data.scoreboard;
+//     while (availCourses)
+//     {
+//         studentList *enrolledStd = availCourses->data.enrolledStudents;
+//         scoreList *scoreboard = availCourses->data.scoreboard;
 
-        while (enrolledStd)
-        {
-            bool resultsReleased = availCourses->data.resultsReleased;
+//         while (enrolledStd)
+//         {
+//             bool resultsReleased = availCourses->data.resultsReleased;
 
-            if (enrolledStd->data.id == userID)
-            {
-                cout << "| " << left << setw(7) << index << ". "
-                     << " | " << left << setw(10) << availCourses->data.id
-                     << " | " << left << setw(50) << availCourses->data.courseName
-                     << " | " << left << setw(7) << availCourses->data.credit << " | ";
+//             if (enrolledStd->data.id == userID)
+//             {
+//                 cout << "| " << left << setw(7) << index << ". "
+//                      << " | " << left << setw(10) << availCourses->data.id
+//                      << " | " << left << setw(50) << availCourses->data.courseName
+//                      << " | " << left << setw(7) << availCourses->data.credit << " | ";
 
-                if (!resultsReleased)
-                {
-                    cout << left << "Results not released." << endl;
-                }
-                else
-                {
-                    cout << left << setw(7) << scoreboard->data.total
-                         << " | " << left << setw(7) << scoreboard->data.midterm
-                         << " | " << left << setw(7) << scoreboard->data.finalMark
-                         << " | " << left << setw(7) << scoreboard->data.other << " |" << endl;
-                }
-            }
+//                 if (!resultsReleased)
+//                 {
+//                     cout << left << "Results not released." << endl;
+//                 }
+//                 else
+//                 {
+//                     cout << left << setw(7) << scoreboard->data.total
+//                          << " | " << left << setw(7) << scoreboard->data.midterm
+//                          << " | " << left << setw(7) << scoreboard->data.finalMark
+//                          << " | " << left << setw(7) << scoreboard->data.other << " |" << endl;
+//                 }
+//             }
 
-            enrolledStd = enrolledStd->next;
-            scoreboard = scoreboard->next;
-            index++;
-        }
+//             enrolledStd = enrolledStd->next;
+//             scoreboard = scoreboard->next;
+//             index++;
+//         }
 
-        availCourses = availCourses->next;
-    }
+//         availCourses = availCourses->next;
+//     }
 
-    return;
-}
+//     return;
+// }
 
 // 24. View his/her scoreboard (retrieves school year and calls print function)
-void viewScoreboard(user *curUser, yearList *YearList)
+void viewScoreboard(user *curUser, semester *curSemester)
 {
-    string userYear = (curUser->id).substr(0, 2);
+    bool scorePublished = curSemester->scorePublished;
 
-    while (YearList)
+    // if (scorePublished)
+    // {
+    //     cout << "                                                  SCOREBOARD OF SEMESTER " << curSemester->semesterID << "                                                  " << endl;
+    //     cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl;
+    //     cout << "| " << left << setw(7) << "NUMBER"
+    //          << " | " << left << setw(10) << "COURSE ID"
+    //          << " | " << left << setw(50) << "COURSE NAME"
+    //          << " | " << left << setw(7) << "CREDITS"
+    //          << " | " << left << setw(7) << "TOTAL"
+    //          << " | " << left << setw(7) << "MIDTERM"
+    //          << " | " << left << setw(7) << "FINAL"
+    //          << " | " << left << setw(7) << "OTHER"
+    //          << " |" << endl;
+    //     cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl;
+
+    //     printCourseScore(curUser->id, curSemester);
+    //     cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl
+    //          << endl;
+    // }
+
+    cout << "\t----------------------------------------------------------------------------------------------------" << endl;
+    cout << "\t No |    Course ID    | Course name\t\t\t|  Credits  |  Mid  | Final | Other | Total " << endl;
+    cout << "\t----------------------------------------------------------------------------------------------------" << endl;
+    int i = 1;
+    
+    if (scorePublished)
     {
-        string curYear = to_string(YearList->data.start % 100);
-        if (userYear == curYear)
+        courseList *availCourses = curSemester->allCourses;
+
+        while (availCourses)
         {
-            semester *s[3] = {YearList->data.sem1, YearList->data.sem2, YearList->data.sem3};
+            scoreList *scoreboard = availCourses->data.scoreboard;
 
-            int curSem;
-            cout << "Enter current semester: ";
-            cin >> curSem;
-
-            while (curSem != 1 && curSem != 2 && curSem != 3)
+            while (scoreboard)
             {
-                cout << "Invalid semester. Please try again: ";
-                cin >> curSem;
+                if (scoreboard->data.id == curUser->id)
+                {
+                    cout << "\t " << setw(2) << i++ << " | " << setw(8) << availCourses->data.id << " | "
+                         << availCourses->data.courseName;
+                    for (int i = 0; i < 30 - availCourses->data.courseName.length(); i++)
+                        cout << " ";
+                    cout << " | " << setw(5) << availCourses->data.credit << " | "
+                         << setw(5) << scoreboard->data.midterm << " | "
+                         << setw(5) << scoreboard->data.finalMark << " | "
+                         << setw(5) << scoreboard->data.other << " | "
+                         << setw(5) << scoreboard->data.total << endl;
+                    
+                    break;
+                }
+
+                scoreboard = scoreboard->next;
             }
 
-            bool scorePublished = s[curSem - 1]->scorePublished;
-
-            if (scorePublished)
-            {
-                cout << "                                                  SCOREBOARD OF SEMESTER " << curSem << "                                                  " << endl;
-                cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl;
-                cout << "| " << left << setw(7) << "NUMBER"
-                     << " | " << left << setw(10) << "COURSE ID"
-                     << " | " << left << setw(50) << "COURSE NAME"
-                     << " | " << left << setw(7) << "CREDITS"
-                     << " | " << left << setw(7) << "TOTAL"
-                     << " | " << left << setw(7) << "MIDTERM"
-                     << " | " << left << setw(7) << "FINAL"
-                     << " | " << left << setw(7) << "OTHER"
-                     << " |" << endl;
-                cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl;
-
-                printCourseScore(curUser->id, s[curSem - 1]);
-                cout << "+--------------------------------------------------------------------------------------------------------------------------+" << endl
-                     << endl;
-            }
-
-            else
-                cout << "The results of semester " << curSem << " has not been published." << endl;
+            availCourses = availCourses->next;
         }
-
-        else
-            YearList = YearList->next;
     }
+    else 
+        cout << endl << "The results of semester " << curSemester->semesterID << " has not been published." << endl;
 
     string x;
-    cout << "Done viewing? Enter any character to exit: " << endl;
+    cout << "Done viewing? Enter any character to exit: ";
     cin >> x;
     clearScreen();
     cout << "==============================================================" << endl;
@@ -142,14 +154,18 @@ void viewCourseInSemesterOfAStudent(semester *curSemester, user *curUser)
                 count++;
                 string fullname = curCourse->data.courseName;
                 cout << "\t" << setw(2) << count << " | " << curCourse->data.id;
-                if (curCourse->data.id.size() >= 10);
-                else {
+                if (curCourse->data.id.size() >= 10)
+                    ;
+                else
+                {
                     for (int i = 0; i < (10 - curCourse->data.id.size()); i++)
                         cout << " ";
                 }
                 cout << " | " << fullname;
-                if (fullname.size() >= 50);
-                else {
+                if (fullname.size() >= 50)
+                    ;
+                else
+                {
                     for (int i = 0; i < (50 - fullname.size()); i++)
                         cout << " ";
                 }

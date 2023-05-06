@@ -23,11 +23,17 @@ void returnDefault();
 void exportStu(courseList* course);
 double toDouble(const string& str);
 void importScoreboard(courseList*& course);
-void viewScoreboard(semester* curSem);
+// function 22
+void chooseCourse(schoolYear *curYear, semester *curSemester, courseList *&thisCourse);
+void chooseStudent(schoolYear *curYear, semester *curSemester, courseList *thisCourse, scoreList *&thisStudent);
+void updateMark(schoolYear *curYear, semester *curSemester, courseList *thisCourse, scoreList *&thisStudent);
+void chooseToUpdate(schoolYear *curYear, semester *curSemester);
+// function 23
 void getAllIDs(classScores *&scoresOfClass, studentList *studentsOfClass);
 void getMarksFromCourses(classScores *&scoresOfClass, semester *curSemester);
 double gpaThisSem(classScores *curStudent);
 double gpaOverall(classScores *scoresOfClass, yearList *YearList);
 void printClassScoreboard(yearList *YearList, classScores* scoresOfClass, classList* curClass);
 void scoreboardOfClass(yearList *YearList, schoolYear *curYear, semester *curSemester);
-void scoreboardOfClass2(yearList* YearList, schoolYear* curYear, semester* curSemester);
+// function 24
+void viewScoreboard(semester* curSem);
