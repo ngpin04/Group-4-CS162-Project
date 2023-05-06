@@ -10,26 +10,30 @@
 #include "../header/endSem.h"
 using namespace std;
 
-void checkUserAtLogIn(userList* pHead, user*& curUser)
+void checkUserAtLogIn(userList *pHead, user *&curUser)
 {
 	clearScreen();
 	cout << "\t\t\t----------------------------------------------" << endl;
 	cout << "\t\t\t|  Welcome to the Course Management System!  |" << endl;
 	cout << "\t\t\t----------------------------------------------" << endl
-		<< endl;
-	cout << "\t\t\tEnter 0 for username to save & exit\n\t\t\tLogging in..." << endl << endl;
+		 << endl;
+	cout << "\t\t\tEnter 0 for username to save & exit\n\t\t\tLogging in..." << endl
+		 << endl;
 	string curUsername;
 	string curPassword;
-	userList* cur = pHead;
+	userList *cur = pHead;
 	do
 	{
-		cout << "\tEnter username: "; cout.flush();
+		cout << "\tEnter username: ";
+		cout.flush();
 		cin >> curUsername;
-		if (curUsername == "0") {
+		if (curUsername == "0")
+		{
 			curUser = nullptr;
 			return;
 		}
-		cout << "\tEnter password: "; cout.flush();
+		cout << "\tEnter password: ";
+		cout.flush();
 		cin >> curPassword;
 		cur = pHead;
 		while (cur)
@@ -43,11 +47,11 @@ void checkUserAtLogIn(userList* pHead, user*& curUser)
 			cur = cur->next;
 		}
 		cout << endl
-			<< "\tEither wrong username or password!\n\tPlease re-enter username and password." << endl;
+			 << "\tEither wrong username or password!\n\tPlease re-enter username and password." << endl;
 	} while (curUser == nullptr);
 }
 
-void startYear(yearList* YearList, schoolYear*& curYear)
+void startYear(yearList *YearList, schoolYear *&curYear)
 {
 	clearScreen();
 	cout << " ================================================================" << endl;
@@ -58,15 +62,17 @@ void startYear(yearList* YearList, schoolYear*& curYear)
 	while (choice != 0)
 	{
 		cout << " Actions at the start of the school year: " << endl
-			<< endl;
+			 << endl;
 		cout << "\t1. Create a school year" << endl;
 		cout << "\t2. Create class for 1st years" << endl;
 		cout << "\t3. Add students to 1st-year class" << endl;
 		cout << "\t0. Return to Possible Actions"
-			<< endl << endl;
+			 << endl
+			 << endl;
 		cout << " Your choice: ";
 		cin >> choice;
-		if (!check(cin)) {
+		if (!check(cin))
+		{
 			choice = 100;
 			continue;
 		}
@@ -85,7 +91,7 @@ void startYear(yearList* YearList, schoolYear*& curYear)
 		case 3:
 		{
 			int tmp;
-			generalClass* c;
+			generalClass *c;
 			beforeAddStus(c, curYear->allClasses, tmp);
 			if (tmp == 1)
 			{
@@ -106,7 +112,8 @@ void startYear(yearList* YearList, schoolYear*& curYear)
 			cout << " ==============================================================" << endl;
 			return;
 		}
-		default: {
+		default:
+		{
 			cout << "invalid choice, please try again\n";
 			break;
 		}
@@ -114,15 +121,18 @@ void startYear(yearList* YearList, schoolYear*& curYear)
 	}
 }
 
-void changeYearSem(yearList* YearList, schoolYear*& curYear, semester*& curSemester) {
-	if (!YearList) {
+void changeYearSem(yearList *YearList, schoolYear *&curYear, semester *&curSemester)
+{
+	if (!YearList)
+	{
 		cout << " No school year found\n";
 		return;
 	}
-	schoolYear* tmp = curYear;
-	yearList* cur = YearList;
+	schoolYear *tmp = curYear;
+	yearList *cur = YearList;
 	int index = 1;
-	while (cur) {
+	while (cur)
+	{
 		if (cur->data.start == -1 || cur->data.end == -1)
 			break;
 		cout << "\t" << index << ". " << cur->data.start << " - " << cur->data.end << endl;
@@ -132,19 +142,24 @@ void changeYearSem(yearList* YearList, schoolYear*& curYear, semester*& curSemes
 	cout << " Target your new year: ";
 	int choice;
 	cin >> choice;
-	for (int i = 1; i < choice; i++) {
+	for (int i = 1; i < choice; i++)
+	{
 		YearList = YearList->next;
 	}
 	curYear = &(YearList->data);
 	cout << " Change year successfully!\n";
 	index = 0;
 	if (curYear->sem1)
-		cout << "\t" << "Semester 1 can be targeted" << endl;
+		cout << "\t"
+			 << "Semester 1 can be targeted" << endl;
 	if (curYear->sem2)
-		cout << "\t" << "Semester 2 can be targeted" << endl;
+		cout << "\t"
+			 << "Semester 2 can be targeted" << endl;
 	if (curYear->sem3)
-		cout << "\t" << "Semester 3 can be targeted" << endl;
-	if (curYear->sem1 == nullptr && curYear->sem2 == nullptr && curYear->sem3 == nullptr) {
+		cout << "\t"
+			 << "Semester 3 can be targeted" << endl;
+	if (curYear->sem1 == nullptr && curYear->sem2 == nullptr && curYear->sem3 == nullptr)
+	{
 		cout << " No semester found. Year and semester will stay the same.\n";
 		curYear = tmp;
 		return;
@@ -161,7 +176,8 @@ void changeYearSem(yearList* YearList, schoolYear*& curYear, semester*& curSemes
 		curSemester = curYear->sem2;
 	else if (choice == 3)
 		curSemester = curYear->sem3;
-	else {
+	else
+	{
 		cout << " Invalid choice! Current semester will stay the same.\n";
 		return;
 	}
@@ -172,7 +188,7 @@ void changeYearSem(yearList* YearList, schoolYear*& curYear, semester*& curSemes
 	cout << " ==============================================================" << endl;
 }
 
-void endSem(yearList* YearList, schoolYear* curYear, semester* curSemester)
+void endSem(yearList *YearList, schoolYear *curYear, semester *curSemester)
 {
 	clearScreen();
 	cout << " ==================================================================" << endl;
@@ -183,17 +199,19 @@ void endSem(yearList* YearList, schoolYear* curYear, semester* curSemester)
 	while (choice != 0)
 	{
 		cout << " Actions at the end of semester: " << endl
-			<< endl;
+			 << endl;
 		cout << "\t1. Export list of students from course" << endl;
 		cout << "\t2. Import scoreboard of a course" << endl;
 		cout << "\t3. View scoreboard of a course" << endl;
 		cout << "\t4. Update student's result" << endl;
 		cout << "\t5. View scoreboard of a class" << endl;
 		cout << "\t0. Return to Possible Actions"
-			<< endl << endl;
+			 << endl
+			 << endl;
 		cout << " Your choice: ";
 		cin >> choice;
-		if (!check(cin)) {
+		if (!check(cin))
+		{
 			choice = 100;
 			continue;
 		}
@@ -215,6 +233,10 @@ void endSem(yearList* YearList, schoolYear* curYear, semester* curSemester)
 			break;
 		}
 		case 4:
+		{
+			chooseToUpdate(curYear, curSemester);
+			break;
+		}
 		case 5:
 		{
 			scoreboardOfClass(YearList, curYear, curSemester);
@@ -232,7 +254,7 @@ void endSem(yearList* YearList, schoolYear* curYear, semester* curSemester)
 	}
 }
 
-void anyTime(schoolYear* curYear, semester* curSem)
+void anyTime(schoolYear *curYear, semester *curSem)
 {
 	clearScreen();
 	cout << " ==============================================================" << endl;
@@ -243,34 +265,39 @@ void anyTime(schoolYear* curYear, semester* curSem)
 	while (choice != 0)
 	{
 		cout << " Actions at any time: " << endl
-			<< endl;
+			 << endl;
 		cout << "\t1. View list of classes" << endl;
 		cout << "\t2. View list of students in a class" << endl;
 		cout << "\t3. View list of courses" << endl;
 		cout << "\t4. View list of students in a course" << endl;
 		cout << "\t0. Return to Possible Actions" << endl
-			<< endl;
+			 << endl;
 		cout << " Your choice: ";
 		cin >> choice;
-		if (!check(cin)) {
+		if (!check(cin))
+		{
 			choice = 100;
 			continue;
 		}
 		switch (choice)
 		{
-		case 1: {
+		case 1:
+		{
 			viewClass(curYear);
 			break;
 		}
-		case 2: {
+		case 2:
+		{
 			viewStudent(curYear);
 			break;
 		}
-		case 3: {
+		case 3:
+		{
 			viewCourse(curSem);
 			break;
 		}
-		case 4: {
+		case 4:
+		{
 			viewStudentOfACourse(curSem);
 			break;
 		}
@@ -286,7 +313,7 @@ void anyTime(schoolYear* curYear, semester* curSem)
 	}
 }
 
-void actionsAsStaff(yearList* YearList, schoolYear*& curYear, semester*& curSemester)
+void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSemester)
 {
 	clearScreen();
 	cout << " ==============================================================" << endl;
@@ -299,17 +326,18 @@ void actionsAsStaff(yearList* YearList, schoolYear*& curYear, semester*& curSeme
 		cout << " Current year: " << curYear->start << " - " << curYear->end << endl;
 		cout << " Current semester: " << curSemester->semesterID << " - start from " << curSemester->startDate.month << "/" << curSemester->startDate.year << endl;
 		cout << " Possible actions" << endl
-			<< endl;
+			 << endl;
 		cout << "\t1. At the beginning of the school year" << endl;
 		cout << "\t2. At the beginning of semester" << endl;
 		cout << "\t3. At the end of semester" << endl;
 		cout << "\t4. At any time" << endl;
 		cout << "\t5. Change current school year and semester" << endl;
 		cout << "\t0. Return to Main Menu" << endl
-			<< endl;
+			 << endl;
 		cout << " Your choice: ";
 		cin >> choice;
-		if (!check(cin)) {
+		if (!check(cin))
+		{
 			choice = 100;
 			continue;
 		}
@@ -352,8 +380,7 @@ void actionsAsStaff(yearList* YearList, schoolYear*& curYear, semester*& curSeme
 	}
 }
 
-
-void actionsAsStudent(user*& curUser, semester* curSemester, schoolYear* curYear)
+void actionsAsStudent(user *&curUser, semester *curSemester, schoolYear *curYear)
 
 {
 	clearScreen();
@@ -362,20 +389,21 @@ void actionsAsStudent(user*& curUser, semester* curSemester, schoolYear* curYear
 	cout << " ==============================================================" << endl;
 	int choice = 100;
 
-
 	while (choice != 0)
 	{
 		cout << " Current year: " << curYear->start << " - " << curYear->end << endl;
-		cout << " Current semester: " << curSemester->semesterID << " - start from " << curSemester->startDate.month <<"/"<<curSemester->startDate.year << endl;
+		cout << " Current semester: " << curSemester->semesterID << " - start from " << curSemester->startDate.month << "/" << curSemester->startDate.year << endl;
 		cout << " Possible actions: " << endl
-			<< endl;
+			 << endl;
 		cout << "\t1. View list of courses" << endl;
 		cout << "\t2. View scoreboard" << endl;
 		cout << "\t0. Return to Main Menu"
-			<< endl << endl;
+			 << endl
+			 << endl;
 		cout << " Your choice: ";
 		cin >> choice;
-		if (!check(cin)) {
+		if (!check(cin))
+		{
 			choice = 100;
 			continue;
 		}
@@ -401,10 +429,9 @@ void actionsAsStudent(user*& curUser, semester* curSemester, schoolYear* curYear
 		}
 		}
 	}
-
 }
 
-void menuAfterLogin(user*& curUser, yearList* YearList, semester*& curSemester, schoolYear*& curYear)
+void menuAfterLogin(user *&curUser, yearList *YearList, semester *&curSemester, schoolYear *&curYear)
 {
 	clearScreen();
 	cout << " ==============================================================" << endl;
@@ -412,22 +439,22 @@ void menuAfterLogin(user*& curUser, yearList* YearList, semester*& curSemester, 
 	cout << " ==============================================================" << endl;
 	int choice = 100;
 
-
 	while (choice != 0)
 	{
 		cout << endl
-			<< " Hi, " << curUser->username << "!"
-			<< endl;
+			 << " Hi, " << curUser->username << "!"
+			 << endl;
 		cout << " Options: " << endl
-			<< endl;
+			 << endl;
 		cout << "\t1. View your profile" << endl;
 		cout << "\t2. Change password" << endl;
 		cout << "\t3. Possible actions" << endl;
 		cout << "\t0. Logout" << endl
-			<< endl;
+			 << endl;
 		cout << " Your choice: ";
 		cin >> choice;
-		if (!check(cin)) {
+		if (!check(cin))
+		{
 			choice = 100;
 			continue;
 		}
@@ -458,5 +485,4 @@ void menuAfterLogin(user*& curUser, yearList* YearList, semester*& curSemester, 
 		}
 		}
 	}
-
 }
