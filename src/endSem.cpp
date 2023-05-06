@@ -278,7 +278,8 @@ void chooseCourse(schoolYear *curYear, semester *curSemester, courseList *&thisC
 	while (coursesThisSem)
 	{
 		cout << i++ << ". " << coursesThisSem->data.id << " | "
-			 << coursesThisSem->data.courseName << endl;
+			 << coursesThisSem->data.courseName << " | "
+			 << coursesThisSem->data.className << endl;
 		coursesThisSem = coursesThisSem->next;
 	}
 
@@ -323,7 +324,7 @@ void chooseStudent(schoolYear *curYear, semester *curSemester, courseList *thisC
 		 << "*" << endl
 		 << endl;
 
-	cout << "All students of course " << thisCourse->data.id << " this semester" << endl;
+	cout << "All students of course " << thisCourse->data.id << ", class " << thisCourse->data.className << endl;
 	cout << "---------------------------------------------------------" << endl
 		 << endl;
 
