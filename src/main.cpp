@@ -2,6 +2,7 @@
 #include "../header/readData.h"
 #include "../header/login.h"
 #include "../header/schoolYear.h"
+#include "../header/saveData.h"
 
 userList *userData = new userList;
 yearList *YearList = new yearList;
@@ -26,7 +27,10 @@ int main() {
             menuAfterLogin(curUser, YearList, curSemester, curYear);
         }
     }
-    //saveYearList(YearList);
-    //saveTime(curSemester, curYear); //unfinished
+    saveData(userData, "data/user.txt");
+    saveYearList(YearList);
+    saveAllCourse(YearList);
+    saveTime(curSemester, curYear);
+    saveAllClasses(YearList);
     return 0;
 }

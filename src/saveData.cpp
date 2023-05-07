@@ -8,7 +8,7 @@
 using namespace std;
 
 //save the users account: username and password
-void printData(userList *User, string filename) {
+void saveData(userList *User, string filename) {
     ofstream fo(filename);
     for (userList *i = User; i != nullptr; i = i->next) {
         fo << 1 << " ";
