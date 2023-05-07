@@ -18,6 +18,7 @@ struct course
     studentList* enrolledStudents = nullptr;
     scoreList* scoreboard = nullptr;
     void input(ifstream& fi);
+    void output(ofstream& fo);
 };
 
 struct courseList

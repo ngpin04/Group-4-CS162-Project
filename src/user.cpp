@@ -37,6 +37,17 @@ void user::input(ifstream &fi) {
     fi >> this->password;
 }
 
+void user::output(ofstream &fo) {
+    fo << this->id << " ";
+    fo << this->isStaff << " ";
+    fo << this->birth.day << " ";
+    fo << this->birth.month << " ";
+    fo << this->birth.year << " ";
+    fo << this->username << " ";
+    fo << this->password << " ";
+    fo << "\n";
+}
+
 userList::userList() {
     this->next = nullptr;
 };

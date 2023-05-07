@@ -11,6 +11,7 @@ struct generalClass
     string index = "unused";
     studentList* studentHead = nullptr;
     void input(ifstream& fi);
+    void output(ofstream& fo);
 };
 
 struct classList

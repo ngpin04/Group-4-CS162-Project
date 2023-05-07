@@ -58,12 +58,30 @@ void startSem(yearList *YearList) {
             }
 
             switch (choice) {
-                case 2: addCourse(newSem);
-                case 3: uploadStudentList(newSem->allCourses);
-                case 4: viewCourse(newSem->allCourses);
-                case 5: updateCourse(newSem->allCourses);
-                case 6: addStudent(newSem->allCourses);
-                case 7: removeStudent(newSem->allCourses);
+                case 2: {
+                    addCourse(newSem);
+                    break;
+                }
+                case 3: {
+                    uploadStudentList(newSem->allCourses);
+                    break;
+                }
+                case 4: {
+                    viewCourse(newSem->allCourses);
+                    break;
+                }
+                case 5: {
+                    updateCourse(newSem->allCourses);
+                    break;
+                }
+                case 6: {
+                    addStudent(newSem->allCourses);
+                    break;
+                }
+                case 7: {
+                    removeStudent(newSem->allCourses);
+                    break;
+                }
                 case 8: {
                     deleteCourse(newSem->allCourses);
                     break;
