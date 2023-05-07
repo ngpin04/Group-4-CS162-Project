@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void printData(userList *User, string filename);
+void saveData(userList *User, string filename);
 
 void saveCourseList(courseList* CourseList, string filename);
 
