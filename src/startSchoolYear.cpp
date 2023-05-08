@@ -60,7 +60,7 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         returnActions();
         return;
     }
-    while (cur->next && cur->next->data.start<start)
+    while (cur->next && cur->next->data.start<start && cur->next->data.start!=-1)
         cur = cur -> next;
     if (cur==head && head->data.start<start) //Only 1 year added and < the one we add
     {
@@ -93,11 +93,24 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
 void createClasses(schoolYear*& curYear)
 {
     cout << "Enter the list of classes, enter 0 to stop: ";
-    curYear->allClasses = new classList;
+    if (!curYear->allClasses) curYear->allClasses = new classList; //No classes have been added
     classList* curClass = curYear->allClasses;
+    if (curClass->next)
+    {
+        while (curClass->next) curClass = curClass -> next; //Find the last class in the list
+        curClass -> next = new classList;
+        curClass = curClass -> next;
+    }
     string name;
     cin >> name;
-    if (name=="0") curYear->allClasses = nullptr;
+    if (name=="0") 
+    {
+        if (curYear->allClasses->data.firstYear==-1)
+            curYear->allClasses = nullptr;
+        cout << "No new classes have been added!" << endl;
+        returnActions();
+        return;
+    }
     while(name!="0")
     {
         curClass -> data.name = name;
@@ -276,31 +289,31 @@ void updateStuOfYearsAfter(yearList*& year, schoolYear* curYear)
     if (cur) //make sure cur != nullptr
     {
         int s = cur->data.start, e = cur->data.end;
-        yearList* tmp = year;
-        while (tmp && tmp->data.start != curYear->start)
-                tmp = tmp -> next;
-        if (tmp) // make sure tmp != nullptr
+        yearList* nextCur = cur;
+        int cnt = 1;
+        while (cnt<4) //Create 3 other school years
         {
-            int cnt = 1;
-            while (cnt<4) //Create 3 other school years
+            if (nextCur->next && nextCur->next->data.start!=-1) 
+                nextCur = nextCur -> next; //Find the next year
+            else 
             {
-                tmp = tmp -> next; //Find the next year
-                if (tmp)
-                {
-                    tmp -> data.allClasses = cur -> data.allClasses;
-                    ++s;
-                    ++e;
-                }
-                else
-                {
-                    tmp = new yearList;
-                    tmp -> next = nullptr;
-                    tmp -> data.start = ++s;
-                    tmp -> data.end = ++e;
-                    tmp -> data.allClasses = cur -> data.allClasses;
-                }
+                yearList* tmp = new yearList;
+                tmp -> next = nextCur -> next;
+                tmp -> data.start = ++s;
+                tmp -> data.end = ++e;
+                tmp -> data.allClasses = cur -> data.allClasses;
+                nextCur -> next = tmp;
+                nextCur = nextCur -> next;
                 ++cnt;
+                continue;
             }
+            classList* curClass = nextCur -> data.allClasses;
+            while (curClass->next)
+                curClass = curClass -> next;
+            curClass -> next = cur -> data.allClasses;
+            ++s;
+            ++e;
+            ++cnt;
         }
     }
 }
