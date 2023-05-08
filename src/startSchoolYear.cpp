@@ -307,10 +307,10 @@ void updateStuOfYearsAfter(yearList*& year, schoolYear* curYear)
                 ++cnt;
                 continue;
             }
-            classList* curClass = nextCur -> data.allClasses;
-            while (curClass->next)
-                curClass = curClass -> next;
-            curClass -> next = cur -> data.allClasses;
+            classList* newClasses = cur -> data.allClasses;
+            while (newClasses->next) newClasses = newClasses -> next;
+            newClasses -> next = nextCur -> data.allClasses;
+            nextCur -> data.allClasses =  cur -> data.allClasses;
             ++s;
             ++e;
             ++cnt;
