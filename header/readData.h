@@ -6,7 +6,7 @@ void readData(userList *User, string filename);
 
 void printData(userList *pHead);
 
-void readTime(semester*& curSemester, schoolYear*& curYear, yearList* YearList);
+void readTime(semester*& curSemester, schoolYear*& curYear, yearList* YearList, int& index);
 
 void saveTime(semester* curSemester, schoolYear* curYear);
 

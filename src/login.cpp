@@ -51,6 +51,14 @@ void checkUserAtLogIn(userList *pHead, user *&curUser)
 	} while (curUser == nullptr);
 }
 
+void displayTime(schoolYear* curYear, semester* curSem, int index) {
+	cout << " Current year: " << curYear->start << " - " << curYear->end << endl;
+	if (!curSem)
+		cout << " Current semester: " << index << " - Semester have not been created (!)";
+	else
+		cout << " Current semester: " << curSem->semesterID << " - start from " << curSem->startDate.month << "/" << curSem->startDate.year << endl;
+}
+
 void startYear(yearList *YearList, schoolYear *&curYear)
 {
 	clearScreen();
@@ -121,7 +129,7 @@ void startYear(yearList *YearList, schoolYear *&curYear)
 	}
 }
 
-void changeYearSem(yearList *YearList, schoolYear *&curYear, semester *&curSemester)
+void changeYearSem(yearList *YearList, schoolYear *&curYear, semester *&curSemester, int& semIndex)
 {
 	if (!YearList)
 	{
@@ -149,25 +157,25 @@ void changeYearSem(yearList *YearList, schoolYear *&curYear, semester *&curSemes
 	curYear = &(YearList->data);
 	cout << " Change year successfully!\n";
 	index = 0;
-	if (curYear->sem1)
-		cout << "\t"
-			 << "Semester 1 can be targeted" << endl;
-	if (curYear->sem2)
-		cout << "\t"
-			 << "Semester 2 can be targeted" << endl;
-	if (curYear->sem3)
-		cout << "\t"
-			 << "Semester 3 can be targeted" << endl;
-	if (curYear->sem1 == nullptr && curYear->sem2 == nullptr && curYear->sem3 == nullptr)
-	{
-		cout << " No semester found. Year and semester will stay the same.\n";
-		curYear = tmp;
-		return;
-		clearScreen();
-		cout << " ==============================================================" << endl;
-		cout << " Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
-		cout << " ==============================================================" << endl;
-	}
+	//if (curYear->sem1)
+	//	cout << "\t"
+	//		 << " Semester 1 can be targeted" << endl;
+	//if (curYear->sem2)
+	//	cout << "\t"
+	//		 << " Semester 2 can be targeted" << endl;
+	//if (curYear->sem3)
+	//	cout << "\t"
+	//		 << " Semester 3 can be targeted" << endl;
+	//if (curYear->sem1 == nullptr && curYear->sem2 == nullptr && curYear->sem3 == nullptr)
+	//{
+	//	cout << " No semester found. Year and semester will stay the same.\n";
+	//	curYear = tmp;
+	//	return;
+	//	clearScreen();
+	//	cout << " ==============================================================" << endl;
+	//	cout << " Logged In >> Main Menu >> POSSIBLE ACTIONS" << endl;
+	//	cout << " ==============================================================" << endl;
+	//}
 	cout << " Target your new semester: ";
 	cin >> choice;
 	if (choice == 1)
@@ -178,9 +186,11 @@ void changeYearSem(yearList *YearList, schoolYear *&curYear, semester *&curSemes
 		curSemester = curYear->sem3;
 	else
 	{
-		cout << " Invalid choice! Current semester will stay the same.\n";
+		cout << " Invalid choice! Current year and semester will stay the same.\n";
+		curYear = tmp;
 		return;
 	}
+	semIndex = choice;
 	cout << " Change semester successfully!\n";
 	clearScreen();
 	cout << " ==============================================================" << endl;
@@ -313,7 +323,7 @@ void anyTime(schoolYear *curYear, semester *curSem)
 	}
 }
 
-void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSemester)
+void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSemester, int& index)
 {
 	clearScreen();
 	cout << " ==============================================================" << endl;
@@ -323,8 +333,7 @@ void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSeme
 
 	while (choice != 0)
 	{
-		cout << " Current year: " << curYear->start << " - " << curYear->end << endl;
-		cout << " Current semester: " << curSemester->semesterID << " - start from " << curSemester->startDate.month << "/" << curSemester->startDate.year << endl;
+		displayTime(curYear, curSemester, index);
 		cout << " Possible actions" << endl
 			 << endl;
 		cout << "\t1. At the beginning of the school year" << endl;
@@ -365,7 +374,7 @@ void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSeme
 		}
 		case 5:
 		{
-			changeYearSem(YearList, curYear, curSemester);
+			changeYearSem(YearList, curYear, curSemester, index);
 			break;
 		}
 		case 0:
@@ -380,7 +389,7 @@ void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSeme
 	}
 }
 
-void actionsAsStudent(user *&curUser, semester *curSemester, schoolYear *curYear)
+void actionsAsStudent(user *&curUser, semester *curSemester, schoolYear *curYear, int index)
 
 {
 	clearScreen();
@@ -391,8 +400,7 @@ void actionsAsStudent(user *&curUser, semester *curSemester, schoolYear *curYear
 
 	while (choice != 0)
 	{
-		cout << " Current year: " << curYear->start << " - " << curYear->end << endl;
-		cout << " Current semester: " << curSemester->semesterID << " - start from " << curSemester->startDate.month << "/" << curSemester->startDate.year << endl;
+		displayTime(curYear, curSemester, index);
 		cout << " Possible actions: " << endl
 			 << endl;
 		cout << "\t1. View list of courses" << endl;
@@ -431,7 +439,7 @@ void actionsAsStudent(user *&curUser, semester *curSemester, schoolYear *curYear
 	}
 }
 
-void menuAfterLogin(user *&curUser, yearList *YearList, semester *&curSemester, schoolYear *&curYear)
+void menuAfterLogin(user *&curUser, yearList *YearList, semester *&curSemester, schoolYear *&curYear, int& index)
 {
 	clearScreen();
 	cout << " ==============================================================" << endl;
@@ -473,9 +481,9 @@ void menuAfterLogin(user *&curUser, yearList *YearList, semester *&curSemester, 
 		case 3:
 		{
 			if (curUser->isStaff)
-				actionsAsStaff(YearList, curYear, curSemester);
+				actionsAsStaff(YearList, curYear, curSemester, index);
 			else
-				actionsAsStudent(curUser, curSemester, curYear);
+				actionsAsStudent(curUser, curSemester, curYear, index);
 			break;
 		}
 		case 0:

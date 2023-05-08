@@ -8,12 +8,13 @@ userList *userData = new userList;
 yearList *YearList = new yearList;
 semester *curSemester = nullptr;
 schoolYear *curYear = nullptr;
+int curSemIndex = 1;
 
 int main() {
     readData(userData, "data/user.txt");
     readYearList(YearList);
     readAllCourse(YearList);
-    readTime(curSemester, curYear, YearList);
+    readTime(curSemester, curYear, YearList, curSemIndex);
     readAllClasses(YearList);
     user* curUser = nullptr;
     while (true){
@@ -24,7 +25,7 @@ int main() {
                 break;
         }
         else{
-            menuAfterLogin(curUser, YearList, curSemester, curYear);
+            menuAfterLogin(curUser, YearList, curSemester, curYear, curSemIndex);
         }
     }
     saveData(userData, "data/user.txt");
