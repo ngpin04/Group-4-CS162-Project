@@ -25,7 +25,7 @@ void printData(userList *pHead){
     }
 }
 //read the current time into the program before working with user
-void readTime(semester*& curSemester, schoolYear*& curYear, yearList* YearList){
+void readTime(semester*& curSemester, schoolYear*& curYear, yearList* YearList, int& index){
     ifstream fi("data/current.txt");
     int temp = 0;
     fi >> temp;
@@ -44,6 +44,7 @@ void readTime(semester*& curSemester, schoolYear*& curYear, yearList* YearList){
         curSemester = curYear->sem2;
     else
         curSemester = curYear->sem3;
+    index = temp;
     fi.close();
 }
 //after user finish working, save the current time to the file
