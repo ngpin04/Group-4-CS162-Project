@@ -12,25 +12,23 @@
 
 using namespace std;
 
-void startSem(yearList *YearList) {
+void startSem(yearList *YearList, schoolYear *curYear, semester * &curSem, int &index) {
     clearScreen();
     cout << " ====================================================================" << endl;
     cout << " Logged In >> Main Menu >> Possible Actions >> BEGIN-SEMESTER ACTIONS" << endl;
     cout << " ====================================================================" << endl;
     int choice = 100;
 
-    semester *newSem = nullptr;
     while (choice != 0) {
         cout << " Actions at the beginning of semester: " << endl
              << endl;
         cout << "\t1. Create a semester" << endl;
         cout << "\t2. Add course to semester" << endl;
         cout << "\t3. Upload list of students to course" << endl;
-        cout << "\t4. View list of courses" << endl;
-        cout << "\t5. Update course information" << endl;
-        cout << "\t6. Add a student to course" << endl;
-        cout << "\t7. Remove a student from course" << endl;
-        cout << "\t8. Delete a course" << endl;
+        cout << "\t4. Update course information" << endl;
+        cout << "\t5. Add a student to course" << endl;
+        cout << "\t6. Remove a student from course" << endl;
+        cout << "\t7. Delete a course" << endl;
         cout << "\t0. Return to Possible Actions" << endl
              << endl;
         cout << " Your choice: ";
@@ -40,7 +38,7 @@ void startSem(yearList *YearList) {
             // this line discards all the input waiting in the stream
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             choice = 100;
-            cout << " Invalid input, please try again!" << endl;
+            cout << "Invalid input, please try again!" << endl;
             continue;
         }
         if (choice == 0) {
@@ -50,40 +48,50 @@ void startSem(yearList *YearList) {
             cout << " ==============================================================" << endl;
             return;
         } else if (choice == 1) {
-            newSem = createSemester(YearList);
+            delete curSem;
+            curSem = new semester;
+            curSem->semesterID = index;
+            cout << "Please enter the semester start date (DD MM YY): ";
+            cin >> curSem->startDate.day;
+            cin >> curSem->startDate.month;
+            cin >> curSem->startDate.year;
+            cout << "Please enter the semester end date (DD MM YY): ";
+            cin >> curSem->endDate.day;
+            cin >> curSem->endDate.month;
+            cin >> curSem->endDate.year;
+            assert(curSem->allCourses == nullptr);
+            cout << "New semester is created! Press any key to continue" << endl;
+            cin.ignore();
+            cin.get();
         } else {
-            if (newSem == nullptr) {
+            if (curSem == nullptr) {
                 cout << " Semester has not been created, please try again." << endl;
                 continue;
             }
 
             switch (choice) {
                 case 2: {
-                    addCourse(newSem);
+                    addCourse(curSem->allCourses);
                     break;
                 }
                 case 3: {
-                    uploadStudentList(newSem->allCourses);
+                    uploadStudentList(curSem->allCourses);
                     break;
                 }
                 case 4: {
-                    viewCourse(newSem->allCourses);
+                    updateCourse(curSem->allCourses);
                     break;
                 }
                 case 5: {
-                    updateCourse(newSem->allCourses);
+                    addStudent(curSem->allCourses);
                     break;
                 }
                 case 6: {
-                    addStudent(newSem->allCourses);
+                    removeStudent(curSem->allCourses);
                     break;
                 }
                 case 7: {
-                    removeStudent(newSem->allCourses);
-                    break;
-                }
-                case 8: {
-                    deleteCourse(newSem->allCourses);
+                    deleteCourse(curSem->allCourses);
                     break;
                 }
             }

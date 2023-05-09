@@ -1,4 +1,4 @@
 #pragma once
 #include "schoolYear.h"
 
-void addCourse(semester *sem);
+void addCourse(courseList *&cur);

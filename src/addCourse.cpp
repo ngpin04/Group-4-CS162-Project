@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void addCourse(semester *sem) {
+void addCourse(courseList *&cur) {
     course newCourse;
     cout << " Please enter course id: ";
     cin >> newCourse.id;
@@ -28,10 +28,10 @@ void addCourse(semester *sem) {
     temp->data = newCourse;
     temp->next = nullptr;
 
-    courseList *lastCourse = sem->allCourses;
-    if (lastCourse == nullptr)
-        lastCourse = temp;
-    else {
+    if (cur == nullptr){
+        cur = temp;
+    } else {
+        courseList *lastCourse = cur;
         while (lastCourse->next != nullptr)
             lastCourse = lastCourse->next;
         lastCourse->next = temp;

@@ -4,6 +4,12 @@
 using namespace std;
 
 void deleteCourse(courseList *courses) {
+    if (courses == nullptr) {
+        cout << "There is no courses to update! Press any key to return" << endl;
+        cin.ignore();
+        cin.get();
+        return;
+    }
     string id; 
     cout << " Please enter the course id that you want to delete: ";
     cin >> id;

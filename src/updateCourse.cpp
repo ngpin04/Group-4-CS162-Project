@@ -3,6 +3,12 @@
 using namespace std;
 
 void updateCourse(courseList *current) {
+    if (current == nullptr) {
+        cout << "There is no courses to update! Press any key to return" << endl;
+        cin.ignore();
+        cin.get();
+        return;
+    }
     cout << " Please enter the course id that you want to update: ";
     string id; cin >> id;
     while (current != nullptr) {
