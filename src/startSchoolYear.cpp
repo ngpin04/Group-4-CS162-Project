@@ -107,7 +107,7 @@ void createClasses(schoolYear*& curYear)
     {
         if (curYear->allClasses->data.firstYear==-1)
             curYear->allClasses = nullptr;
-        cout << "No new classes have been added!" << endl;
+        cout << "No new classes have been added! Please try again!" << endl;
         returnActions();
         return;
     }
@@ -199,7 +199,7 @@ int to_num(const string &str)
 //4. Add 1st year students by csv file
 void addManyStus(generalClass*& c)
 {
-    cout << "Enter the name of the csv file that you want to upload: ";
+    cout << "Enter the name of the csv file that you want to upload (including .csv): ";
     string filename;
     cin >> filename;
     ifstream fin(filename);
@@ -245,7 +245,7 @@ void addManyStus(generalClass*& c)
     }
     else
     {
-        cout << "Could not open the file" << endl;
+        cout << "Could not open the file!" << endl;
         returnActions();
     }
 }
@@ -281,6 +281,7 @@ void beforeAddStus(generalClass*& c, classList* allClasses, int& tmp)
     }
 }
 
+//5. Update students from previous years
 void updateStuOfYearsAfter(yearList*& year, schoolYear* curYear)
 {
     yearList* cur = year;
