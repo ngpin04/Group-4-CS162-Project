@@ -10,7 +10,7 @@ using namespace std;
 //save the users account: username and password
 void saveData(userList *User, string filename) {
     ofstream fo(filename);
-    for (userList *i = User; i != nullptr; i = i->next) {
+    for (userList *i = User; i->next != nullptr; i = i->next) {
         fo << 1 << " ";
         i->data.output(fo);
     }

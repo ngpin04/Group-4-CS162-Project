@@ -17,5 +17,6 @@ void viewCourse(courseList *list) {
     }
 
     cout << " Enter any character to go back: ";
-    int x; cin >> x;
+    cin.ignore();
+    cin.get();
 }

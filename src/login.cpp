@@ -359,7 +359,7 @@ void actionsAsStaff(yearList *YearList, schoolYear *&curYear, semester *&curSeme
 		}
 		case 2:
 		{
-			startSem(YearList);
+			startSem(YearList, curYear, curSemester, index);
 			break;
 		}
 		case 3:
