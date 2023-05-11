@@ -4,6 +4,12 @@
 using namespace std;
 
 void addStudent(courseList *courses) {
+    if (courses == nullptr) {
+        cout << "There is no courses to update! Press any key to return" << endl;
+        cin.ignore();
+        cin.get();
+        return;
+    }
     studentList *newStudent = new studentList;
     newStudent->next = nullptr;
     cout << " Please enter the student's id: ";

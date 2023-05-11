@@ -14,7 +14,7 @@ void readData(userList *User, string filename) {
         User->data.input(fi);
         User->next = new userList;
         User = User->next;
-    }
+    }   
     fi.close();
 }
 //test function to print the users account
