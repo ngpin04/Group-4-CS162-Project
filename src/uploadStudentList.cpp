@@ -48,20 +48,25 @@ void uploadStudentList(courseList *current) {
 
     string line, word;
     studentList *students = new studentList;
-    current->data.enrolledStudents = students;
+    current->data.enrolledStudents = &(*students);
 	fstream file ("data/" + filename, ios::in);
 	if(file.is_open()) {
-        bool firstline = true;
+        int cur = 1;
 		while(getline(file, line)) {
 			stringstream str(line);
-            if (!firstline) {
+            if (cur == 1) {
+                cur++;
+                continue;
+            } 
+            if (cur > 2) {
                 students->next = new studentList;
                 students = students->next;
             }
 
             getline(str, word, ',');
             getline(str, word, ',');
-            students->data.id = to_number(word);
+            students->data.id = word;
+            cerr << students->data.id << "\n";
             getline(str, word, ',');
             students->data.firstName = word;
             getline(str, word, ',');
@@ -73,9 +78,10 @@ void uploadStudentList(courseList *current) {
             getline(str, word, ',');
             students->data.birth.month = to_number(word);
             getline(str, word, ',');
-            students->data.birth.month = to_number(word);
+            students->data.birth.year = to_number(word);
             getline(str, word, ',');
             students->data.socialID = word;
+            cur++;
 		}
 	}
 	else {
