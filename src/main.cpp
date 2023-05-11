@@ -30,8 +30,8 @@ int main() {
     }
     saveData(userData, "data/user.txt");
     saveYearList(YearList);
-    // saveAllCourse(YearList);
-    // saveTime(curSemester, curYear);
-    // saveAllClasses(YearList);
+    saveAllCourse(YearList);
+    saveTime(curSemester, curYear);
+    saveAllClasses(YearList);
     return 0;
 }
