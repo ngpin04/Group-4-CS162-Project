@@ -71,7 +71,7 @@ void readYearList(yearList* YearList){
 
 //save the school year to text file
 void saveYearList(yearList* YearList){
-    ofstream fo("data/schoolYearOutput.txt");
+    ofstream fo("data/schoolYear.txt");
     int index = 1;
     while (YearList){
         if (YearList->data.start==-1)
