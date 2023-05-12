@@ -42,8 +42,6 @@ void generalClass::input(ifstream& fi) {
 }
 
 void generalClass::output(ofstream& fo) {
-    if (this->studentHead == nullptr)
-        return;
     studentList* cur = this->studentHead;
 
     while (cur != nullptr) {
@@ -56,6 +54,7 @@ void generalClass::output(ofstream& fo) {
         fo << cur->data.birth.month << "\n";
         fo << cur->data.birth.year << "\n";
         fo << cur->data.socialID << "\n";
+        cur = cur->next;
     }
     
 

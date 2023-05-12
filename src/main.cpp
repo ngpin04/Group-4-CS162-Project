@@ -15,7 +15,7 @@ int main() {
     readYearList(YearList);
     readAllCourse(YearList);
     readTime(curSemester, curYear, YearList, curSemIndex);
-    // readAllClasses(YearList);
+    readAllClasses(YearList);
     user* curUser = nullptr;
     while (true){
         if (curUser == nullptr){
@@ -32,6 +32,6 @@ int main() {
     saveYearList(YearList);
     saveAllCourse(YearList);
     saveTime(curSemester, curYear);
-    // saveAllClasses(YearList);
+    saveAllClasses(YearList);
     return 0;
 }

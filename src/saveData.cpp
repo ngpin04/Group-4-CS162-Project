@@ -49,11 +49,8 @@ void saveAllCourse(yearList* YearList){
 
 void saveClass(classList*& ClassList, string filename) {
     ofstream fo(filename);
-    if (ClassList == nullptr) 
-        return;
-
     classList *cur = ClassList;
-    while (true) {
+    while (cur != nullptr) {
         fo << 1 << "\n";
         fo << cur->data.firstYear << "\n";
         fo << cur->data.name << "\n";
@@ -66,7 +63,7 @@ void saveClass(classList*& ClassList, string filename) {
 
 void saveAllClasses(yearList* YearList) {
     string prefix = "data/class";
-    while (YearList) {
+    while (YearList != nullptr) {
         if (YearList && YearList->data.start == -1)
             return;
         string filename = prefix + to_string(YearList->data.start) + ".txt";
