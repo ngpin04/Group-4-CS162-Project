@@ -66,7 +66,6 @@ void uploadStudentList(courseList *current) {
             getline(str, word, ',');
             getline(str, word, ',');
             students->data.id = word;
-            cerr << students->data.id << "\n";
             getline(str, word, ',');
             students->data.firstName = word;
             getline(str, word, ',');
