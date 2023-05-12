@@ -1,49 +1,13 @@
-999999
-CS161
-Introduction to Computer Science I
-22TT1
-Dinh Ba Tien
-4 50 WES 4 1
-100000001
 1
-22125041
-Khoa
-Mai Dang
-0 26 02 2004
-089204009838
-2
-22125011
-Binh
-Nguyen Phu
-0 11 11 2004
-506192904758
-3
-22125069
-Nhi
-Lam Tu
-1 11 9 2004
-194865372906
--1
-100000001
-1
-22125041
-Mai Dang Khoa
-7 7.2 7 7
-2
-22125011
-Nguyen Phu Binh
-8 7 8 7.5
-3
-22125069
-Lam Tu Nhi
-8 8.4 8 8
--1
-999999
 CS161
-Introduction to Computer Science I
+Introduction to Computer Science I	
 22TT2
-Dinh Ba Tien
-4 50 MON 2 0
+Dinh Ba Tien	
+4
+50
+MON
+2
+0
 0
 0
 -1

@@ -14,8 +14,8 @@ int main() {
     readData(userData, "data/user.txt");
     readYearList(YearList);
     readAllCourse(YearList);
-    readTime(curSemester, curYear, YearList, curSemIndex);
-    readAllClasses(YearList);
+    // readTime(curSemester, curYear, YearList, curSemIndex);
+    // readAllClasses(YearList);
     user* curUser = nullptr;
     while (true){
         if (curUser == nullptr){
@@ -30,7 +30,7 @@ int main() {
     }
     saveData(userData, "data/user.txt");
     saveYearList(YearList);
-    // saveAllCourse(YearList);
+    saveAllCourse(YearList);
     // saveTime(curSemester, curYear);
     // saveAllClasses(YearList);
     return 0;

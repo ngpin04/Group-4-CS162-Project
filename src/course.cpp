@@ -117,9 +117,9 @@ void saveStudentList(studentList *ptr, ofstream &fo) {
         fo << ptr->data.id << "\n";
         fo << ptr->data.firstName << "\n";
         fo << ptr->data.lastName << "\n";
-        fo << ptr->data.isFemale << "\n";
-        fo << ptr->data.birth.day << "\n";
-        fo << ptr->data.birth.month << "\n";
+        fo << ptr->data.isFemale << " ";
+        fo << ptr->data.birth.day << " ";
+        fo << ptr->data.birth.month << " ";
         fo << ptr->data.birth.year << "\n";
         fo << ptr->data.socialID << "\n";
         ptr = ptr->next;
@@ -138,9 +138,9 @@ void saveScoreList(scoreList *&ScoreList, ofstream &fo)
         fo << "1\n";
         fo << cur->data.id << "\n";
         fo << cur->data.fullname << "\n";
-        fo << cur->data.midterm << "\n";
-        fo << cur->data.finalMark << "\n";
-        fo << cur->data.other << "\n";
+        fo << cur->data.midterm << " ";
+        fo << cur->data.finalMark << " ";
+        fo << cur->data.other << " ";
         fo << cur->data.total << "\n";
         cur = cur->next;
     }
@@ -163,12 +163,14 @@ void course::output(ofstream &fo)
     if (this->enrolledStudents == nullptr) {
         fo << 0 << "\n";
     } else {
+        fo << 1 << "\n";
         saveStudentList(this->enrolledStudents, fo);
     }
 
     if (this->scoreboard == nullptr) {
         fo << 0 << "\n";
     } else {
+        fo << 1 << "\n";
         saveScoreList(this->scoreboard, fo);
     }
 }

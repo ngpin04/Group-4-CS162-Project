@@ -27,6 +27,7 @@ void saveCourseList(courseList* CourseList, string filename){
         CourseList->data.output(fo);
         CourseList = CourseList->next;
     }
+    fo << "-1\n";
     fo.close();
 }
 

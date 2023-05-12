@@ -117,7 +117,7 @@ void saveYearList(yearList* YearList){
         }
         YearList = YearList->next;
     }
-    fo << -1;
+    fo << -1 << endl;
     fo.close();
 }
 

@@ -1,17 +1,13 @@
 1
-CS162
-Introduction to Computer Science II
-20TT1
-Dinh Ba Tien
-4 50 TUE 3 0
-0
-0
+CS161
+Introduction to Computer Science I	
+22TT2
+Dinh Ba Tien	
+4
+50
+MON
 2
-CS162
-Introduction to Computer Science II
-20TT2
-Dinh Ba Tien
-4 50 FRI 1 0
+0
 0
 0
 -1
