@@ -71,6 +71,7 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         }
         cur = cur -> next;
     }
+    cur = head;
     while (cur->next && cur->next->data.start<start && cur->next->data.start!=-1)
         cur = cur -> next;
     if (cur==head && head->data.start<start) //Only 1 year added and < the one we add
