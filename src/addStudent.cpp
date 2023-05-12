@@ -28,7 +28,11 @@ void addStudent(courseList *courses) {
     cout << " Please enter the student's social ID: ";
     cin >> newStudent->data.socialID;
     studentList *lastptr = courses->data.enrolledStudents;
-    while (lastptr->next != nullptr)
-        lastptr = lastptr->next;
-    lastptr->next = newStudent;
+    if (lastptr == nullptr) 
+        lastptr = newStudent;
+    else {
+        while (lastptr->next != nullptr && lastptr->next->data.id < newStudent->data.id)
+            lastptr = lastptr->next;
+        lastptr->next = newStudent;
+    }
 }
