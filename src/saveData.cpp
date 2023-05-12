@@ -38,11 +38,14 @@ void saveAllCourse(yearList* YearList){
         if (YearList && YearList->data.start == -1)
             return;
         string filename = prefix + to_string(YearList->data.start) + "_01.txt"; 
-        saveCourseList(YearList->data.sem1->allCourses, filename);
+        if(YearList->data.sem1 != nullptr)
+            saveCourseList(YearList->data.sem1->allCourses, filename);
         filename = prefix + to_string(YearList->data.start) + "_02.txt";
-        saveCourseList(YearList->data.sem2->allCourses, filename);
+        if(YearList->data.sem2 != nullptr)
+            saveCourseList(YearList->data.sem2->allCourses, filename);
         filename = prefix + to_string(YearList->data.start) + "_03.txt";
-        saveCourseList(YearList->data.sem3->allCourses, filename);
+        if(YearList->data.sem3 != nullptr)
+            saveCourseList(YearList->data.sem3->allCourses, filename);
         YearList = YearList->next;
     }
 }

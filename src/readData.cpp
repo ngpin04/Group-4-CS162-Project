@@ -71,7 +71,7 @@ void readYearList(yearList* YearList){
 
 //save the school year to text file
 void saveYearList(yearList* YearList){
-    ofstream fo("data/schoolYearOutput.txt");
+    ofstream fo("data/schoolYear.txt");
     int index = 1;
     while (YearList){
         if (YearList->data.start==-1)
@@ -146,12 +146,15 @@ void readAllCourse(yearList* YearList){
         if (YearList && YearList->data.start == -1)
             return;
         string filename = prefix + to_string(YearList->data.start) + "_01.txt"; 
-        readCourseList(YearList->data.sem1->allCourses, filename);
+        if(YearList->data.sem1 != nullptr)
+            readCourseList(YearList->data.sem1->allCourses, filename);
         filename = prefix + to_string(YearList->data.start) + "_02.txt";
-        readCourseList(YearList->data.sem2->allCourses, filename);
+        if(YearList->data.sem2 != nullptr)
+            readCourseList(YearList->data.sem2->allCourses, filename);
         filename = prefix + to_string(YearList->data.start) + "_03.txt";
-        readCourseList(YearList->data.sem3->allCourses, filename);
-        YearList = YearList->next;
+        if(YearList->data.sem3 != nullptr)
+            readCourseList(YearList->data.sem3->allCourses, filename);
+        YearList = YearList->next;  
     }
 }
 
