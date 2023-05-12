@@ -202,7 +202,6 @@ void addManyStus(generalClass*& c)
     cout << "Enter the name of the csv file that you want to upload (including .csv): ";
     string filename;
     cin >> filename;
-    filename = "data/" + filename;
     ifstream fin(filename);
     if (fin.is_open())
     {
