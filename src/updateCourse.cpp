@@ -25,9 +25,9 @@ void updateCourse(courseList *current) {
         return;
     }
 
-    if (current == nullptr) {
-        cout << " There is no course with your provided id, please try again" << endl;
-        return;
+    choice--;
+    while (choice--) {
+        current = current->next;
     }
     
     int action;
