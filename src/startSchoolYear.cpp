@@ -60,6 +60,17 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
         returnActions();
         return;
     }
+    while (cur)
+    {
+        if (cur->data.start==start)
+        {
+            delete tmp;
+            cout << "This school year has been created before!" << endl;
+            returnActions();
+            return;
+        }
+        cur = cur -> next;
+    }
     while (cur->next && cur->next->data.start<start && cur->next->data.start!=-1)
         cur = cur -> next;
     if (cur==head && head->data.start<start) //Only 1 year added and < the one we add
@@ -70,10 +81,6 @@ void createSchoolYear(yearList*& head, schoolYear*& curYear)
     {
         tmp -> next = head;
         head = tmp;
-    }
-    else if (cur==head && head->data.start==start) //We added that year before
-    {
-        delete tmp;
     }
     else if (!cur->next) //All years added < the one we add
     {
