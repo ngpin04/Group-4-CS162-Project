@@ -141,7 +141,7 @@ void inputStu(student& stu)
     cin >> n;
     if (n) stu.isFemale = true;
     else stu.isFemale = false;
-    cout << "Date of birth: ";
+    cout << "Date of birth (DD MM YYYY): ";
     cin >> stu.birth.day >> stu.birth.month >> stu.birth.year;
     cout << "Social ID: ";
     cin >> stu.socialID;
