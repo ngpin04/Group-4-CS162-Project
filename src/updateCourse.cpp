@@ -9,7 +9,7 @@ void updateCourse(courseList *current) {
         cin.get();
         return;
     }
-    cout << "Please choose the course that you want to update: ";
+    cout << "Please choose the course that you want to update: " << "\n";
     int count = 0;
     for (courseList *i = current; i != nullptr; i = i->next) {
         count++;
@@ -49,36 +49,44 @@ void updateCourse(courseList *current) {
         case 1: {
             cout << " Please enter course id: ";
             cin >> current->data.id;
+            break;
         }
         case 2: {
             cout << " Please enter course name: ";
             cin >> current->data.courseName;
+            break;
         }
         case 3: {
             cout << " Please enter class name: ";
             cin >> current->data.className;
+            break;
         }
         case 4: {
             cout << " Please enter teacher name: ";
             getline(cin, current->data.teacherName);
+            break;
         }
         case 5: {
             cout << " Please enter the number of credits: ";
             cin >> current->data.credit;    
+            break;
         }
         case 6: {
             cout << " Please enter the maximum number of students (0 to set it to default): ";
             cin >> current->data.maximum;
             if (current->data.maximum == 0)
                 current->data.maximum = 50;
+            break;
         }
         case 7: {
             cout << " Please enter the day of week (only the first three capital letters) and the session (from 1 to 4) of this course: ";
             cin >> current->data.dayOfWeek >> current->data.session;
+            break;
         }
         case 8: {
 			cout << " Please enter the results released (0 for false, 1 for true): ";
 			cin >> current->data.resultsReleased;
+            break;
 		}
     }
 
