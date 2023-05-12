@@ -21,12 +21,16 @@ void removeStudent(courseList *courses) {
             else 
                 pre->next = cur->next;
             delete cur;
-            cout << " The deletion is done" << endl;
+            cout << " The deletion is done! Press any key to return" << endl;
+            cin.ignore();
+            cin.get();
             return;
         }
         pre = cur;
         cur = cur->next;
     }
-    cout << " There is no students matched the id!";
+    cout << " There is no students matched the id! Press any key to return";
     cout << endl;
+    cin.ignore();
+    cin.get();
 }
