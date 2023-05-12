@@ -8,6 +8,28 @@ Dinh Ba Tien
 MON
 2
 0
-0
-0
+1
+1
+22125011
+Binh
+Nguyen Phu
+0 11 11 2004
+142135123
+1
+22125011
+Khoa
+Dang Mai
+0 1 1 2004
+139528153
+-1
+1
+1
+22125011
+Nguyen Phu Binh
+10 10 10 10
+1
+22125003
+Mai Dang Khoa
+10 10 10 10
+-1
 -1
