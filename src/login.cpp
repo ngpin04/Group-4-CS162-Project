@@ -109,7 +109,7 @@ void startYear(yearList *YearList, schoolYear *&curYear)
 			{
 				addManyStus(c);
 			}
-			updateStuOfYearsAfter(YearList, curYear);
+			//updateStuOfYearsAfter(YearList, curYear);
 			break;
 		}
 		case 0:
