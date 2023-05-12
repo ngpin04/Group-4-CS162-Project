@@ -12,6 +12,13 @@
 
 using namespace std;
 
+void restart() {
+    clearScreen();
+    cout << " ====================================================================" << endl;
+    cout << " Logged In >> Main Menu >> Possible Actions >> BEGIN-SEMESTER ACTIONS" << endl;
+    cout << " ====================================================================" << endl;
+}
+
 void startSem(yearList *YearList, schoolYear *curYear, semester * &curSem, int &index) {
     clearScreen();
     cout << " ====================================================================" << endl;
@@ -51,47 +58,54 @@ void startSem(yearList *YearList, schoolYear *curYear, semester * &curSem, int &
             delete curSem;
             curSem = new semester;
             curSem->semesterID = index;
-            cout << "Please enter the semester start date (DD MM YY): ";
+            cout << "Please enter the semester start date (DD MM YYYY): ";
             cin >> curSem->startDate.day;
             cin >> curSem->startDate.month;
             cin >> curSem->startDate.year;
-            cout << "Please enter the semester end date (DD MM YY): ";
+            cout << "Please enter the semester end date (DD MM YYYY): ";
             cin >> curSem->endDate.day;
             cin >> curSem->endDate.month;
             cin >> curSem->endDate.year;
-            assert(curSem->allCourses == nullptr);
             cout << "New semester is created! Press any key to continue" << endl;
             cin.ignore();
             cin.get();
+            restart();
         } else {
             if (curSem == nullptr) {
                 cout << " Semester has not been created, please try again." << endl;
+                restart();
                 continue;
             }
 
             switch (choice) {
                 case 2: {
                     addCourse(curSem->allCourses);
+                    restart();
                     break;
                 }
                 case 3: {
                     uploadStudentList(curSem->allCourses);
+                    restart();
                     break;
                 }
                 case 4: {
                     updateCourse(curSem->allCourses);
+                    restart();
                     break;
                 }
                 case 5: {
                     addStudent(curSem->allCourses);
+                    restart();
                     break;
                 }
                 case 6: {
                     removeStudent(curSem->allCourses);
+                    restart();
                     break;
                 }
                 case 7: {
                     deleteCourse(curSem->allCourses);
+                    restart();
                     break;
                 }
             }

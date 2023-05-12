@@ -49,7 +49,7 @@ void uploadStudentList(courseList *current) {
     string line, word;
     studentList *students = new studentList;
     current->data.enrolledStudents = &(*students);
-	fstream file ("data/" + filename, ios::in);
+	fstream file (filename, ios::in);
 	if(file.is_open()) {
         int cur = 1;
 		while(getline(file, line)) {

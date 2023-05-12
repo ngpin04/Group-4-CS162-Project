@@ -9,17 +9,27 @@ void updateCourse(courseList *current) {
         cin.get();
         return;
     }
-    cout << " Please enter the course id that you want to update: ";
-    string id; cin >> id;
-    while (current != nullptr) {
-        if (current->data.id == id)
-            break;
+    cout << "Please choose the course that you want to update: ";
+    int count = 0;
+    for (courseList *i = current; i != nullptr; i = i->next) {
+        count++;
+        cout << count << ". " << i->data.id << " " << i->data.className << "\n";
+    }
+    
+    int choice = 0; 
+    cin >> choice;
+    if (choice > count || choice <= 0) {
+        cout << "your choice is invalid! Press any key to return" << endl;
+        cin.ignore();
+        cin.get();
+        return;
     }
 
     if (current == nullptr) {
         cout << " There is no course with your provided id, please try again" << endl;
         return;
     }
+    
     int action;
     cout << " Please choose from the following action: " << endl;
     cout << "\t1. Update course id" << endl;

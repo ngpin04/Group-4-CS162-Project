@@ -20,10 +20,11 @@ void addStudent(courseList *courses) {
     cin >> newStudent->data.birth.year;
     cout << " Please enter the student's first name: ";
     cin >> newStudent->data.firstName;
+    cout << " Please enter the student's last name: ";
+    cin.ignore(100, '\n');
+    getline(cin, newStudent->data.lastName);
     cout << " Please enter 0 if the student is male and 1 if the student is female: ";
     cin >> newStudent->data.isFemale;
-    cout << " Please enter the student's last name: ";
-    cin >> newStudent->data.lastName;
     cout << " Please enter the student's social ID: ";
     cin >> newStudent->data.socialID;
     studentList *lastptr = courses->data.enrolledStudents;
